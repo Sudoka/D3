@@ -19,8 +19,8 @@
 
 using namespace d3;
 
-d3GLSceneGraphRenderer *renderer;
 d3Scene *scene;
+d3GLSceneGraphRenderer *renderer;
 
 void display(void)
 {
