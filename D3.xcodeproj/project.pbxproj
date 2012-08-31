@@ -1,0 +1,211 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		ECCB7D8415F139FC00495973 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECCB7D8315F139FC00495973 /* main.cpp */; };
+		ECCB7D8615F139FC00495973 /* D3.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECCB7D8515F139FC00495973 /* D3.1 */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		ECCB7D7D15F139FC00495973 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				ECCB7D8615F139FC00495973 /* D3.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		ECCB7D7F15F139FC00495973 /* D3 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = D3; sourceTree = BUILT_PRODUCTS_DIR; };
+		ECCB7D8315F139FC00495973 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		ECCB7D8515F139FC00495973 /* D3.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = D3.1; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		ECCB7D7C15F139FC00495973 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		ECCB7D7415F139FC00495973 = {
+			isa = PBXGroup;
+			children = (
+				ECCB7D8215F139FC00495973 /* D3 */,
+				ECCB7D8015F139FC00495973 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		ECCB7D8015F139FC00495973 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ECCB7D7F15F139FC00495973 /* D3 */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ECCB7D8215F139FC00495973 /* D3 */ = {
+			isa = PBXGroup;
+			children = (
+				ECCB7D8315F139FC00495973 /* main.cpp */,
+				ECCB7D8515F139FC00495973 /* D3.1 */,
+			);
+			path = D3;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		ECCB7D7E15F139FC00495973 /* D3 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ECCB7D8915F139FC00495973 /* Build configuration list for PBXNativeTarget "D3" */;
+			buildPhases = (
+				ECCB7D7B15F139FC00495973 /* Sources */,
+				ECCB7D7C15F139FC00495973 /* Frameworks */,
+				ECCB7D7D15F139FC00495973 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = D3;
+			productName = D3;
+			productReference = ECCB7D7F15F139FC00495973 /* D3 */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ECCB7D7615F139FC00495973 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0440;
+				ORGANIZATIONNAME = "Srđan Rašić";
+			};
+			buildConfigurationList = ECCB7D7915F139FC00495973 /* Build configuration list for PBXProject "D3" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = ECCB7D7415F139FC00495973;
+			productRefGroup = ECCB7D8015F139FC00495973 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ECCB7D7E15F139FC00495973 /* D3 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ECCB7D7B15F139FC00495973 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ECCB7D8415F139FC00495973 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		ECCB7D8715F139FC00495973 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		ECCB7D8815F139FC00495973 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		ECCB7D8A15F139FC00495973 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		ECCB7D8B15F139FC00495973 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ECCB7D7915F139FC00495973 /* Build configuration list for PBXProject "D3" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ECCB7D8715F139FC00495973 /* Debug */,
+				ECCB7D8815F139FC00495973 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ECCB7D8915F139FC00495973 /* Build configuration list for PBXNativeTarget "D3" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ECCB7D8A15F139FC00495973 /* Debug */,
+				ECCB7D8B15F139FC00495973 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = ECCB7D7615F139FC00495973 /* Project object */;
+}
