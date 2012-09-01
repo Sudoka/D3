@@ -17,6 +17,8 @@ namespace d3 {
     protected:
         unsigned int tex_id_;
         
+        float rotation = 60;
+        
     public:
         d3Texture(d3Image *image);
         

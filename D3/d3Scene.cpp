@@ -16,7 +16,12 @@ namespace d3 {
         root_node_ = new d3Node("Root");
         root_node_->setNeedsUpdate(false);
         
-        camera_ = (d3Camera*)root_node_->createSubnode("MainCamera", new d3Camera)->getAttachedObject();
+        camera_ = (d3Camera*)root_node_->createSubnode("MainCamera", new d3Camera())->getAttachedObject();
+    }
+    
+    d3Scene::~d3Scene()
+    {
+        delete root_node_;
     }
         
     d3Camera * d3Scene::getCamera() const
@@ -24,7 +29,7 @@ namespace d3 {
         return camera_;
     }
     
-    d3Node * d3Scene::getRootNode() const
+    d3Node * d3Scene::getRoot() const
     {
         return root_node_;
     }

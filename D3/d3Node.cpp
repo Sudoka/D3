@@ -15,11 +15,11 @@ namespace d3 {
         return parent_node_ != nullptr;
     }
     
-    bool d3Node::Attachment::isVisible() const
+    bool d3Node::Attachment::isRenderable() const
     {
         return false;
     }
-    
+        
     void d3Node::Attachment::setParent(d3Node *parent)
     {
         parent_node_ = parent;
@@ -44,7 +44,20 @@ namespace d3 {
         parent_ = nullptr;
     }
     
-    void d3Node::traverse(d3::d3Node::VisitOperation *op)
+    d3Node::~d3Node()
+    {
+        // Delete subnodes
+        for (d3Node *node : sub_nodes_) {
+            delete node;
+        }
+        
+        // Delete attached object
+        if (getAttachedObject() != nullptr) {
+            delete attachedObject_;
+        }
+    }
+    
+    void d3Node::traverse(shared_ptr<d3Node::VisitOperation> op)
     {
         // begin this node
         op->beginNode(this);
@@ -160,10 +173,11 @@ namespace d3 {
         setNeedsUpdate();
     }
     
-    void d3Node::setPosition(d3Vec3 v)
+    d3Node * d3Node::setPosition(d3Vec3 v)
     {
         position_ = v;
         setNeedsUpdate();
+        return this;
     }
     
     d3Vec3 d3Node::getPosition() const
@@ -178,10 +192,11 @@ namespace d3 {
         return derivedPosition_;
     }
     
-    void d3Node::setScale(d3Vec3 k)
+    d3Node * d3Node::setScale(d3Vec3 k)
     {
         scale_ = k;
         setNeedsUpdate();
+        return this;
     }
     
     d3Vec3 d3Node::getScale() const
@@ -202,10 +217,11 @@ namespace d3 {
         setNeedsUpdate();
     }
     
-    void d3Node::setOrientation(d3Quat q)
+    d3Node * d3Node::setOrientation(d3Quat q)
     {
         orientation_ = q;
         setNeedsUpdate();
+        return this;
     }
     
     d3Quat d3Node::getOrientation() const

@@ -11,36 +11,35 @@
 namespace d3 {
     d3SpotLight::d3SpotLight()
     {
-        spot_cutoff_ = 60;
+        spot_cutoff_ = 30;
         spot_exponent_ = 0;
-        spot_attenuation_[0] = 1;   // constant
-        spot_attenuation_[1] = 0;   // linear
-        spot_attenuation_[2] = 0;   // quadratic
+        
+        setDirection(d3Vec3(0, -1, 0));
+        
+        target_node_ = nullptr;
+    }
+    
+    void d3SpotLight::setTarget(d3Node *target_node)
+    {
+        target_node_ = target_node;
+    }
+    
+    void d3SpotLight::setDirection(d3Vec3 dir)
+    {
+        direction_ = dir;
     }
     
     d3Vec3 d3SpotLight::getDirection()
     {
-        return d3Vec3(0,1,0); // FIX
+        if (target_node_ != nullptr)
+            return target_node_->getPosition() - getParent()->getPosition();
+        
+        return direction_;
     }
     
-    void d3SpotLight::apply()
-    {
-        d3Vec3 p = getParent()->getPosition();
-        glEnable ( GL_LIGHTING ) ;
-        glEnable(GL_COLOR_MATERIAL);
-        glEnable(GL_LIGHT0);    // FIX light number
-        glLightfv(GL_LIGHT0, GL_POSITION, d3Vec4(p.x, p.y, p.z, 1.0));
-        glLightfv(GL_LIGHT0, GL_AMBIENT, ambient_color_);
-        glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse_color_);
-        glLightfv(GL_LIGHT0, GL_SPECULAR, specular_color_);
-        
-        glLightf(GL_LIGHT0, GL_SPOT_CUTOFF, spot_cutoff_);
-        glLightf(GL_LIGHT0, GL_SPOT_EXPONENT, spot_exponent_);
-        glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, getDirection());
-        
-        glLightf(GL_LIGHT0, GL_CONSTANT_ATTENUATION, spot_attenuation_[0]);
-        glLightf(GL_LIGHT0, GL_LINEAR_ATTENUATION, spot_attenuation_[1]);
-        glLightf(GL_LIGHT0, GL_QUADRATIC_ATTENUATION, spot_attenuation_[2]);
-        
-    }
+    void d3SpotLight::setCutoff(int v) { spot_cutoff_ = v; }    // TODO Boudaries
+    int d3SpotLight::getCutoff() const { return spot_cutoff_; }
+    
+    void d3SpotLight::setExponent(int v) {spot_exponent_ = v; }
+    int d3SpotLight::getExponent() const { return spot_exponent_; }
 }

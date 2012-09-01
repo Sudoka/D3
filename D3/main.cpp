@@ -19,8 +19,12 @@
 
 using namespace d3;
 
-d3Scene *scene;
-d3GLSceneGraphRenderer *renderer;
+d3SceneRenderer * renderer;
+d3Scene * scene;
+
+float cam_radius = 15.0;
+float cam_rotation = 0.0;
+float cam_y = 8;
 
 void display(void)
 {
@@ -30,7 +34,7 @@ void display(void)
 
 void reshape(int width, int height)
 {
-    scene->getCamera()->setScreenSize(width, height);   // set screen size
+    renderer->setScreenSize(width, height);   // set screen size
 }
 
 void idle(void)
@@ -38,17 +42,21 @@ void idle(void)
     glutPostRedisplay();
 }
 
+void updateCamera() {
+    d3Vec3 pos = d3Vec3(cosf(cam_rotation) * cam_radius, cam_y, sinf(cam_rotation) * cam_radius);
+    scene->getCamera()->getParent()->setPosition(pos);
+}
+
 void processNormalKeys(unsigned char key, int x, int y) {
-    
 	switch(key) {
-        case '-' :
-            scene->getCamera()->setFovy(scene->getCamera()->getFovy() - 1.0); break;
-        case '+' :
-            scene->getCamera()->setFovy(scene->getCamera()->getFovy() + 1.0); break;
-        case 'i' :
-            scene->getRootNode()->getSubnode("Svjetlo1")->move(d3Vec3(0, -0.2, 0)); break;
-		case 'o' :
-            scene->getRootNode()->getSubnode("Svjetlo1")->move(d3Vec3(0, 0.2, 0)); break;
+        case 'd' :
+            scene->getRoot()->getSubnode("Kocka")->move(d3Vec3(0, 0, -0.5)); break;
+        case 'a' :
+            scene->getRoot()->getSubnode("Kocka")->move(d3Vec3(0, 0, 0.5)); break;
+        case 'w' :
+            scene->getRoot()->getSubnode("Kocka")->move(d3Vec3(-0.5, 0, 0)); break;
+        case 's' :
+            scene->getRoot()->getSubnode("Kocka")->move(d3Vec3(0.5, 0, 0)); break;
 	}
 }
 
@@ -56,14 +64,16 @@ void processSpecialKeys(int key, int x, int y) {
     
 	switch(key) {
 		case GLUT_KEY_UP :
-            scene->getRootNode()->getSubnode("Kocka")->move(d3Vec3(-1, 0, 0)); break;
+            cam_y -= 0.5f; break;
 		case GLUT_KEY_DOWN :
-            scene->getRootNode()->getSubnode("Kocka")->move(d3Vec3(1, 0, 0)); break;
+            cam_y += 0.5f; break;
         case GLUT_KEY_LEFT :
-            scene->getRootNode()->getSubnode("Kocka")->move(d3Vec3(0, 0, 1)); break;
+            cam_rotation += kPi/6.0; break;
 		case GLUT_KEY_RIGHT :
-            scene->getRootNode()->getSubnode("Kocka")->move(d3Vec3(0, 0, -1)); break;
+            cam_rotation -= kPi/6.0; break; break;
 	}
+    
+    updateCamera();
 }
 
 int main(int argc, char** argv)
@@ -80,28 +90,25 @@ int main(int argc, char** argv)
     glutReshapeFunc(reshape);
     glutIdleFunc(idle);
     
-    scene = new d3::d3Scene();
-    renderer = new d3GLSceneGraphRenderer();
+    renderer = new d3GLSceneRenderer(640, 480);
+    scene = new d3Scene();
     
-    scene->getRootNode()->createSubnode("Svjetlo1", new d3PointLight())->setPosition(d3Vec3(-0.5, 2, -0.5));
-    scene->getRootNode()->createSubnode("Kocka", new d3Box())->setPosition(d3Vec3(0, 0, 0));
-    scene->getRootNode()->getSubnode("Kocka")->setScale(d3Vec3(0.1, 0.1, 0.1));
-    scene->getRootNode()->createSubnode("Osi", new d3Axes());
-    scene->getRootNode()->createSubnode("Ravnina", new d3Plane())->setScale(d3Vec3(3,3,3));
-    scene->getCamera()->setTarget(scene->getRootNode()->getSubnode("Kocka"));
-    scene->getCamera()->getParent()->setPosition(d3Vec3(5, 5, 5));
+    d3Node *box = scene->getRoot()->createSubnode("Kocka", new d3Renderable(d3GeometryFactory::createBox()));
+    box->setScale(d3Vec3(0.5, 0.5, 0.5))->move(d3Vec3(0, 0.5, 0));
+    scene->getCamera()->setTarget(box);
     
-    // Texture test
-    d3Image *slk = new d3Image("/Users/srdan/Desktop/earth.png");
-    scene->getRootNode()->getSubnode("Ravnina")->getAttachedObject()->getRenderOperation()->setTexture(new d3Texture(slk));
-      
-    // Material test
-    d3Material *m = new d3Material();
-    m->setAmbientAndDiffuseColor(d3Vec4(0.9, 0.9, 0.9, 1.0));
-    m->setSpecularColor(d3Vec4(1.0, 1.0, 1.0, 1.0));
-    m->setShininess(10);
-    scene->getRootNode()->getSubnode("Ravnina")->getAttachedObject()->getRenderOperation()->setMaterial(m);
+    d3Renderable *earthPlane = new d3Renderable(d3GeometryFactory::createPlane());
+    earthPlane->setTexture(new d3Texture(new d3Image("/Users/srdan/Desktop/earth.png")));
+    scene->getRoot()->createSubnode("Earth", earthPlane)->setScale(d3Vec3(10, 10, 10));
     
+    d3SpotLight *sl = new d3SpotLight;
+    sl->setCutoff(30);
+    sl->setDiffuseColor(d3Vec4(5.0, 5.0, 5.0, 1.0));
+    scene->getRoot()->createSubnode("Svjetlo", sl);
+    sl->getParent()->setOrientation(d3Quat(d3Vec3(0, 1, 0), -kPiOver2))->setPosition(d3Vec3(0, 4, 0));
+    sl->setTarget(box);
+    
+    updateCamera();
     
     glutMainLoop();
     

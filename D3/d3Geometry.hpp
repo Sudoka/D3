@@ -1,17 +1,16 @@
 //
-//  d3RenderOperation.hpp
+//  d3Geometry.hpp
 //  D3
 //
-//  Created by Srđan Rašić on 8/27/12.
+//  Created by Srđan Rašić on 9/1/12.
 //  Copyright (c) 2012 Srđan Rašić. All rights reserved.
 //
 
-#ifndef D3_d3RenderOperation_hpp
-#define D3_d3RenderOperation_hpp
+#ifndef D3_d3Geometry_hpp
+#define D3_d3Geometry_hpp
 
-namespace d3 {   
-    class d3RenderOperation {
-        
+namespace d3 {
+    class d3Geometry {
     protected:
         d3ArrayDescriptor<unsigned int> * indices_;
         d3ArrayDescriptor<float> * vertex_array_;
@@ -21,13 +20,8 @@ namespace d3 {
         
         unsigned int geometry_type_;
         
-        d3Material * material_;
-        d3Texture * texture_;
-        
     public:
-        d3RenderOperation();
-        
-        virtual void render();
+        d3Geometry();
         
         void setGeometryType(unsigned int geometry_type);
         unsigned int getGeometryType();
@@ -46,12 +40,6 @@ namespace d3 {
         
         void setColorArray(d3ArrayDescriptor<float> * color_array);
         d3ArrayDescriptor<float> * getColorArray() const;
-        
-        void setMaterial(d3Material * material);
-        d3Material * getMaterial() const;
-        
-        void setTexture(d3Texture * texture);
-        d3Texture * getTexture() const;
     };
 }
 

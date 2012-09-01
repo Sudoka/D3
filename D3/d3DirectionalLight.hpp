@@ -18,14 +18,16 @@ namespace d3 {
     //! Direction is inherited through nodes orientation.
     class d3DirectionalLight : public d3PointLight {
     protected:
+        d3Vec3 direction_;
         
     public:
+        d3DirectionalLight();
+        
+        //! Sets direction (Note: direction is rotated by orientation)
+        void setDirection(d3Vec3 dir);
         
         //! Gets direction
         d3Vec3 getDirection();
-        
-        //! d3StateOperation: applies state
-        void apply();
     };
 }
 

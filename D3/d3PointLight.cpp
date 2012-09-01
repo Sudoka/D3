@@ -14,6 +14,7 @@ namespace d3 {
         setAmbientColor(d3Vec4(0.1, 0.1, 0.1, 1.0));
         setDiffuseColor(d3Vec4(1.0, 1.0, 1.0, 1.0));
         setSpecularColor(d3Vec4(1.0, 1.0, 1.0, 1.0));
+        setAttenuation(d3Vec3(1, 0, 0));
         setOn(true);
     }
     
@@ -27,9 +28,19 @@ namespace d3 {
         ambient_color_ = color;
     }
     
+    d3Vec4 d3PointLight::getAmbientColor() const
+    {
+        return ambient_color_;
+    }
+    
     void d3PointLight::setDiffuseColor(d3Vec4 color)
     {
         diffuse_color_ = color;
+    }
+    
+    d3Vec4 d3PointLight::getDiffuseColor() const
+    {
+        return diffuse_color_;
     }
     
     void d3PointLight::setSpecularColor(d3Vec4 color)
@@ -37,24 +48,20 @@ namespace d3 {
         specular_color_ = color;
     }
     
-    void d3PointLight::setAmbientAndDiffuseColor(d3Vec4 color)
+    d3Vec4 d3PointLight::getSpecularColor() const
     {
-        ambient_color_ = diffuse_color_ = color;
+        return specular_color_;
     }
     
-    bool d3PointLight::isVisible() const
+    void d3PointLight::setAttenuation(d3Vec3 a)
     {
-        return is_on_;
+        attenuation_.x = a.x;   // constant
+        attenuation_.y = a.y;   // linear
+        attenuation_.z = a.z;   // quadratic
     }
     
-    void d3PointLight::apply()
+    d3Vec3 d3PointLight::getAttenuation() const
     {
-        d3Vec3 p = getParent()->getPosition();
-        glEnable ( GL_LIGHTING ) ;
-        glEnable(GL_LIGHT0);    // FIX light number
-        glLightfv(GL_LIGHT0, GL_POSITION, d3Vec4(p.x, p.y, p.z, 1.0));
-        glLightfv(GL_LIGHT0, GL_AMBIENT, ambient_color_);
-        glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse_color_);
-        glLightfv(GL_LIGHT0, GL_SPECULAR, specular_color_);
+        return attenuation_;
     }
 }

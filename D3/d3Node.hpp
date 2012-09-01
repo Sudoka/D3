@@ -26,8 +26,8 @@ namespace d3 {
         //! Is performed on each node while traversing graph
         class VisitOperation {
         public:
-            virtual void beginNode(d3Node *node) {};
-            virtual void endNode(d3Node *node) {};
+            virtual void beginNode(d3Node *node) {}
+            virtual void endNode(d3Node *node) {}
         };
         
         //! Represents attachable object
@@ -37,9 +37,8 @@ namespace d3 {
             
         public:           
             //! Should override if object is renderable
-            virtual bool isVisible() const;
-            
-            virtual d3RenderOperation * getRenderOperation() { return nullptr; }
+            virtual bool isRenderable() const;
+                        
             virtual d3StateOperation * getStateOperation() { return nullptr; }
             
             bool isAttached() const;
@@ -68,11 +67,14 @@ namespace d3 {
         Attachment *attachedObject_;
               
     public:
-        //! Creates new named node. To be used internaly.
+        //! Creates new named node. To be used internaly!
         d3Node(d3String node_name);
         
+        //! Deletes all subnodes
+        ~d3Node();
+        
         //! Traverse node and subnodes.
-        virtual void traverse(VisitOperation *op);
+        virtual void traverse(shared_ptr<VisitOperation> op);
 
         //! @return Node name
         d3String getName() const;
@@ -125,7 +127,7 @@ namespace d3 {
         void move(d3Vec3 v);
         
         //! Changes position
-        void setPosition(d3Vec3 v);
+        d3Node * setPosition(d3Vec3 v);
         
         //! @return Nodes position
         d3Vec3 getPosition() const;
@@ -134,7 +136,7 @@ namespace d3 {
         d3Vec3 getDerivedPosition();
         
         //! Sets scaling factor (in all dims)
-        void setScale(d3Vec3 k);
+        d3Node * setScale(d3Vec3 k);
         
         //! @return Nodes scale factor
         d3Vec3 getScale() const;
@@ -146,7 +148,7 @@ namespace d3 {
         void rotate(d3Vec3 axis, float angle);
         
         //! Changes orientation
-        void setOrientation(d3Quat q);
+        d3Node * setOrientation(d3Quat q);
         
         //! @return Nodes orientation
         d3Quat getOrientation() const;

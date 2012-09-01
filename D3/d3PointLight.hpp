@@ -15,29 +15,33 @@ namespace d3 {
     class d3Vec4;
     
 #pragma mark Interface
-    class d3PointLight : public d3Node::Attachment, public d3StateOperation {
+    class d3PointLight : public d3Node::Attachment {
     protected:
         d3Vec4 ambient_color_;
         d3Vec4 diffuse_color_;
         d3Vec4 specular_color_;
+        
+        d3Vec3 attenuation_;    // constant, linear and quadratic attenuation
 
         bool is_on_;
         
     public:
         d3PointLight();
         
-        virtual void setOn(bool state);
+        void setOn(bool state);
         
-        virtual void setAmbientColor(d3Vec4 color);
-        virtual void setDiffuseColor(d3Vec4 color);
-        virtual void setSpecularColor(d3Vec4 color);
-        virtual void setAmbientAndDiffuseColor(d3Vec4 color);
+        void setAmbientColor(d3Vec4 color);
+        d3Vec4 getAmbientColor() const;
         
-        virtual bool isVisible() const;
+        void setDiffuseColor(d3Vec4 color);
+        d3Vec4 getDiffuseColor() const;
         
-        virtual void apply();
+        void setSpecularColor(d3Vec4 color);
+        d3Vec4 getSpecularColor() const;
         
-        virtual d3StateOperation * getStateOperation() { return this; }
+        void setAttenuation(d3Vec3 a);
+        d3Vec3 getAttenuation() const;
+               
     };
 }
 

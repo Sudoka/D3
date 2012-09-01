@@ -14,6 +14,8 @@
 #include "d3Mat3.hpp"
 #include "d3Mat4.hpp"
 
+#define TOLERANCE 0.00001f
+
 namespace d3 {
 #pragma mark Interface
     class d3Quat {
@@ -30,7 +32,7 @@ namespace d3 {
         //! From floats.
         d3Quat(float x, float y, float z, float w);
         
-        //! From vector (imaginary) and scalar.
+        //! From axies and angle.
         d3Quat(d3Vec3 v, float s);
         
         //! From 3x3 matrix.
@@ -38,6 +40,10 @@ namespace d3 {
         
         //! From 4x4 matrix.
         d3Quat(d3Mat4 m);
+        
+        void normalise();
+        
+        d3Quat conjugate() const;
         
         //! Addition.
         d3Quat operator+(const d3Quat& b) const;
@@ -47,6 +53,9 @@ namespace d3 {
         
         //! Multiplication.
         d3Quat operator*(const d3Quat& b) const;
+        
+        //! Multiplication with vector.
+        d3Vec3 operator*(const d3Vec3& b) const;
         
         float getRotationAngle() const;
         
@@ -62,8 +71,16 @@ namespace d3 {
     {
     }
     
-    inline d3Quat::d3Quat(d3Vec3 v, float s) : x(v.x), y(v.y), z(v.z), w(s)
+    inline d3Quat::d3Quat(d3Vec3 axies, float angle)
     {
+        float sinAngle = sinf(angle * 0.5f);
+        d3Vec3 vn(axies);
+        vn.normalize();
+        
+        x = vn.x * sinAngle;
+        y = vn.y * sinAngle;
+        z = vn.z * sinAngle;
+        w = cosf(angle * 0.5f);
     }
     
     inline d3Quat::d3Quat(d3Mat3 m)
@@ -74,25 +91,57 @@ namespace d3 {
     {
     }
     
-    inline d3Quat d3Quat::operator+(const d3Quat& b) const
+    inline void d3Quat::normalise()
+    {
+        float mag2 = w*w + x*x + y*y + z*z;
+        if (fabsf(mag2) > TOLERANCE && fabsf(mag2 - 1.f) > TOLERANCE) {
+            float mag = sqrtf(mag2);
+            w /= mag;
+            x /= mag;
+            y /= mag;
+            z /= mag;
+        }
+    }
+    
+    inline d3Quat d3Quat::conjugate() const
+    {
+        return d3Quat(-x, -y, -z, w);
+    }
+    
+    inline d3Quat d3Quat::operator+(const d3Quat& rq) const
     {
         return d3Quat();
     }
     
-    inline d3Quat d3Quat::operator-(const d3Quat& b) const
+    inline d3Quat d3Quat::operator-(const d3Quat& rq) const
     {
         return d3Quat();
     }
     
-    inline d3Quat d3Quat::operator*(const d3Quat& b) const
+    inline d3Quat d3Quat::operator*(const d3Quat& rq) const
     {
-        return d3Quat();
+        return d3Quat(w * rq.x + x * rq.w + y * rq.z - z * rq.y,
+                      w * rq.y + y * rq.w + z * rq.x - x * rq.z,
+                      w * rq.z + z * rq.w + x * rq.y - y * rq.x,
+                      w * rq.w - x * rq.x - y * rq.y - z * rq.z);
+    }
+    
+    inline d3Vec3 d3Quat::operator*(const d3Vec3& b) const
+    {
+        d3Vec3 vn(b);
+        vn.normalize();
+        
+        d3Quat vecQuat(vn.x, vn.y, vn.z, 0.f);
+        d3Quat resQuat = vecQuat * conjugate();
+        resQuat = (*this) * resQuat;
+        
+        return d3Vec3(resQuat.x, resQuat.y, resQuat.z);
     }
     
     inline float d3Quat::getRotationAngle() const
     {
         // w = cos(theta / 2)
-        return safeAcos(w) * 2.0f * 180.0 * k1OverPi;
+        return safeAcos(w) * 2.0f;
     }
     
     inline d3Vec3 d3Quat::getRotationAxis() const

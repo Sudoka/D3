@@ -12,11 +12,14 @@
 #include <cmath>
 
 namespace d3 {
+    class d3Mat4;
+    class d3Vec3;
     
     // Commonly used constants
     const float kPi = 3.14159265f;
     const float k2Pi = 2.0f * kPi;
     const float kPiOver2 = kPi / 2.0f;
+    const float kPiOver180 = kPi / 180.0f;
     const float k1OverPi = 1.0f / kPi;
     const float k1Over2Pi = 1.0f / k2Pi;
     
@@ -26,6 +29,15 @@ namespace d3 {
     //! Same as acos(x) but if x is out of range, it is clamped
     //! to the nearest valid value.
     float safeAcos(float x);
+    
+    struct d3Frustum {
+        float left, right;
+        float down, up;
+        float near, far;
+    };
+    
+    //! Transform matrices
+    d3Mat4 getTranslationMatrix(d3Vec3 v);
     
     
 #pragma mark Implementation
@@ -45,6 +57,8 @@ namespace d3 {
         
         return acosf(x);
     }
+    
+
 }
 
 #endif

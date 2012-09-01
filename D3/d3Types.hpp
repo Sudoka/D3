@@ -12,9 +12,11 @@
 #include <string>
 #include <list>
 #include <vector>
+#include <memory>
 #include "d3Gl.hpp"
 
 namespace d3 {
+    using std::shared_ptr;
 #pragma mark Custom data types
     typedef std::string d3String;
     typedef unsigned int d3Size;

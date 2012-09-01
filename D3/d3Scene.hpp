@@ -23,11 +23,13 @@ namespace d3 {
     public:
         d3Scene();
         
+        ~d3Scene();
+        
         //! @return Scene camera
         d3Camera * getCamera() const;
         
         //! @return Root node
-        d3Node * getRootNode() const;
+        d3Node * getRoot() const;
     };
 }
 
