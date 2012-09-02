@@ -32,6 +32,8 @@
 		EC06057E15F29589009CB3E0 /* d3GeometryFactory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = d3GeometryFactory.hpp; sourceTree = "<group>"; };
 		EC06057F15F2AA44009CB3E0 /* d3Math.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = d3Math.cpp; sourceTree = "<group>"; };
 		EC06058115F2ACE1009CB3E0 /* d3SceneRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = d3SceneRenderer.hpp; sourceTree = "<group>"; };
+		EC06058315F2DAF2009CB3E0 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		EC06058415F2DED0009CB3E0 /* earth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = earth.png; path = Resources/earth.png; sourceTree = "<group>"; };
 		EC123C4A15F13E09004447ED /* README */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = README; sourceTree = "<group>"; };
 		ECCB7D7F15F139FC00495973 /* D3 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = D3; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECCB7DC915F13B3A00495973 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
@@ -92,6 +94,14 @@
 			name = OpenGL;
 			sourceTree = "<group>";
 		};
+		EC06058515F2DEDE009CB3E0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EC06058415F2DED0009CB3E0 /* earth.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		EC123C4515F13C5F004447ED /* Rendering system */ = {
 			isa = PBXGroup;
 			children = (
@@ -146,6 +156,8 @@
 			isa = PBXGroup;
 			children = (
 				EC123C4A15F13E09004447ED /* README */,
+				EC06058315F2DAF2009CB3E0 /* Makefile */,
+				EC06058515F2DEDE009CB3E0 /* Resources */,
 				ECCB7D8215F139FC00495973 /* D3 */,
 				ECCB7DCD15F13B4000495973 /* Frameworks */,
 				ECCB7D8015F139FC00495973 /* Products */,

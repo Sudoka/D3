@@ -98,7 +98,7 @@ int main(int argc, char** argv)
     scene->getCamera()->setTarget(box);
     
     d3Renderable *earthPlane = new d3Renderable(d3GeometryFactory::createPlane());
-    earthPlane->setTexture(new d3Texture(new d3Image("/Users/srdan/Desktop/earth.png")));
+    earthPlane->setTexture(new d3Texture(new d3Image("Resources/earth.png")));
     scene->getRoot()->createSubnode("Earth", earthPlane)->setScale(d3Vec3(10, 10, 10));
     
     d3SpotLight *sl = new d3SpotLight;
