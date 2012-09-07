@@ -11,6 +11,13 @@
 
 #ifdef _IOS_
 #include <OpenGLES/ES1/gl.h>
+
+inline void glFrustum(GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat nearVal, GLfloat farVal)
+{
+    glFrustumf(left, right, bottom, top, nearVal, farVal);
+}
+
+
 #else
 #include <OpenGL/gl.h>
 #endif

@@ -92,7 +92,7 @@ namespace d3 {
                 
                 if (g->getVertexArray() != nullptr) {
                     if (r->getMaterial() != nullptr) {
-                        glMateriali(GL_FRONT, GL_SHININESS, r->getMaterial()->getShininess());
+                        glMaterialf(GL_FRONT, GL_SHININESS, r->getMaterial()->getShininess());
                         glMaterialfv(GL_FRONT, GL_AMBIENT, r->getMaterial()->getAmbientColor());
                         glMaterialfv(GL_FRONT, GL_DIFFUSE, r->getMaterial()->getDiffuseColor());
                         glMaterialfv(GL_FRONT, GL_SPECULAR, r->getMaterial()->getSpecularColor());
@@ -102,7 +102,7 @@ namespace d3 {
                     if (g->getColorArray()) {
                         glEnable(GL_COLOR_MATERIAL);
                         glEnableClientState(GL_COLOR_ARRAY);
-                        glColorPointer(3, GL_FLOAT, g->getColorArray()->getStride(), g->getColorArray()->getPointer());    //FIX size
+                        glColorPointer(4, GL_FLOAT, g->getColorArray()->getStride(), g->getColorArray()->getPointer());    //FIX size
                     }
                     
                     if (g->getNormalArray()) {
@@ -177,7 +177,7 @@ namespace d3 {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         
         // Setup viewport
-        glViewport(0, 0, getScreenWidth(), getScreenHeight());
+        //glViewport(0, 0, getScreenWidth(), getScreenHeight());    // done automatically
         
         // Setup projection
         glMatrixMode(GL_PROJECTION);
@@ -200,6 +200,6 @@ namespace d3 {
         scene->getRoot()->traverse(shared_ptr<d3Node::VisitOperation>(new d3GLNodeDrawOperation()));
 
         // Finish
-        glFlush();
+        glFinish();
     }
 }

@@ -8,7 +8,6 @@
 
 #include "d3Camera.hpp"
 #include <iostream>
-#include <GLUT/glut.h>
 
 namespace d3 {
     d3Camera::d3Camera()

@@ -8,6 +8,8 @@
 
 #include "d3GeometryFactory.hpp"
 
+//TODO: Fix colors! Must be 4 floats!
+
 namespace d3 {
     static float vertices_[72] = {
         1, 1, 1,    -1, 1, 1,   -1,-1, 1,   1,-1, 1,    // v0,v1,v2,v3 (front)
@@ -139,27 +141,28 @@ namespace d3 {
     
     d3Geometry * d3GeometryFactory::createAxes()
     {
-        d3Vec3 * iva = new d3Vec3[6 * 2];
+        d3Vec3 * vertex = new d3Vec3[6];
+        d3Vec4 * color = new d3Vec4[6];
         
         // X-axis
-        iva[0] = iva[2] = d3Vec3(1.f, 0.f, 0.f);    // color
-        iva[1] = d3Vec3(-1000.f, 0.f, 0.f);         // star point
-        iva[3] = d3Vec3( 1000.f, 0.f, 0.f);         // end point
+        color[0] = color[1] = d3Vec4(1.f, 0.f, 0.f, 1.0f);      // color
+        vertex[0] = d3Vec3(-1000.f, 0.f, 0.f);                     // star point
+        vertex[1] = d3Vec3( 1000.f, 0.f, 0.f);                     // end point
         
         // Y-axis
-        iva[4] = iva[6] = d3Vec3(0.f, 1.f, 0.f);    // color
-        iva[5] = d3Vec3(0.f, -1000.f, 0.f);         // star point
-        iva[7] = d3Vec3(0.f,  1000.f, 0.f);         // end point
+        color[2] = color[3] = d3Vec4(0.f, 1.f, 0.f, 1.0f);      // color
+        vertex[2] = d3Vec3(0.f, -1000.f, 0.f);                     // star point
+        vertex[3] = d3Vec3(0.f,  1000.f, 0.f);                     // end point
         
         // Z-axis
-        iva[8] = iva[10] = d3Vec3(0.f, 0.f, 1.f);    // color
-        iva[9] = d3Vec3(0.f, 0.f, -1000.f);         // star point
-        iva[11] = d3Vec3(0.f, 0.f,  1000.f);         // end point
+        color[4] = color[5] = d3Vec4(0.f, 0.f, 1.f, 1.0f);      // color
+        vertex[4] = d3Vec3(0.f, 0.f, -1000.f);                     // star point
+        vertex[5] = d3Vec3(0.f, 0.f,  1000.f);                    // end point
         
         d3Geometry * g = new d3Geometry();
 
-        g->setVertexArray(new d3ArrayDescriptor<float>((float*)&iva[1], 6, sizeof(d3Vec3) * 2));
-        g->setColorArray(new d3ArrayDescriptor<float>((float*)&iva[0], 6, sizeof(d3Vec3) * 2));
+        g->setVertexArray(new d3ArrayDescriptor<float>((float*)vertex, 6, sizeof(d3Vec3)));
+        g->setColorArray(new d3ArrayDescriptor<float>((float*)color, 6, sizeof(d3Vec4)));
         g->setGeometryType(GL_LINES);
         
         return g;

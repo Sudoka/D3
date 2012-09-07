@@ -96,6 +96,8 @@ int main(int argc, char** argv)
     renderer = new d3GLSceneRenderer(640, 480);
     scene = new d3Scene();
     
+    scene->getRoot()->createSubnode("Osi", new d3Renderable(d3GeometryFactory::createAxes()));
+    
     d3Node *box = scene->getRoot()->createSubnode("Kocka", new d3Renderable(d3GeometryFactory::createBox()));
     box->setScale(d3Vec3(0.5, 0.5, 0.5))->move(d3Vec3(0, 0.5, 0));
     scene->getCamera()->setTarget(box);
