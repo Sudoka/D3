@@ -18,7 +18,7 @@ BINDIR = bin
 seminar:
 	@echo "Compiling example..."
 	@mkdir -p $(BINDIR)
-	@${COMPILER} D3/main.cpp ${LIBS} ${CPP11_FLAGS} -o ${BINDIR}/d3
+	@${COMPILER} /main.cpp ${LIBS} ${CPP11_FLAGS} -o ${BINDIR}/d3
 
 	@echo "Successfully completed!"
 	@echo "To try, execute: make run"

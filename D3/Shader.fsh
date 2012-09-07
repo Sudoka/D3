@@ -1,6 +1,6 @@
 //
 //  Shader.fsh
-//  D3
+//  
 //
 //  Created by Srđan Rašić on 9/6/12.
 //  Copyright (c) 2012 Srđan Rašić. All rights reserved.

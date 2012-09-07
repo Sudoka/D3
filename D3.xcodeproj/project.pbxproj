@@ -25,59 +25,59 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		EC06057915F28DB5009CB3E0 /* d3Renderable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = d3Renderable.hpp; sourceTree = "<group>"; };
-		EC06057A15F28E73009CB3E0 /* d3Geometry.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = d3Geometry.hpp; sourceTree = "<group>"; };
-		EC06057D15F29589009CB3E0 /* d3GeometryFactory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = d3GeometryFactory.cpp; sourceTree = "<group>"; };
-		EC06057E15F29589009CB3E0 /* d3GeometryFactory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = d3GeometryFactory.hpp; sourceTree = "<group>"; };
-		EC06057F15F2AA44009CB3E0 /* d3Math.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = d3Math.cpp; sourceTree = "<group>"; };
-		EC06058115F2ACE1009CB3E0 /* d3SceneRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = d3SceneRenderer.hpp; sourceTree = "<group>"; };
-		EC06058315F2DAF2009CB3E0 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		EC06057915F28DB5009CB3E0 /* Renderable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Renderable.hpp; sourceTree = "<group>"; };
+		EC06057A15F28E73009CB3E0 /* Geometry.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Geometry.hpp; sourceTree = "<group>"; };
+		EC06057D15F29589009CB3E0 /* GeometryFactory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GeometryFactory.cpp; sourceTree = "<group>"; };
+		EC06057E15F29589009CB3E0 /* GeometryFactory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GeometryFactory.hpp; sourceTree = "<group>"; };
+		EC06057F15F2AA44009CB3E0 /* Math.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Math.cpp; sourceTree = "<group>"; };
+		EC06058115F2ACE1009CB3E0 /* SceneRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SceneRenderer.hpp; sourceTree = "<group>"; };
+		EC06058315F2DAF2009CB3E0 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; lineEnding = 0; path = Makefile; sourceTree = "<group>"; };
 		EC06058415F2DED0009CB3E0 /* earth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = earth.png; path = Resources/earth.png; sourceTree = "<group>"; };
-		EC123C4A15F13E09004447ED /* README */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = README; sourceTree = "<group>"; };
-		EC33295215F8EDEF007A85D5 /* d3FileIO.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = d3FileIO.hpp; sourceTree = "<group>"; };
-		EC33295315F8EE35007A85D5 /* d3FileIO.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = d3FileIO.cpp; sourceTree = "<group>"; };
-		EC33295515F8F106007A85D5 /* d3GLShader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = d3GLShader.cpp; sourceTree = "<group>"; };
-		EC33295615F8F106007A85D5 /* d3GLShader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = d3GLShader.hpp; sourceTree = "<group>"; };
+		EC123C4A15F13E09004447ED /* README */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; lineEnding = 0; path = README; sourceTree = "<group>"; };
+		EC33295215F8EDEF007A85D5 /* FileIO.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FileIO.hpp; sourceTree = "<group>"; };
+		EC33295315F8EE35007A85D5 /* FileIO.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileIO.cpp; sourceTree = "<group>"; };
+		EC33295515F8F106007A85D5 /* GLShader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GLShader.cpp; sourceTree = "<group>"; };
+		EC33295615F8F106007A85D5 /* GLShader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GLShader.hpp; sourceTree = "<group>"; };
 		EC33295715F902B6007A85D5 /* Shader.vsh */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; path = Shader.vsh; sourceTree = "<group>"; };
 		EC33295915F9055B007A85D5 /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Shader.fsh; sourceTree = "<group>"; };
-		EC33295A15F90D2B007A85D5 /* d3GLProgram.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = d3GLProgram.cpp; sourceTree = "<group>"; };
-		EC33295B15F90D2B007A85D5 /* d3GLProgram.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = d3GLProgram.hpp; sourceTree = "<group>"; };
-		EC33295E15F91431007A85D5 /* d3GLSLRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = d3GLSLRenderer.cpp; sourceTree = "<group>"; };
-		EC33295F15F91431007A85D5 /* d3GLSLRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = d3GLSLRenderer.hpp; sourceTree = "<group>"; };
+		EC33295A15F90D2B007A85D5 /* GLProgram.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GLProgram.cpp; sourceTree = "<group>"; };
+		EC33295B15F90D2B007A85D5 /* GLProgram.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GLProgram.hpp; sourceTree = "<group>"; };
+		EC33295E15F91431007A85D5 /* GLSLRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GLSLRenderer.cpp; sourceTree = "<group>"; };
+		EC33295F15F91431007A85D5 /* GLSLRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GLSLRenderer.hpp; sourceTree = "<group>"; };
 		ECCB7D7F15F139FC00495973 /* D3 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = D3; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECCB7DC915F13B3A00495973 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		ECCB7DCA15F13B3A00495973 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
-		ECCB7DCE15F13BD100495973 /* d3.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = d3.hpp; sourceTree = "<group>"; };
-		ECCB7DCF15F13BD100495973 /* d3ArrayDescriptor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = d3ArrayDescriptor.hpp; sourceTree = "<group>"; };
-		ECCB7DD315F13BD100495973 /* d3Camera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = d3Camera.cpp; sourceTree = "<group>"; };
-		ECCB7DD415F13BD100495973 /* d3Camera.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = d3Camera.hpp; sourceTree = "<group>"; };
-		ECCB7DD515F13BD100495973 /* d3DirectionalLight.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = d3DirectionalLight.cpp; sourceTree = "<group>"; };
-		ECCB7DD615F13BD100495973 /* d3DirectionalLight.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = d3DirectionalLight.hpp; sourceTree = "<group>"; };
-		ECCB7DD715F13BD100495973 /* d3Gl.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = d3Gl.hpp; sourceTree = "<group>"; };
-		ECCB7DD815F13BD100495973 /* d3GLSceneRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = d3GLSceneRenderer.cpp; sourceTree = "<group>"; };
-		ECCB7DD915F13BD100495973 /* d3GLSceneRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = d3GLSceneRenderer.hpp; sourceTree = "<group>"; };
-		ECCB7DDA15F13BD100495973 /* d3Image.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = d3Image.cpp; sourceTree = "<group>"; };
-		ECCB7DDB15F13BD100495973 /* d3Image.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = d3Image.hpp; sourceTree = "<group>"; };
-		ECCB7DDC15F13BD100495973 /* d3Mat3.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = d3Mat3.hpp; sourceTree = "<group>"; };
-		ECCB7DDD15F13BD100495973 /* d3Mat4.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = d3Mat4.hpp; sourceTree = "<group>"; };
-		ECCB7DDE15F13BD100495973 /* d3Material.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = d3Material.cpp; sourceTree = "<group>"; };
-		ECCB7DDF15F13BD100495973 /* d3Material.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = d3Material.hpp; sourceTree = "<group>"; };
-		ECCB7DE015F13BD100495973 /* d3Math.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = d3Math.hpp; sourceTree = "<group>"; };
-		ECCB7DE115F13BD100495973 /* d3Node.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = d3Node.cpp; sourceTree = "<group>"; };
-		ECCB7DE215F13BD100495973 /* d3Node.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = d3Node.hpp; sourceTree = "<group>"; };
-		ECCB7DE415F13BD100495973 /* d3PointLight.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = d3PointLight.cpp; sourceTree = "<group>"; };
-		ECCB7DE515F13BD100495973 /* d3PointLight.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = d3PointLight.hpp; sourceTree = "<group>"; };
-		ECCB7DE615F13BD100495973 /* d3Quat.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = d3Quat.hpp; sourceTree = "<group>"; };
-		ECCB7DE915F13BD100495973 /* d3Scene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = d3Scene.cpp; sourceTree = "<group>"; };
-		ECCB7DEA15F13BD100495973 /* d3Scene.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = d3Scene.hpp; sourceTree = "<group>"; };
-		ECCB7DEB15F13BD100495973 /* d3SpotLight.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = d3SpotLight.cpp; sourceTree = "<group>"; };
-		ECCB7DEC15F13BD100495973 /* d3SpotLight.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = d3SpotLight.hpp; sourceTree = "<group>"; };
-		ECCB7DED15F13BD100495973 /* d3StateOperation.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = d3StateOperation.hpp; sourceTree = "<group>"; };
-		ECCB7DEE15F13BD100495973 /* d3Texture.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = d3Texture.cpp; sourceTree = "<group>"; };
-		ECCB7DEF15F13BD100495973 /* d3Texture.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = d3Texture.hpp; sourceTree = "<group>"; };
-		ECCB7DF015F13BD100495973 /* d3Types.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = d3Types.hpp; sourceTree = "<group>"; };
-		ECCB7DF115F13BD100495973 /* d3Vec3.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = d3Vec3.hpp; sourceTree = "<group>"; };
-		ECCB7DF215F13BD100495973 /* d3Vec4.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = d3Vec4.hpp; sourceTree = "<group>"; };
+		ECCB7DCE15F13BD100495973 /* D3Core.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; lineEnding = 0; path = D3Core.hpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		ECCB7DCF15F13BD100495973 /* ArrayDescriptor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ArrayDescriptor.hpp; sourceTree = "<group>"; };
+		ECCB7DD315F13BD100495973 /* Camera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
+		ECCB7DD415F13BD100495973 /* Camera.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Camera.hpp; sourceTree = "<group>"; };
+		ECCB7DD515F13BD100495973 /* DirectionalLight.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DirectionalLight.cpp; sourceTree = "<group>"; };
+		ECCB7DD615F13BD100495973 /* DirectionalLight.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DirectionalLight.hpp; sourceTree = "<group>"; };
+		ECCB7DD715F13BD100495973 /* OpenGLHeaders.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = OpenGLHeaders.hpp; sourceTree = "<group>"; };
+		ECCB7DD815F13BD100495973 /* GLSceneRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GLSceneRenderer.cpp; sourceTree = "<group>"; };
+		ECCB7DD915F13BD100495973 /* GLSceneRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GLSceneRenderer.hpp; sourceTree = "<group>"; };
+		ECCB7DDA15F13BD100495973 /* Image.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Image.cpp; sourceTree = "<group>"; };
+		ECCB7DDB15F13BD100495973 /* Image.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Image.hpp; sourceTree = "<group>"; };
+		ECCB7DDC15F13BD100495973 /* Mat3.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Mat3.hpp; sourceTree = "<group>"; };
+		ECCB7DDD15F13BD100495973 /* Mat4.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Mat4.hpp; sourceTree = "<group>"; };
+		ECCB7DDE15F13BD100495973 /* Material.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Material.cpp; sourceTree = "<group>"; };
+		ECCB7DDF15F13BD100495973 /* Material.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Material.hpp; sourceTree = "<group>"; };
+		ECCB7DE015F13BD100495973 /* Math.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Math.hpp; sourceTree = "<group>"; };
+		ECCB7DE115F13BD100495973 /* Node.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Node.cpp; sourceTree = "<group>"; };
+		ECCB7DE215F13BD100495973 /* Node.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Node.hpp; sourceTree = "<group>"; };
+		ECCB7DE415F13BD100495973 /* PointLight.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PointLight.cpp; sourceTree = "<group>"; };
+		ECCB7DE515F13BD100495973 /* PointLight.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PointLight.hpp; sourceTree = "<group>"; };
+		ECCB7DE615F13BD100495973 /* Quat.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Quat.hpp; sourceTree = "<group>"; };
+		ECCB7DE915F13BD100495973 /* Scene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Scene.cpp; sourceTree = "<group>"; };
+		ECCB7DEA15F13BD100495973 /* Scene.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Scene.hpp; sourceTree = "<group>"; };
+		ECCB7DEB15F13BD100495973 /* SpotLight.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SpotLight.cpp; sourceTree = "<group>"; };
+		ECCB7DEC15F13BD100495973 /* SpotLight.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SpotLight.hpp; sourceTree = "<group>"; };
+		ECCB7DED15F13BD100495973 /* StateOperation.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = StateOperation.hpp; sourceTree = "<group>"; };
+		ECCB7DEE15F13BD100495973 /* Texture.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Texture.cpp; sourceTree = "<group>"; };
+		ECCB7DEF15F13BD100495973 /* Texture.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Texture.hpp; sourceTree = "<group>"; };
+		ECCB7DF015F13BD100495973 /* Types.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Types.hpp; sourceTree = "<group>"; };
+		ECCB7DF115F13BD100495973 /* Vec3.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Vec3.hpp; sourceTree = "<group>"; };
+		ECCB7DF215F13BD100495973 /* Vec4.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Vec4.hpp; sourceTree = "<group>"; };
 		ECCB7DF315F13BD100495973 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -97,14 +97,14 @@
 		EC06058215F2AF61009CB3E0 /* OpenGL */ = {
 			isa = PBXGroup;
 			children = (
-				EC33295615F8F106007A85D5 /* d3GLShader.hpp */,
-				EC33295515F8F106007A85D5 /* d3GLShader.cpp */,
-				EC33295B15F90D2B007A85D5 /* d3GLProgram.hpp */,
-				EC33295A15F90D2B007A85D5 /* d3GLProgram.cpp */,
-				EC33295F15F91431007A85D5 /* d3GLSLRenderer.hpp */,
-				EC33295E15F91431007A85D5 /* d3GLSLRenderer.cpp */,
-				ECCB7DD915F13BD100495973 /* d3GLSceneRenderer.hpp */,
-				ECCB7DD815F13BD100495973 /* d3GLSceneRenderer.cpp */,
+				EC33295615F8F106007A85D5 /* GLShader.hpp */,
+				EC33295515F8F106007A85D5 /* GLShader.cpp */,
+				EC33295B15F90D2B007A85D5 /* GLProgram.hpp */,
+				EC33295A15F90D2B007A85D5 /* GLProgram.cpp */,
+				EC33295F15F91431007A85D5 /* GLSLRenderer.hpp */,
+				EC33295E15F91431007A85D5 /* GLSLRenderer.cpp */,
+				ECCB7DD915F13BD100495973 /* GLSceneRenderer.hpp */,
+				ECCB7DD815F13BD100495973 /* GLSceneRenderer.cpp */,
 			);
 			name = OpenGL;
 			sourceTree = "<group>";
@@ -120,15 +120,15 @@
 		EC123C4515F13C5F004447ED /* Rendering system */ = {
 			isa = PBXGroup;
 			children = (
-				EC06057915F28DB5009CB3E0 /* d3Renderable.hpp */,
-				ECCB7DCF15F13BD100495973 /* d3ArrayDescriptor.hpp */,
-				ECCB7DED15F13BD100495973 /* d3StateOperation.hpp */,
-				EC06058115F2ACE1009CB3E0 /* d3SceneRenderer.hpp */,
-				EC06057A15F28E73009CB3E0 /* d3Geometry.hpp */,
-				ECCB7DDF15F13BD100495973 /* d3Material.hpp */,
-				ECCB7DDE15F13BD100495973 /* d3Material.cpp */,
-				ECCB7DEF15F13BD100495973 /* d3Texture.hpp */,
-				ECCB7DEE15F13BD100495973 /* d3Texture.cpp */,
+				EC06057915F28DB5009CB3E0 /* Renderable.hpp */,
+				ECCB7DCF15F13BD100495973 /* ArrayDescriptor.hpp */,
+				ECCB7DED15F13BD100495973 /* StateOperation.hpp */,
+				EC06058115F2ACE1009CB3E0 /* SceneRenderer.hpp */,
+				EC06057A15F28E73009CB3E0 /* Geometry.hpp */,
+				ECCB7DDF15F13BD100495973 /* Material.hpp */,
+				ECCB7DDE15F13BD100495973 /* Material.cpp */,
+				ECCB7DEF15F13BD100495973 /* Texture.hpp */,
+				ECCB7DEE15F13BD100495973 /* Texture.cpp */,
 				EC06058215F2AF61009CB3E0 /* OpenGL */,
 			);
 			name = "Rendering system";
@@ -137,8 +137,8 @@
 		EC123C4715F13C6D004447ED /* Primitives */ = {
 			isa = PBXGroup;
 			children = (
-				EC06057E15F29589009CB3E0 /* d3GeometryFactory.hpp */,
-				EC06057D15F29589009CB3E0 /* d3GeometryFactory.cpp */,
+				EC06057E15F29589009CB3E0 /* GeometryFactory.hpp */,
+				EC06057D15F29589009CB3E0 /* GeometryFactory.cpp */,
 			);
 			name = Primitives;
 			sourceTree = "<group>";
@@ -146,10 +146,10 @@
 		EC123C4815F13C75004447ED /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				ECCB7DDB15F13BD100495973 /* d3Image.hpp */,
-				ECCB7DDA15F13BD100495973 /* d3Image.cpp */,
-				EC33295215F8EDEF007A85D5 /* d3FileIO.hpp */,
-				EC33295315F8EE35007A85D5 /* d3FileIO.cpp */,
+				ECCB7DDB15F13BD100495973 /* Image.hpp */,
+				ECCB7DDA15F13BD100495973 /* Image.cpp */,
+				EC33295215F8EDEF007A85D5 /* FileIO.hpp */,
+				EC33295315F8EE35007A85D5 /* FileIO.cpp */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -157,13 +157,13 @@
 		EC123C4915F13C7D004447ED /* Math */ = {
 			isa = PBXGroup;
 			children = (
-				ECCB7DE015F13BD100495973 /* d3Math.hpp */,
-				EC06057F15F2AA44009CB3E0 /* d3Math.cpp */,
-				ECCB7DDC15F13BD100495973 /* d3Mat3.hpp */,
-				ECCB7DDD15F13BD100495973 /* d3Mat4.hpp */,
-				ECCB7DF115F13BD100495973 /* d3Vec3.hpp */,
-				ECCB7DF215F13BD100495973 /* d3Vec4.hpp */,
-				ECCB7DE615F13BD100495973 /* d3Quat.hpp */,
+				ECCB7DE015F13BD100495973 /* Math.hpp */,
+				EC06057F15F2AA44009CB3E0 /* Math.cpp */,
+				ECCB7DDC15F13BD100495973 /* Mat3.hpp */,
+				ECCB7DDD15F13BD100495973 /* Mat4.hpp */,
+				ECCB7DF115F13BD100495973 /* Vec3.hpp */,
+				ECCB7DF215F13BD100495973 /* Vec4.hpp */,
+				ECCB7DE615F13BD100495973 /* Quat.hpp */,
 			);
 			name = Math;
 			sourceTree = "<group>";
@@ -223,9 +223,9 @@
 		ECCB7DF415F13BE300495973 /* Headers */ = {
 			isa = PBXGroup;
 			children = (
-				ECCB7DCE15F13BD100495973 /* d3.hpp */,
-				ECCB7DD715F13BD100495973 /* d3Gl.hpp */,
-				ECCB7DF015F13BD100495973 /* d3Types.hpp */,
+				ECCB7DCE15F13BD100495973 /* D3Core.hpp */,
+				ECCB7DF015F13BD100495973 /* Types.hpp */,
+				ECCB7DD715F13BD100495973 /* OpenGLHeaders.hpp */,
 			);
 			name = Headers;
 			sourceTree = "<group>";
@@ -233,18 +233,18 @@
 		ECCB7DF915F13C2800495973 /* Scene graph */ = {
 			isa = PBXGroup;
 			children = (
-				ECCB7DEA15F13BD100495973 /* d3Scene.hpp */,
-				ECCB7DE915F13BD100495973 /* d3Scene.cpp */,
-				ECCB7DE215F13BD100495973 /* d3Node.hpp */,
-				ECCB7DE115F13BD100495973 /* d3Node.cpp */,
-				ECCB7DD415F13BD100495973 /* d3Camera.hpp */,
-				ECCB7DD315F13BD100495973 /* d3Camera.cpp */,
-				ECCB7DE515F13BD100495973 /* d3PointLight.hpp */,
-				ECCB7DE415F13BD100495973 /* d3PointLight.cpp */,
-				ECCB7DEC15F13BD100495973 /* d3SpotLight.hpp */,
-				ECCB7DEB15F13BD100495973 /* d3SpotLight.cpp */,
-				ECCB7DD615F13BD100495973 /* d3DirectionalLight.hpp */,
-				ECCB7DD515F13BD100495973 /* d3DirectionalLight.cpp */,
+				ECCB7DEA15F13BD100495973 /* Scene.hpp */,
+				ECCB7DE915F13BD100495973 /* Scene.cpp */,
+				ECCB7DE215F13BD100495973 /* Node.hpp */,
+				ECCB7DE115F13BD100495973 /* Node.cpp */,
+				ECCB7DD415F13BD100495973 /* Camera.hpp */,
+				ECCB7DD315F13BD100495973 /* Camera.cpp */,
+				ECCB7DE515F13BD100495973 /* PointLight.hpp */,
+				ECCB7DE415F13BD100495973 /* PointLight.cpp */,
+				ECCB7DEC15F13BD100495973 /* SpotLight.hpp */,
+				ECCB7DEB15F13BD100495973 /* SpotLight.cpp */,
+				ECCB7DD615F13BD100495973 /* DirectionalLight.hpp */,
+				ECCB7DD515F13BD100495973 /* DirectionalLight.cpp */,
 				EC123C4715F13C6D004447ED /* Primitives */,
 			);
 			name = "Scene graph";
