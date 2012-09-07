@@ -22,46 +22,4 @@ namespace d3 {
     {
         is_on_ = state;
     }
-    
-    void d3PointLight::setAmbientColor(d3Vec4 color)
-    {
-        ambient_color_ = color;
-    }
-    
-    d3Vec4 d3PointLight::getAmbientColor() const
-    {
-        return ambient_color_;
-    }
-    
-    void d3PointLight::setDiffuseColor(d3Vec4 color)
-    {
-        diffuse_color_ = color;
-    }
-    
-    d3Vec4 d3PointLight::getDiffuseColor() const
-    {
-        return diffuse_color_;
-    }
-    
-    void d3PointLight::setSpecularColor(d3Vec4 color)
-    {
-        specular_color_ = color;
-    }
-    
-    d3Vec4 d3PointLight::getSpecularColor() const
-    {
-        return specular_color_;
-    }
-    
-    void d3PointLight::setAttenuation(d3Vec3 a)
-    {
-        attenuation_.x = a.x;   // constant
-        attenuation_.y = a.y;   // linear
-        attenuation_.z = a.z;   // quadratic
-    }
-    
-    d3Vec3 d3PointLight::getAttenuation() const
-    {
-        return attenuation_;
-    }
 }

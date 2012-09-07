@@ -10,6 +10,9 @@
 #define D3_d3_hpp
 
 // Interfaces
+// Resources
+#include "d3FileIO.hpp"
+
 // Math
 #include "d3Math.hpp"
 #include "d3Vec3.hpp"
@@ -36,8 +39,13 @@
 
 
 // Rendering system
+#include "d3GLShader.hpp"
+#include "d3GLProgram.hpp"
 #include "d3SceneRenderer.hpp"
 #include "d3GLSceneRenderer.hpp"
+#include "d3GLSLRenderer.hpp"
+
+
 
 // Implementation
 // Simple method to avoid compiling lib
@@ -53,8 +61,11 @@
 #include "d3Material.cpp"
 #include "d3Texture.cpp"
 #include "d3GLSceneRenderer.cpp"
-#include "d3Geometry.cpp"
 #include "d3GeometryFactory.cpp"
+#include "d3FileIO.cpp"
+#include "d3GLShader.cpp"
+#include "d3GLProgram.cpp"
+#include "d3GLSLRenderer.cpp"
 
 
 #endif

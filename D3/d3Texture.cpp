@@ -23,6 +23,7 @@ namespace d3 {
         glTexImage2D(GL_TEXTURE_2D, 0, image->getNumberOfChannels(), image->getWidth(), image->getHeight(), 0, image->getPixelFormat(), GL_UNSIGNED_BYTE, image->getData());
         
         glDisable(GL_TEXTURE_2D);
+        
     }
     
     void d3Texture::bind()

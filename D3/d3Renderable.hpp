@@ -18,15 +18,10 @@ namespace d3 {
         
     public:
         d3Renderable(d3Geometry * geometry) : geometry_(geometry), material_(nullptr), texture_(nullptr) {}
-        
-        inline void setGeometry(d3Geometry * geometry) { geometry_ = geometry; }
-        inline d3Geometry * getGeometry() const { return geometry_; }
-        
-        inline void setMaterial(d3Material * material) { material_ = material; }
-        inline d3Material * getMaterial() const { return material_; }
-        
-        inline void setTexture(d3Texture * texture) { texture_ = texture; }
-        inline d3Texture * getTexture() const { return texture_; }
+                
+        SETGET(d3Geometry *, geometry_, Geometry)
+        SETGET(d3Material *, material_, Material)
+        SETGET(d3Texture *, texture_, Texture)
         
         //! d3Node::Attachment::isRenderable();
         virtual bool isRenderable() const { return true; }

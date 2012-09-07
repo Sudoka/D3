@@ -30,18 +30,10 @@ namespace d3 {
         
         void setOn(bool state);
         
-        void setAmbientColor(d3Vec4 color);
-        d3Vec4 getAmbientColor() const;
-        
-        void setDiffuseColor(d3Vec4 color);
-        d3Vec4 getDiffuseColor() const;
-        
-        void setSpecularColor(d3Vec4 color);
-        d3Vec4 getSpecularColor() const;
-        
-        void setAttenuation(d3Vec3 a);
-        d3Vec3 getAttenuation() const;
-               
+        SETGET(d3Vec4, ambient_color_, AmbientColor)
+        SETGET(d3Vec4, diffuse_color_, DiffuseColor)
+        SETGET(d3Vec4, specular_color_, SpecularColor)
+        SETGET(d3Vec3, attenuation_, Attenuation)               
     };
 }
 

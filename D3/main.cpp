@@ -6,6 +6,9 @@
 //  Copyright (c) 2012 Srđan Rašić. All rights reserved.
 //
 
+#include <stdio.h>
+#include <stdlib.h>
+
 #define D3_COMPILE  // Compile engine
 #include "d3.hpp"
 
@@ -109,6 +112,13 @@ int main(int argc, char** argv)
     sl->setTarget(box);
     
     updateCamera();
+       
+    d3GLProgram program(shared_ptr<d3GLShader>(new d3GLShader(D3_VERTEX_PROGRAM, "D3/Shader.vsh")),
+                        shared_ptr<d3GLShader>(new d3GLShader(D3_FRAGMENT_PROGRAM, "D3/Shader.fsh")));
+    
+    program.compile();
+    program.link();
+    program.printInfoLog();
     
     glutMainLoop();
     

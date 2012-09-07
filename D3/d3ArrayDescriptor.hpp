@@ -21,23 +21,9 @@ namespace d3 {
     public:
         d3ArrayDescriptor(T *ptr, unsigned int size, int stride) : ptr_(ptr), size_(size), stride_(stride) {}
         
-        //! Sets pointer to the first element
-        void setPointer(T* data) { ptr_ = data; }
-        
-        //! @return Pointer to the first element
-        T * getPointer() const { return ptr_; }
-        
-        //! Sets number of elements in array
-        void setSize(unsigned int size) { size_ = size; }
-        
-        //! @return Number of elements
-        unsigned int getSize() { return size_; }
-        
-        //! Sets stride
-        void setStride(int stride) const { stride_ = stride; }
-        
-        //! @return Offset to each next element
-        int getStride() const { return stride_; }
+        SETGET(T *, ptr_, Pointer)
+        SETGET(unsigned int, size_, Size)
+        SETGET(int, stride_, Stride)
     };
 }
 

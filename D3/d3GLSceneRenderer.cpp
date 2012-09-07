@@ -71,11 +71,15 @@ namespace d3 {
     void d3GLSceneRenderer::d3GLNodeDrawOperation::beginNode(d3Node *node)
     {
         glPushMatrix();
-        glTranslatef(node->getPosition().x, node->getPosition().y, node->getPosition().z);
-        d3Vec3 axis = node->getOrientation().getRotationAxis();
-        float angle = node->getOrientation().getRotationAngle() / kPiOver180;
+        d3Vec3 position = node->getPosition();
+        d3Vec3 scale = node->getScale();
+        d3Quat orientation = node->getOrientation();
+        
+        glTranslatef(position.x, position.y, position.z);
+        d3Vec3 axis = orientation.getRotationAxis();
+        float angle = orientation.getRotationAngle() / kPiOver180;
         glRotatef(angle, axis.x, axis.y, axis.z);
-        glScalef(node->getScale().x, node->getScale().y, node->getScale().z);
+        glScalef(scale.x, scale.y, scale.z);
         
         // draw attached object
         d3Node::Attachment * attachment = node->getAttachedObject();
@@ -157,6 +161,8 @@ namespace d3 {
         glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
         glEnable (GL_LIGHTING);
         glLightModelfv(GL_LIGHT_MODEL_AMBIENT, d3Vec4(0.1, 0.1, 0.1, 0.1));
+        //glEnable(GL_CULL_FACE);
+        glEnable(GL_NORMALIZE);
         
     }
     
@@ -192,7 +198,7 @@ namespace d3 {
         
         // Render scene
         scene->getRoot()->traverse(shared_ptr<d3Node::VisitOperation>(new d3GLNodeDrawOperation()));
-        
+
         // Finish
         glFlush();
     }

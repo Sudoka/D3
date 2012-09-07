@@ -23,44 +23,4 @@ namespace d3 {
         setAmbientColor(color);
         setDiffuseColor(color);
     }
-    
-    void d3Material::setAmbientColor(d3Vec4 color)
-    {
-        ambient_color_ = color;
-    }
-    
-    d3Vec4 d3Material::getAmbientColor() const
-    {
-        return ambient_color_;
-    }
-    
-    void d3Material::setDiffuseColor(d3Vec4 color)
-    {
-        diffuse_color_ = color;
-    }
-    
-    d3Vec4 d3Material::getDiffuseColor() const
-    {
-        return diffuse_color_;
-    }
-    
-    void d3Material::setSpecularColor(d3Vec4 color)
-    {
-        specular_color_ = color;
-    }
-    
-    d3Vec4 d3Material::getSpecularColor() const
-    {
-        return specular_color_;
-    }
-    
-    void d3Material::setShininess(int value)
-    {
-        shininess_ = value;
-    }
-    
-    int d3Material::getShininess() const
-    {
-        return shininess_;
-    }
 }

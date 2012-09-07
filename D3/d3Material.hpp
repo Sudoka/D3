@@ -25,17 +25,10 @@ namespace d3 {
         
         void setAmbientAndDiffuseColor(d3Vec4 color);
         
-        void setAmbientColor(d3Vec4 color);
-        d3Vec4 getAmbientColor() const;
-        
-        void setDiffuseColor(d3Vec4 color);
-        d3Vec4 getDiffuseColor() const;
-        
-        void setSpecularColor(d3Vec4 color);
-        d3Vec4 getSpecularColor() const;
-        
-        void setShininess(int value);
-        int getShininess() const;
+        SETGET(d3Vec4, ambient_color_, AmbientColor)
+        SETGET(d3Vec4, diffuse_color_, DiffuseColor)
+        SETGET(d3Vec4, specular_color_, SpecularColor)
+        SETGET(int, shininess_, Shininess)
     };
 }
 

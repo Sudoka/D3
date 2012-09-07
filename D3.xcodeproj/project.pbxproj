@@ -27,7 +27,6 @@
 /* Begin PBXFileReference section */
 		EC06057915F28DB5009CB3E0 /* d3Renderable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = d3Renderable.hpp; sourceTree = "<group>"; };
 		EC06057A15F28E73009CB3E0 /* d3Geometry.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = d3Geometry.hpp; sourceTree = "<group>"; };
-		EC06057B15F28F6E009CB3E0 /* d3Geometry.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = d3Geometry.cpp; sourceTree = "<group>"; };
 		EC06057D15F29589009CB3E0 /* d3GeometryFactory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = d3GeometryFactory.cpp; sourceTree = "<group>"; };
 		EC06057E15F29589009CB3E0 /* d3GeometryFactory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = d3GeometryFactory.hpp; sourceTree = "<group>"; };
 		EC06057F15F2AA44009CB3E0 /* d3Math.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = d3Math.cpp; sourceTree = "<group>"; };
@@ -35,6 +34,16 @@
 		EC06058315F2DAF2009CB3E0 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		EC06058415F2DED0009CB3E0 /* earth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = earth.png; path = Resources/earth.png; sourceTree = "<group>"; };
 		EC123C4A15F13E09004447ED /* README */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = README; sourceTree = "<group>"; };
+		EC33295215F8EDEF007A85D5 /* d3FileIO.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = d3FileIO.hpp; sourceTree = "<group>"; };
+		EC33295315F8EE35007A85D5 /* d3FileIO.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = d3FileIO.cpp; sourceTree = "<group>"; };
+		EC33295515F8F106007A85D5 /* d3GLShader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = d3GLShader.cpp; sourceTree = "<group>"; };
+		EC33295615F8F106007A85D5 /* d3GLShader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = d3GLShader.hpp; sourceTree = "<group>"; };
+		EC33295715F902B6007A85D5 /* Shader.vsh */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; path = Shader.vsh; sourceTree = "<group>"; };
+		EC33295915F9055B007A85D5 /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Shader.fsh; sourceTree = "<group>"; };
+		EC33295A15F90D2B007A85D5 /* d3GLProgram.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = d3GLProgram.cpp; sourceTree = "<group>"; };
+		EC33295B15F90D2B007A85D5 /* d3GLProgram.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = d3GLProgram.hpp; sourceTree = "<group>"; };
+		EC33295E15F91431007A85D5 /* d3GLSLRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = d3GLSLRenderer.cpp; sourceTree = "<group>"; };
+		EC33295F15F91431007A85D5 /* d3GLSLRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = d3GLSLRenderer.hpp; sourceTree = "<group>"; };
 		ECCB7D7F15F139FC00495973 /* D3 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = D3; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECCB7DC915F13B3A00495973 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		ECCB7DCA15F13B3A00495973 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -88,6 +97,12 @@
 		EC06058215F2AF61009CB3E0 /* OpenGL */ = {
 			isa = PBXGroup;
 			children = (
+				EC33295615F8F106007A85D5 /* d3GLShader.hpp */,
+				EC33295515F8F106007A85D5 /* d3GLShader.cpp */,
+				EC33295B15F90D2B007A85D5 /* d3GLProgram.hpp */,
+				EC33295A15F90D2B007A85D5 /* d3GLProgram.cpp */,
+				EC33295F15F91431007A85D5 /* d3GLSLRenderer.hpp */,
+				EC33295E15F91431007A85D5 /* d3GLSLRenderer.cpp */,
 				ECCB7DD915F13BD100495973 /* d3GLSceneRenderer.hpp */,
 				ECCB7DD815F13BD100495973 /* d3GLSceneRenderer.cpp */,
 			);
@@ -110,7 +125,6 @@
 				ECCB7DED15F13BD100495973 /* d3StateOperation.hpp */,
 				EC06058115F2ACE1009CB3E0 /* d3SceneRenderer.hpp */,
 				EC06057A15F28E73009CB3E0 /* d3Geometry.hpp */,
-				EC06057B15F28F6E009CB3E0 /* d3Geometry.cpp */,
 				ECCB7DDF15F13BD100495973 /* d3Material.hpp */,
 				ECCB7DDE15F13BD100495973 /* d3Material.cpp */,
 				ECCB7DEF15F13BD100495973 /* d3Texture.hpp */,
@@ -134,6 +148,8 @@
 			children = (
 				ECCB7DDB15F13BD100495973 /* d3Image.hpp */,
 				ECCB7DDA15F13BD100495973 /* d3Image.cpp */,
+				EC33295215F8EDEF007A85D5 /* d3FileIO.hpp */,
+				EC33295315F8EE35007A85D5 /* d3FileIO.cpp */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -150,6 +166,15 @@
 				ECCB7DE615F13BD100495973 /* d3Quat.hpp */,
 			);
 			name = Math;
+			sourceTree = "<group>";
+		};
+		EC33295815F902C8007A85D5 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				EC33295715F902B6007A85D5 /* Shader.vsh */,
+				EC33295915F9055B007A85D5 /* Shader.fsh */,
+			);
+			name = Shaders;
 			sourceTree = "<group>";
 		};
 		ECCB7D7415F139FC00495973 = {
@@ -176,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				ECCB7DF315F13BD100495973 /* main.cpp */,
+				EC33295815F902C8007A85D5 /* Shaders */,
 				ECCB7DF415F13BE300495973 /* Headers */,
 				EC123C4915F13C7D004447ED /* Math */,
 				ECCB7DF915F13C2800495973 /* Scene graph */,
