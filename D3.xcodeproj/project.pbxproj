@@ -47,7 +47,7 @@
 		ECCB7D7F15F139FC00495973 /* D3 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = D3; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECCB7DC915F13B3A00495973 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		ECCB7DCA15F13B3A00495973 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
-		ECCB7DCE15F13BD100495973 /* D3Core.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; lineEnding = 0; path = D3Core.hpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		ECCB7DCE15F13BD100495973 /* d3.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; lineEnding = 0; path = d3.hpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		ECCB7DCF15F13BD100495973 /* ArrayDescriptor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ArrayDescriptor.hpp; sourceTree = "<group>"; };
 		ECCB7DD315F13BD100495973 /* Camera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
 		ECCB7DD415F13BD100495973 /* Camera.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Camera.hpp; sourceTree = "<group>"; };
@@ -223,7 +223,7 @@
 		ECCB7DF415F13BE300495973 /* Headers */ = {
 			isa = PBXGroup;
 			children = (
-				ECCB7DCE15F13BD100495973 /* D3Core.hpp */,
+				ECCB7DCE15F13BD100495973 /* d3.hpp */,
 				ECCB7DF015F13BD100495973 /* Types.hpp */,
 				ECCB7DD715F13BD100495973 /* OpenGLHeaders.hpp */,
 			);

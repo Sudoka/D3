@@ -10,7 +10,7 @@
 #include <stdlib.h>
 
 #define D3_COMPILE  // Compile engine
-#include "d3Core.hpp"
+#include "d3.hpp"
 
 #include <stdlib.h>
 
