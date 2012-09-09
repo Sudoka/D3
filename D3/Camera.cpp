@@ -54,7 +54,7 @@ namespace d3 {
         if (target_node_ != nullptr) {
             look_at = target_node_->getDerivedPosition();
         } else {
-            look_at = getParent()->getPosition() + getParent()->getOrientation() * direction_;
+            look_at = getParent()->getDerivedPosition() + getParent()->getDerivedOrientation() * direction_;
         }
         
         Vec3 forward = look_at - position; forward.normalize();

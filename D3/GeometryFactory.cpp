@@ -29,15 +29,6 @@ namespace d3 {
         0, 0,-1,   0, 0,-1,   0, 0,-1,   0, 0,-1    // v4,v7,v6,v5 (back)
     };
     
-    static float colors_[72] = {
-        1, 1, 1,   1, 1, 0,   1, 0, 0,   1, 0, 1,   // v0,v1,v2,v3 (front)
-        1, 1, 1,   1, 0, 1,   0, 0, 1,   0, 1, 1,   // v0,v3,v4,v5 (right)
-        1, 1, 1,   0, 1, 1,   0, 1, 0,   1, 1, 0,   // v0,v5,v6,v1 (top)
-        1, 1, 0,   0, 1, 0,   0, 0, 0,   1, 0, 0,   // v1,v6,v7,v2 (left)
-        0, 0, 0,   0, 0, 1,   1, 0, 1,   1, 0, 0,   // v7,v4,v3,v2 (bottom)
-        0, 0, 1,   0, 0, 0,   0, 1, 0,   0, 1, 1    // v4,v7,v6,v5 (back)
-    };
-    
     static unsigned int indices_[36]  = {
         0, 1, 2,   2, 3, 0,     // front
         4, 5, 6,   6, 7, 4,     // right
@@ -103,7 +94,6 @@ namespace d3 {
         Geometry * g = new Geometry();
         g->setVertexArray(new ArrayDescriptor<float>(vertices_, 72, 0));
         g->setNormalArray(new ArrayDescriptor<float>(normals_, 72, 0));
-        g->setColorArray(new ArrayDescriptor<float>(colors_, 72, 0));
         g->setIndices(new ArrayDescriptor<unsigned int>(indices_, 36, 0));
         g->setGeometryType(GL_TRIANGLES);
         
@@ -163,6 +153,25 @@ namespace d3 {
 
         g->setVertexArray(new ArrayDescriptor<float>((float*)vertex, 6, sizeof(Vec3)));
         g->setColorArray(new ArrayDescriptor<float>((float*)color, 6, sizeof(Vec4)));
+        g->setGeometryType(GL_LINES);
+        
+        return g;
+    }
+    
+    Geometry * GeometryFactory::createArrow(Vec3 v)
+    {
+        Vec3 * vertex = new Vec3[2];
+        Vec4 * color = new Vec4[3];
+        
+        // X-axis
+        color[0] = color[1] = Vec4(1.0f, 1.0f, 1.0f, 1.0f);      // color
+        vertex[0] = Vec3(0.f, 0.f, 0.f);                     // star point
+        vertex[1] = v.unit() * 10.0;                     // end point
+        
+        Geometry * g = new Geometry();
+        
+        g->setVertexArray(new ArrayDescriptor<float>((float*)vertex, 2, sizeof(Vec3)));
+        g->setColorArray(new ArrayDescriptor<float>((float*)color, 2, sizeof(Vec4)));
         g->setGeometryType(GL_LINES);
         
         return g;

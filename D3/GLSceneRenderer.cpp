@@ -71,11 +71,19 @@ namespace d3 {
     void GLSceneRenderer::GLNodeDrawOperation::beginNode(Node *node)
     {
         glPushMatrix();
+//        Mat4 translate = getTranslationMatrix(node->getPosition());
+//        Mat4 scale = getScalingMatrix(node->getScale());
+//        Mat4 rotate = node->getOrientation().normalized();
+//        
+//        Mat4 transform = (scale * rotate) * translate;
+//        glMultMatrixf(transform.transpose());
+        
         Vec3 position = node->getPosition();
         Vec3 scale = node->getScale();
-        Quat orientation = node->getOrientation();
+        Quat orientation = node->getOrientation().normalized();
         
         glTranslatef(position.x, position.y, position.z);
+
         Vec3 axis = orientation.getRotationAxis();
         float angle = orientation.getRotationAngle() / kPiOver180;
         glRotatef(angle, axis.x, axis.y, axis.z);
@@ -159,10 +167,12 @@ namespace d3 {
         glEnable(GL_DEPTH_TEST);
         glShadeModel(GL_SMOOTH);
         glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
-        glEnable (GL_LIGHTING);
+        //glEnable (GL_LIGHTING);
         glLightModelfv(GL_LIGHT_MODEL_AMBIENT, Vec4(0.1, 0.1, 0.1, 0.1));
         //glEnable(GL_CULL_FACE);
         glEnable(GL_NORMALIZE);
+        
+        glPointSize(2.0);
         
     }
     
@@ -184,6 +194,7 @@ namespace d3 {
         glLoadIdentity();
         Frustum frustum = camera->getFrustum();
         glFrustum(frustum.left, frustum.right, frustum.down, frustum.up, frustum.near, frustum.far);
+        //glOrtho(-10, 10, -10, 10, 1, 100);
         
         // Setup camera view point
         glMatrixMode(GL_MODELVIEW);

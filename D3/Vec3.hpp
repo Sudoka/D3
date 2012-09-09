@@ -57,6 +57,9 @@ namespace d3 {
         float length() const;
         
         //! Vector normalization.
+        Vec3 unit();
+        
+        //! Vector normalization.
         void normalize();
         
         //! Convert to const float*.
@@ -122,6 +125,12 @@ namespace d3 {
     inline float Vec3::length() const
     {
         return sqrtf(x*x + y*y + z*z);
+    }
+    
+    inline Vec3 Vec3::unit()
+    {
+        float l = length();
+        return Vec3(x/l, y/l, z/l);
     }
     
     inline void Vec3::normalize()

@@ -213,7 +213,7 @@ namespace d3 {
     
     void Node::rotate(Vec3 axis, float angle)
     {
-        //TODO
+        orientation_ = orientation_ * Quat(axis, angle);
         setNeedsUpdate();
     }
     

@@ -35,7 +35,10 @@
 #include "Renderable.hpp"
 #include "Camera.hpp"
 #include "Image.hpp"
+
+// Primitives
 #include "GeometryFactory.hpp"
+#include "Modeler.hpp"
 
 
 // Rendering system
@@ -66,6 +69,7 @@
 #include "GLShader.cpp"
 #include "GLProgram.cpp"
 #include "GLSLRenderer.cpp"
+#include "Modeler.cpp"
 
 
 #endif

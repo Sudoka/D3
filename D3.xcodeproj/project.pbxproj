@@ -34,6 +34,8 @@
 		EC06058315F2DAF2009CB3E0 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; lineEnding = 0; path = Makefile; sourceTree = "<group>"; };
 		EC06058415F2DED0009CB3E0 /* earth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = earth.png; path = Resources/earth.png; sourceTree = "<group>"; };
 		EC123C4A15F13E09004447ED /* README */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; lineEnding = 0; path = README; sourceTree = "<group>"; };
+		EC19985115FA7CAF00717FE3 /* Modeler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Modeler.cpp; sourceTree = "<group>"; };
+		EC19985215FA7CAF00717FE3 /* Modeler.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Modeler.hpp; sourceTree = "<group>"; };
 		EC33295215F8EDEF007A85D5 /* FileIO.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FileIO.hpp; sourceTree = "<group>"; };
 		EC33295315F8EE35007A85D5 /* FileIO.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileIO.cpp; sourceTree = "<group>"; };
 		EC33295515F8F106007A85D5 /* GLShader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GLShader.cpp; sourceTree = "<group>"; };
@@ -137,6 +139,8 @@
 		EC123C4715F13C6D004447ED /* Primitives */ = {
 			isa = PBXGroup;
 			children = (
+				EC19985215FA7CAF00717FE3 /* Modeler.hpp */,
+				EC19985115FA7CAF00717FE3 /* Modeler.cpp */,
 				EC06057E15F29589009CB3E0 /* GeometryFactory.hpp */,
 				EC06057D15F29589009CB3E0 /* GeometryFactory.cpp */,
 			);

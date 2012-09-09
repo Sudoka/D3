@@ -12,8 +12,10 @@
 #include <cmath>
 
 namespace d3 {
+    class Mat3;
     class Mat4;
     class Vec3;
+    class Quat;
     
     // Commonly used constants
     const float kPi = 3.14159265f;
@@ -36,11 +38,33 @@ namespace d3 {
         float near, far;
     };
     
+    float clamp(float min, float max, float value);
+    
     //! Transform matrices
     Mat4 getTranslationMatrix(Vec3 v);
     
+    Mat4 getScalingMatrix(Vec3 v);
+    
+    Mat3 getRotationMatrix(Vec3 axis, float angle);
+    
+    Vec3 lerp(Vec3 v0, Vec3 v1, float t);
+    
+    //! Linear Quaternion interpolation
+    Quat lerp(Quat q0, Quat q1, float t);
+    
+    //! Spherical Quaternion interpolation
+    Quat slerp(Quat q0, Quat q1, float t);
+    
+    float randf();
+    
+    int randi(int min, int max);
+    
     
 #pragma mark Implementation
+    inline float clamp(float min, float max, float value) {
+        return (value < min) ? min : ( value > max ? max : value );
+    }
+    
     inline float wrapPi(float theta) {
         theta += kPi;
         theta -= floor(theta * k1Over2Pi) * k2Pi;
@@ -58,7 +82,13 @@ namespace d3 {
         return acosf(x);
     }
     
-
+    inline float randf() {
+        return (float)(rand() % 65000) / 65000.0;
+    }
+    
+    inline int randi(int min, int max) {
+        return rand() % (-min + max) + min; // fix?
+    }
 }
 
 #endif

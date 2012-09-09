@@ -13,8 +13,9 @@
 #include "Vec3.hpp"
 #include "Mat3.hpp"
 #include "Mat4.hpp"
+#include <assert.h>
 
-#define TOLERANCE 0.00001f
+#define TOLERANCE 0.0000001f
 
 namespace d3 {
 #pragma mark Interface
@@ -22,6 +23,7 @@ namespace d3 {
     public:
         union {
             struct { float x, y, z, w; };
+            struct { Vec3 v; float s; };
             float q[4];
         } __attribute__((aligned(16)));
         
@@ -43,7 +45,17 @@ namespace d3 {
         
         void normalise();
         
+        Quat normalized() const;
+        
         Quat conjugate() const;
+        
+        Quat inverse() const;
+        
+        Quat scale(float k) const;
+        
+        float norm() const;
+        
+        float dot(Quat rq) const;
         
         //! Addition.
         Quat operator+(const Quat& b) const;
@@ -60,6 +72,8 @@ namespace d3 {
         float getRotationAngle() const;
         
         Vec3 getRotationAxis() const;
+        
+        operator Mat4 () const;
     };
     
 #pragma mark Implementation
@@ -71,16 +85,14 @@ namespace d3 {
     {
     }
     
-    inline Quat::Quat(Vec3 axies, float angle)
+    inline Quat::Quat(Vec3 axis, float theta)
     {
-        float sinAngle = sinf(angle * 0.5f);
-        Vec3 vn(axies);
-        vn.normalize();
+        assert(fabs(axis.length() - 1.0f) < 0.01f); // Compute the half angle and its sin
         
-        x = vn.x * sinAngle;
-        y = vn.y * sinAngle;
-        z = vn.z * sinAngle;
-        w = cosf(angle * 0.5f);
+        float thetaOver2 = theta * .5f;
+        float sinThetaOver2 = sin(thetaOver2); // Set the values
+        w = cos(thetaOver2);
+        x = axis.x * sinThetaOver2; y = axis.y * sinThetaOver2; z = axis.z * sinThetaOver2;
     }
     
     inline Quat::Quat(Mat3 m)
@@ -93,14 +105,31 @@ namespace d3 {
     
     inline void Quat::normalise()
     {
-        float mag2 = w*w + x*x + y*y + z*z;
-        if (fabsf(mag2) > TOLERANCE && fabsf(mag2 - 1.f) > TOLERANCE) {
-            float mag = sqrtf(mag2);
-            w /= mag;
-            x /= mag;
-            y /= mag;
-            z /= mag;
+        float mag = (float)sqrt(w*w + x*x + y*y + z*z);
+        
+        // Check for bogus length to protect against divide by zero
+        if (mag > 0.0f) {
+            // Normalize it
+            float oneOverMag = 1.0f / mag;
+            
+            w *= oneOverMag;
+            x *= oneOverMag;
+            y *= oneOverMag;
+            z *= oneOverMag;
+        } else {
+            // Houston, we have a problem
+            assert(false);
+            // In a release build, just slam it to something
+            w = 1.0f;
+            x = y = z = 0.0f;
         }
+    }
+    
+    inline Quat Quat::normalized() const
+    {
+        Quat q(*this);
+        q.normalise();
+        return q;
     }
     
     inline Quat Quat::conjugate() const
@@ -108,9 +137,29 @@ namespace d3 {
         return Quat(-x, -y, -z, w);
     }
     
+    inline Quat Quat::inverse() const
+    {
+        return conjugate().scale(1.0/norm());
+    }
+    
+    inline Quat Quat::scale(float k) const
+    {
+        return Quat(x*k, y*k, z*k, w*k);
+    }
+    
+    inline float Quat::norm() const
+    {
+        return (w*w + x*x + y*y + z*z);
+    }
+    
+    inline float Quat::dot(d3::Quat rq) const
+    {
+        return w * rq.w + x * rq.x + y * rq.y + z * rq.z;
+    }
+    
     inline Quat Quat::operator+(const Quat& rq) const
     {
-        return Quat();
+        return Quat(x+rq.x, y+rq.y, z+rq.z, w+rq.w);
     }
     
     inline Quat Quat::operator-(const Quat& rq) const
@@ -160,6 +209,28 @@ namespace d3 {
                       y * oneOverSinThetaOver2,
                       z * oneOverSinThetaOver2
                       );
+    }
+    
+    inline Quat::operator Mat4 () const
+    {
+        Mat4 m;
+        // Compute a few values to optimize common subexpressions
+        float ww = 2.0f * w;
+        float xx = 2.0f * x;
+        float yy = 2.0f * y;
+        float zz = 2.0f * z;
+
+        m.a00 = 1.0f - yy*y - zz*z;
+        m.a01 = xx*y + ww*z;
+        m.a02 = xx*z - ww*x;
+        m.a10 = xx*y - ww*z;
+        m.a11 = 1.0f - xx*x - zz*z;
+        m.a12 = yy*z + ww*x;
+        m.a20 = xx*z + ww*y;
+        m.a21 = yy*z - ww*x;
+        m.a22 = 1.0f - xx*x - yy*y;
+        
+        return m;
     }
     
 }

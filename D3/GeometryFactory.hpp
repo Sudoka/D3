@@ -16,6 +16,7 @@ namespace d3 {
         static Geometry * createBox();
         static Geometry * createCylinder();
         static Geometry * createAxes();
+        static Geometry * createArrow(Vec3);
     };
 }
 #endif

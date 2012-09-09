@@ -17,6 +17,7 @@ namespace d3 {
         
     public:
         SceneRenderer(int screen_width, int screen_height) { setScreenSize(screen_width, screen_height); }
+        virtual ~SceneRenderer() {}
         
         //! Renders scene
         virtual void render(Scene * scene) =0;
