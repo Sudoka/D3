@@ -39,7 +39,7 @@ namespace d3 {
     };
     
     
-    Geometry * GeometryFactory::createPlane()
+    shared_ptr<Geometry> GeometryFactory::createPlane()
     {
         float width = 2;
         float height = 2;
@@ -48,88 +48,102 @@ namespace d3 {
         float offsetX = 1.0 / subdivs;
         float offsetZ = 1.0 / subdivs;
         
-        Vec3 * iva = new Vec3[subdivs * (12 + subdivs * 6)];
+        Vec3 * vertex_array = new Vec3[subdivs * (4 + subdivs * 2)];
+        Vec3 * normal_array = new Vec3[subdivs * (4 + subdivs * 2)];
+        Vec3 * texcoord_array = new Vec3[subdivs * (4 + subdivs * 2)];
         
         int idx = 0;
         for (int j = 1; j <= subdivs; j++) {
-            iva[idx++] = Vec3((offsetX * (j - 1) - 0.5) * width, 0, - 0.5 * height);  // vertex
-            iva[idx++] = Vec3(0, 1, 0);                                               // normal
-            iva[idx++] = Vec3(offsetX * (j - 1), 0.0, 0);                             // texture coordinate
+            vertex_array[idx] = Vec3((offsetX * (j - 1) - 0.5) * width, 0, - 0.5 * height);  // vertex
+            normal_array[idx] = Vec3(0, 1, 0);                                               // normal
+            texcoord_array[idx++] = Vec3(offsetX * (j - 1), 0.0, 0);                             // texture coordinate
             
-            iva[idx++] = Vec3((offsetX * j - 0.5) * width, 0, - 0.5 * height);
-            iva[idx++] = Vec3(0, 1, 0);
-            iva[idx++] = Vec3(offsetX * j, 0.0, 0);
+            vertex_array[idx] = Vec3((offsetX * j - 0.5) * width, 0, - 0.5 * height);
+            normal_array[idx] = Vec3(0, 1, 0);
+            texcoord_array[idx++] = Vec3(offsetX * j, 0.0, 0);
             
             for (int i = 1; i <= subdivs; i++) {
-                iva[idx++] = Vec3((offsetX * (j - 1) - 0.5) * width, 0, (offsetZ * i - 0.5) * height);
-                iva[idx++] = Vec3(0, 1, 0);
-                iva[idx++] = Vec3(offsetX * (j - 1), offsetZ * i, 0);
+                vertex_array[idx] = Vec3((offsetX * (j - 1) - 0.5) * width, 0, (offsetZ * i - 0.5) * height);
+                normal_array[idx] = Vec3(0, 1, 0);
+                texcoord_array[idx++] = Vec3(offsetX * (j - 1), offsetZ * i, 0);
                 
-                iva[idx++] = Vec3((offsetX * j - 0.5) * width, 0, (offsetZ * i - 0.5) * height);
-                iva[idx++] = Vec3(0, 1, 0);
-                iva[idx++] = Vec3(offsetX * j, offsetZ * i, 0);
+                vertex_array[idx] = Vec3((offsetX * j - 0.5) * width, 0, (offsetZ * i - 0.5) * height);
+                normal_array[idx] = Vec3(0, 1, 0);
+                texcoord_array[idx++] = Vec3(offsetX * j, offsetZ * i, 0);
             }
             
-            iva[idx++] = Vec3((offsetX * j - 0.5) * width, 0, (offsetZ * subdivs - 0.5) * height);
-            iva[idx++] = Vec3(0, 1, 0);
-            iva[idx++] = Vec3(offsetX * j - 1.0, offsetX * subdivs, 0);
+            vertex_array[idx] = Vec3((offsetX * j - 0.5) * width, 0, (offsetZ * subdivs - 0.5) * height);
+            normal_array[idx] = Vec3(0, 1, 0);
+            texcoord_array[idx++] = Vec3(offsetX * j - 1.0, offsetX * subdivs, 0);
             
-            iva[idx++] = Vec3((offsetX * j - 0.5) * width, 0, - 0.5 * height);
-            iva[idx++] = Vec3(0, 1, 0);
-            iva[idx++] = Vec3(offsetX * j, 0.0, 0);
+            vertex_array[idx] = Vec3((offsetX * j - 0.5) * width, 0, - 0.5 * height);
+            normal_array[idx] = Vec3(0, 1, 0);
+            texcoord_array[idx++] = Vec3(offsetX * j, 0.0, 0);
         }
         
-        Geometry * g = new Geometry();
+        Geometry * g = new Geometry(shared_ptr<float>((float*)vertex_array), idx);
+
+        g->setNormalArray(shared_ptr<float>((float*)normal_array));
+        g->setTexCoordArray(shared_ptr<float>((float*)texcoord_array));
         
-        g->setVertexArray(new ArrayDescriptor<float>((float*)&iva[0], idx/3, sizeof(Vec3) * 3));
-        g->setNormalArray(new ArrayDescriptor<float>((float*)&iva[1], idx/3, sizeof(Vec3) * 3));
-        g->setTexCoordArray(new ArrayDescriptor<float>((float*)&iva[2], idx/3, sizeof(Vec3) * 3));
         g->setGeometryType(GL_TRIANGLE_STRIP);
+        g->setVertexPointerStride(sizeof(Vec3));
+        g->setNormalPointerStride(sizeof(Vec3));
+        g->setTexCoordPointerStride(sizeof(Vec3));
         
-        return g;
+        return shared_ptr<Geometry>(g);
     }
     
-    Geometry * GeometryFactory::createBox()
+    shared_ptr<Geometry> GeometryFactory::createBox()
     {
-        Geometry * g = new Geometry();
-        g->setVertexArray(new ArrayDescriptor<float>(vertices_, 72, 0));
-        g->setNormalArray(new ArrayDescriptor<float>(normals_, 72, 0));
-        g->setIndices(new ArrayDescriptor<unsigned int>(indices_, 36, 0));
+        float * vertices = new float[72]; memcpy(vertices, vertices_, sizeof(float)*72);
+        float * normals = new float[72]; memcpy(normals, normals_, sizeof(float)*72);
+        unsigned int * indices = new unsigned int[36]; memcpy(indices, indices_, sizeof(unsigned int)*36);
+        
+        
+        Geometry * g = new Geometry(shared_ptr<float>(vertices),
+                                    shared_ptr<unsigned int>(indices),
+                                    36);
+        
+        g->setNormalArray(shared_ptr<float>(normals));
+
         g->setGeometryType(GL_TRIANGLES);
         
-        return g;
+        return shared_ptr<Geometry>(g);
     }
     
-    Geometry * GeometryFactory::createCylinder()
+    shared_ptr<Geometry> GeometryFactory::createCylinder()
     {
         int segments = 15;
         float offset = 1.0 / segments;
-        Vec3 * iva = new Vec3[segments*4+4];
+
+        Vec3 * vertex_array = new Vec3[segments*2+2];
+        Vec3 * texcoord_array = new Vec3[segments*2+2];
         
         int idx = 0;
         for (int i = 0; i < segments; i++) {
-            iva[idx++] = Vec3(cosf(offset * i * k2Pi), sinf(offset * i * k2Pi), -0.5f);
-            iva[idx++] = Vec3(offset * i, 0, 0);
-            iva[idx++] = Vec3(cosf(offset * i * k2Pi), sinf(offset * i * k2Pi), 0.5f);
-            iva[idx++] = Vec3(offset * i, 1, 0);
+            vertex_array[idx] = Vec3(cosf(offset * i * k2Pi), sinf(offset * i * k2Pi), -0.5f);
+            texcoord_array[idx++] = Vec3(offset * i, 0, 0);
+            vertex_array[idx] = Vec3(cosf(offset * i * k2Pi), sinf(offset * i * k2Pi), 0.5f);
+            texcoord_array[idx++] = Vec3(offset * i, 1, 0);
         }
         
-        iva[idx++] = Vec3(cosf(0), sinf(0), -0.5f);
-        iva[idx++] = Vec3(1, 0, 0);
+        vertex_array[idx] = Vec3(cosf(0), sinf(0), -0.5f);
+        texcoord_array[idx++] = Vec3(1, 0, 0);
         
-        iva[idx++] = Vec3(cosf(0), sinf(0), 0.5f);
-        iva[idx++] = Vec3(1, 1, 0);
+        vertex_array[idx] = Vec3(cosf(0), sinf(0), 0.5f);
+        texcoord_array[idx++] = Vec3(1, 1, 0);
         
-        Geometry * g = new Geometry();
-        
-        g->setVertexArray(new ArrayDescriptor<float>((float*)&iva[0], idx/2, sizeof(Vec3) * 2));
-        g->setTexCoordArray(new ArrayDescriptor<float>((float*)&iva[1], idx/2, sizeof(Vec3) * 2));
+        Geometry * g = new Geometry(shared_ptr<float>((float*)vertex_array), idx/2);
+        g->setTexCoordArray(shared_ptr<float>((float*)texcoord_array));
         g->setGeometryType(GL_TRIANGLE_STRIP);
+        g->setVertexPointerStride(sizeof(Vec3));
+        g->setTexCoordPointerStride(sizeof(Vec3));
         
-        return g;
+        return shared_ptr<Geometry>(g);
     }
     
-    Geometry * GeometryFactory::createAxes()
+    shared_ptr<Geometry> GeometryFactory::createAxes()
     {
         Vec3 * vertex = new Vec3[6];
         Vec4 * color = new Vec4[6];
@@ -149,16 +163,17 @@ namespace d3 {
         vertex[4] = Vec3(0.f, 0.f, -1000.f);                     // star point
         vertex[5] = Vec3(0.f, 0.f,  1000.f);                    // end point
         
-        Geometry * g = new Geometry();
+        Geometry * g = new Geometry(shared_ptr<float>((float*)vertex), 6);
+        g->setColorArray(shared_ptr<float>((float*)color));
 
-        g->setVertexArray(new ArrayDescriptor<float>((float*)vertex, 6, sizeof(Vec3)));
-        g->setColorArray(new ArrayDescriptor<float>((float*)color, 6, sizeof(Vec4)));
         g->setGeometryType(GL_LINES);
+        g->setVertexPointerStride(sizeof(Vec3));
+        g->setColorPointerStride(sizeof(Vec3));
         
-        return g;
+        return shared_ptr<Geometry>(g);
     }
     
-    Geometry * GeometryFactory::createArrow(Vec3 v)
+    shared_ptr<Geometry> GeometryFactory::createArrow(Vec3 v)
     {
         Vec3 * vertex = new Vec3[2];
         Vec4 * color = new Vec4[3];
@@ -168,12 +183,13 @@ namespace d3 {
         vertex[0] = Vec3(0.f, 0.f, 0.f);                     // star point
         vertex[1] = v.unit() * 10.0;                     // end point
         
-        Geometry * g = new Geometry();
+        Geometry * g = new Geometry(shared_ptr<float>((float*)vertex), 2);
+        g->setColorArray(shared_ptr<float>((float*)color));
         
-        g->setVertexArray(new ArrayDescriptor<float>((float*)vertex, 2, sizeof(Vec3)));
-        g->setColorArray(new ArrayDescriptor<float>((float*)color, 2, sizeof(Vec4)));
         g->setGeometryType(GL_LINES);
+        g->setVertexPointerStride(sizeof(Vec3));
+        g->setColorPointerStride(sizeof(Vec3));
         
-        return g;
+        return shared_ptr<Geometry>(g);
     }
 }

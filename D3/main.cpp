@@ -103,7 +103,7 @@ int main(int argc, char** argv)
     scene->getCamera()->setTarget(box);
     
     Renderable *earthPlane = new Renderable(GeometryFactory::createPlane());
-    earthPlane->setTexture(new Texture(new Image("Resources/earth.png")));
+    earthPlane->setTexture(shared_ptr<Texture>(new Texture(new Image("Resources/earth.png"))));
     scene->getRoot()->createSubnode("Earth", earthPlane)->setScale(Vec3(10, 10, 10));
     
     SpotLight *sl = new SpotLight;

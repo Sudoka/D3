@@ -12,16 +12,20 @@
 namespace d3 {
     class Renderable : public Node::Attachment {
     protected:
-        Geometry * geometry_;
-        Material * material_;
-        Texture * texture_;
+        shared_ptr<Geometry> geometry_;
+        shared_ptr<Material> material_;
+        shared_ptr<Texture> texture_;
         
     public:
-        Renderable(Geometry * geometry) : geometry_(geometry), material_(nullptr), texture_(nullptr) {}
+        Renderable() : geometry_(nullptr), material_(nullptr), texture_(nullptr) {}
+        
+        Renderable(shared_ptr<Geometry> geometry) : geometry_(geometry), material_(nullptr), texture_(nullptr) {}
+        
+        virtual ~Renderable() {}
                 
-        SETGET(Geometry *, geometry_, Geometry)
-        SETGET(Material *, material_, Material)
-        SETGET(Texture *, texture_, Texture)
+        SETGET(shared_ptr<Geometry>, geometry_, Geometry)
+        SETGET(shared_ptr<Material>, material_, Material)
+        SETGET(shared_ptr<Texture>, texture_, Texture)
         
         //! Node::Attachment::isRenderable();
         virtual bool isRenderable() const { return true; }

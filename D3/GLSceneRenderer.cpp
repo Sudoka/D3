@@ -19,7 +19,7 @@ namespace d3 {
         
         glEnable(light_id);
         
-        Vec3 p = light->getParent()->getPosition();
+        Vec3 p = light->getParent()->getDerivedPosition();
         glLightfv(light_id, GL_POSITION, Vec4(p.x, p.y, p.z, 1.0));
         glLightfv(light_id, GL_AMBIENT, light->getAmbientColor());
         glLightfv(light_id, GL_DIFFUSE, light->getDiffuseColor());
@@ -96,7 +96,11 @@ namespace d3 {
             // if renderable
             if (attachment->isRenderable()) {
                 Renderable * r = (Renderable*)attachment;
-                Geometry * g = r->getGeometry();
+                
+                if (!r->getGeometry())
+                    return;
+                
+                shared_ptr<Geometry> g = r->getGeometry();
                 
                 if (g->getVertexArray() != nullptr) {
                     if (r->getMaterial() != nullptr) {
@@ -110,31 +114,31 @@ namespace d3 {
                     if (g->getColorArray()) {
                         glEnable(GL_COLOR_MATERIAL);
                         glEnableClientState(GL_COLOR_ARRAY);
-                        glColorPointer(4, GL_FLOAT, g->getColorArray()->getStride(), g->getColorArray()->getPointer());    //FIX size
+                        glColorPointer(4, GL_FLOAT, g->getColorPointerStride(), g->getColorArray().get());    //FIX size
                     }
                     
                     if (g->getNormalArray()) {
                         glEnableClientState(GL_NORMAL_ARRAY);
-                        glNormalPointer(GL_FLOAT, g->getNormalArray()->getStride(), g->getNormalArray()->getPointer());
+                        glNormalPointer(GL_FLOAT, g->getNormalPointerStride(), g->getNormalArray().get());
                     }
                     
                     if (r->getTexture() != nullptr && g->getTexCoordArray()) {
                         glEnable(GL_TEXTURE_2D);
                         r->getTexture()->bind();
                         glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-                        glTexCoordPointer(2, GL_FLOAT, g->getTexCoordArray()->getStride(), g->getTexCoordArray()->getPointer());
+                        glTexCoordPointer(2, GL_FLOAT, g->getTexCoordPointerStride(), g->getTexCoordArray().get());
                     }
                     
                     glEnableClientState(GL_VERTEX_ARRAY);
-                    glVertexPointer(3, GL_FLOAT, g->getVertexArray()->getStride(), g->getVertexArray()->getPointer());
+                    glVertexPointer(3, GL_FLOAT, g->getVertexPointerStride(), g->getVertexArray().get());
                     
                     if (g->getIndices()) {
                         glDrawElements(g->getGeometryType(),
-                                       g->getIndices()->getSize(),
+                                       g->getSize(),
                                        GL_UNSIGNED_INT,
-                                       g->getIndices()->getPointer());
+                                       g->getIndices().get());
                     } else {
-                        glDrawArrays(g->getGeometryType(), 0, g->getVertexArray()->getSize());
+                        glDrawArrays(g->getGeometryType(), 0, g->getSize());
                     }
                     
                     // undo
@@ -167,8 +171,8 @@ namespace d3 {
         glEnable(GL_DEPTH_TEST);
         glShadeModel(GL_SMOOTH);
         glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
-        //glEnable (GL_LIGHTING);
-        glLightModelfv(GL_LIGHT_MODEL_AMBIENT, Vec4(0.1, 0.1, 0.1, 0.1));
+        glEnable (GL_LIGHTING);
+        glLightModelfv(GL_LIGHT_MODEL_AMBIENT, Vec4(0.2, 0.2, 0.2, 1.0));
         //glEnable(GL_CULL_FACE);
         glEnable(GL_NORMALIZE);
         
@@ -187,7 +191,9 @@ namespace d3 {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         
         // Setup viewport
+        #ifndef _IOS_
         glViewport(0, 0, getScreenWidth(), getScreenHeight()); // comment this line for iOS
+        #endif
         
         // Setup projection
         glMatrixMode(GL_PROJECTION);

@@ -35,7 +35,9 @@ namespace d3 {
         protected:
             Node *parent_node_;
             
-        public:           
+        public:
+            virtual ~Attachment() {}
+            
             //! Should override if object is renderable
             virtual bool isRenderable() const;
                         

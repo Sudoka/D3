@@ -165,6 +165,8 @@ namespace d3 {
     void Node::setNeedsUpdate(bool needsUpdate)
     {
         needsUpdate_ = needsUpdate;
+        for (Node *n : sub_nodes_)
+            n->setNeedsUpdate();
     }
     
     void Node::move(Vec3 v)

@@ -34,7 +34,7 @@ namespace d3 {
         if (target_node_ != nullptr)
             return target_node_->getPosition() - getParent()->getPosition();
         
-        return direction_;
+        return getParent()->getDerivedOrientation() * direction_;
     }
     
     void SpotLight::setCutoff(int v) { spot_cutoff_ = v; }    // TODO Boudaries

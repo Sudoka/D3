@@ -12,11 +12,11 @@
 namespace d3 {
     class GeometryFactory {
     public:
-        static Geometry * createPlane();
-        static Geometry * createBox();
-        static Geometry * createCylinder();
-        static Geometry * createAxes();
-        static Geometry * createArrow(Vec3);
+        static shared_ptr<Geometry> createPlane();
+        static shared_ptr<Geometry> createBox();
+        static shared_ptr<Geometry> createCylinder();
+        static shared_ptr<Geometry> createAxes();
+        static shared_ptr<Geometry> createArrow(Vec3);
     };
 }
 #endif
