@@ -12,6 +12,7 @@
 namespace d3 {
     class GeometryFactory {
     public:
+        static shared_ptr<Geometry> createBoundingBox(Vec3 volume);
         static shared_ptr<Geometry> createPlane();
         static shared_ptr<Geometry> createBox();
         static shared_ptr<Geometry> createCylinder();

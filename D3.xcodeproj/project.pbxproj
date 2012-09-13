@@ -181,6 +181,13 @@
 			name = Shaders;
 			sourceTree = "<group>";
 		};
+		ECB26550160076B6005D283C /* Physics */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Physics;
+			sourceTree = "<group>";
+		};
 		ECCB7D7415F139FC00495973 = {
 			isa = PBXGroup;
 			children = (
@@ -208,6 +215,7 @@
 				EC33295815F902C8007A85D5 /* Shaders */,
 				ECCB7DF415F13BE300495973 /* Headers */,
 				EC123C4915F13C7D004447ED /* Math */,
+				ECB26550160076B6005D283C /* Physics */,
 				ECCB7DF915F13C2800495973 /* Scene graph */,
 				EC123C4515F13C5F004447ED /* Rendering system */,
 				EC123C4815F13C75004447ED /* Resources */,

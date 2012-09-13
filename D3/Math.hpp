@@ -10,11 +10,11 @@
 #define _math_hpp
 
 #include <cmath>
+#include "Vec3.hpp"
 
 namespace d3 {
     class Mat3;
     class Mat4;
-    class Vec3;
     class Quat;
     
     // Commonly used constants
@@ -38,7 +38,16 @@ namespace d3 {
         float near, far;
     };
     
+    //! Origin is assumed to be in the center of volume
+    struct Box {
+        Vec3 origin;
+        Vec3 size;
+    };
+    
     float clamp(float min, float max, float value);
+    
+    //! Axis-aligned bounding box test
+    bool aabbTest(Box &b1, Box &b2);
     
     //! Transform matrices
     Mat4 getTranslationMatrix(Vec3 v);
@@ -58,6 +67,8 @@ namespace d3 {
     float randf();
     
     int randi(int min, int max);
+    
+    float absf(float a);
     
     
 #pragma mark Implementation
@@ -88,6 +99,10 @@ namespace d3 {
     
     inline int randi(int min, int max) {
         return rand() % (-min + max) + min; // fix?
+    }
+    
+    inline float absf(float a) {
+        return a < 0 ? -a : a;
     }
 }
 

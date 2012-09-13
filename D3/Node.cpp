@@ -42,6 +42,9 @@ namespace d3 {
         needsUpdate_ = true;
         
         parent_ = nullptr;
+        
+        show_bb_ = false;
+        bounding_box_ = Vec3(0.1, 0.1, 0.1);
     }
     
     Node::~Node()
@@ -55,6 +58,29 @@ namespace d3 {
         if (getAttachedObject() != nullptr) {
             delete attachedObject_;
         }
+    }
+    
+    void Node::setBoundingBox(Vec3 box)
+    {
+        bounding_box_ = box;
+    }
+    
+    Box Node::getBoundingBox(bool derived_position)
+    {
+        if (derived_position)
+            return { getDerivedPosition(), bounding_box_ };
+        else
+            return { getPosition(), bounding_box_ };
+    }
+    
+    void Node::setBoundingBoxVisibility(bool visible)
+    {
+        show_bb_ = visible;
+    }
+    
+    bool Node::getBoundingBoxVisibility() const
+    {
+        return show_bb_;
     }
     
     void Node::traverse(shared_ptr<Node::VisitOperation> op)

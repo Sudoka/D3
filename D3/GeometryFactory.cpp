@@ -94,6 +94,53 @@ namespace d3 {
         return shared_ptr<Geometry>(g);
     }
     
+    shared_ptr<Geometry> GeometryFactory::createBoundingBox(Vec3 volume)
+    {
+        // vertex array
+        Vec3 * vertex_array = new Vec3[8];
+        
+        float half_x = volume.x / 2.0;
+        float half_y = volume.y / 2.0;
+        float half_z = volume.z / 2.0;
+        
+        vertex_array[0] = Vec3(-half_x, -half_y,  half_z);
+        vertex_array[1] = Vec3( half_x, -half_y,  half_z);
+        vertex_array[2] = Vec3( half_x, -half_y, -half_z);
+        vertex_array[3] = Vec3(-half_x, -half_y, -half_z);
+        
+        vertex_array[4] = Vec3(-half_x, half_y, half_z);
+        vertex_array[5] = Vec3( half_x, half_y, half_z);
+        vertex_array[6] = Vec3( half_x, half_y, -half_z);
+        vertex_array[7] = Vec3(-half_x, half_y, -half_z);
+        
+        // indices
+        unsigned int * indices = new unsigned int[16];
+        indices[0] = 4;
+        indices[1] = 0;
+        indices[2] = 1;
+        indices[3] = 5;
+        indices[4] = 6;
+        indices[5] = 2;
+        indices[6] = 3;
+        indices[7] = 7;
+        indices[8] = 4;
+        indices[9] = 5;
+        indices[10] = 1;
+        indices[11] = 2;
+        indices[12] = 6;
+        indices[13] = 7;
+        indices[14] = 3;
+        indices[15] = 0;
+        
+        Geometry * g = new Geometry(shared_ptr<float>((float*)vertex_array),
+                                    shared_ptr<unsigned int>(indices),
+                                    16);
+        g->setVertexPointerStride(sizeof(Vec3));
+        g->setGeometryType(GL_LINE_STRIP);
+        
+        return shared_ptr<Geometry>(g);
+    }
+    
     shared_ptr<Geometry> GeometryFactory::createBox()
     {
         float * vertices = new float[72]; memcpy(vertices, vertices_, sizeof(float)*72);

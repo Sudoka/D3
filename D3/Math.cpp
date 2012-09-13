@@ -30,6 +30,17 @@ namespace d3 {
         return m;
     }
     
+    bool aabbTest(Box &b1, Box &b2)
+    {
+        if (absf(b1.origin.x - b2.origin.x) > (b1.size.x + b2.size.x) / 2.0)
+            return false;
+        if (absf(b1.origin.y - b2.origin.y) > (b1.size.y + b2.size.y) / 2.0)
+            return false;
+        if (absf(b1.origin.z - b2.origin.z) > (b1.size.z + b2.size.z) / 2.0)
+            return false;
+        return true;
+    }
+    
     Mat3 getRotationMatrix(Vec3 axis, float angle)
     {
         Mat3 m;

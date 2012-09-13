@@ -49,6 +49,13 @@ namespace d3 {
             Node * getParent() const;
         };
         
+        //! Listens for actions on Node object
+        class Listener {
+        public:
+            //! Called upon collision
+            virtual void onCollision(std::list<Node *> nodes) {}
+        };
+        
     protected:
         Node *parent_;
         
@@ -67,6 +74,9 @@ namespace d3 {
         std::list<Node*> sub_nodes_;
         
         Attachment *attachedObject_;
+        
+        Vec3 bounding_box_;
+        bool show_bb_;
               
     public:
         //! Creates new named node. To be used internaly!
@@ -91,6 +101,18 @@ namespace d3 {
         
         //! @return Attached object
         Attachment * getAttachedObject() const;
+        
+        //! Sets bounding box
+        void setBoundingBox(Vec3 box);
+        
+        //! @return Bounding box
+        Box getBoundingBox(bool derived_position = false);
+        
+        //! Pass TRUE to show bounding box
+        void setBoundingBoxVisibility(bool visible);
+        
+        //! @return TRUE is BB is to be shown, FALSE otherwise
+        bool getBoundingBoxVisibility() const;
         
         //! Creates subnode (registers parent-child relationship)
         Node * createSubnode(String name, Attachment* object = nullptr);

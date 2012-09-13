@@ -158,6 +158,24 @@ namespace d3 {
                 }
             }
         }
+        
+        // draw bb
+        if (node->getBoundingBoxVisibility()) {
+            glDisable(GL_LIGHTING);
+            
+            Vec3 box = node->getBoundingBox().size;
+            shared_ptr<Geometry> g = GeometryFactory::createBoundingBox(box);   // TODO: Optimize
+            
+            glEnableClientState(GL_VERTEX_ARRAY);
+            glVertexPointer(3, GL_FLOAT, g->getVertexPointerStride(), g->getVertexArray().get());
+            
+            glDrawElements(g->getGeometryType(),
+                           g->getSize(),
+                           GL_UNSIGNED_INT,
+                           g->getIndices().get());
+            // disable VA
+            glEnable(GL_LIGHTING);
+        }
     }
     
     void GLSceneRenderer::GLNodeDrawOperation::endNode(Node *node)
