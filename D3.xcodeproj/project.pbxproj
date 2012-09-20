@@ -46,6 +46,8 @@
 		EC33295B15F90D2B007A85D5 /* GLProgram.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GLProgram.hpp; sourceTree = "<group>"; };
 		EC33295E15F91431007A85D5 /* GLSLRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GLSLRenderer.cpp; sourceTree = "<group>"; };
 		EC33295F15F91431007A85D5 /* GLSLRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GLSLRenderer.hpp; sourceTree = "<group>"; };
+		EC51B0E516065CB400E11226 /* Simulator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Simulator.cpp; sourceTree = "<group>"; };
+		EC51B0E616065CB400E11226 /* Simulator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Simulator.hpp; sourceTree = "<group>"; };
 		ECCB7D7F15F139FC00495973 /* D3 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = D3; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECCB7DC915F13B3A00495973 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		ECCB7DCA15F13B3A00495973 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -184,6 +186,8 @@
 		ECB26550160076B6005D283C /* Physics */ = {
 			isa = PBXGroup;
 			children = (
+				EC51B0E616065CB400E11226 /* Simulator.hpp */,
+				EC51B0E516065CB400E11226 /* Simulator.cpp */,
 			);
 			name = Physics;
 			sourceTree = "<group>";

@@ -67,8 +67,8 @@ namespace d3 {
                       0, 0, 0, 1
                       );
         
-        Mat4 translate_back = getTranslationMatrix(getParent()->getPosition() * -1.0);
+        Mat4 translate_back = getTranslationMat4(getParent()->getPosition() * -1.0);
         
-        return (matrix * translate_back).transpose();    // GL uses column-major
+        return (matrix * translate_back);    // GL uses column-major
     }
 }

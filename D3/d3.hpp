@@ -48,6 +48,9 @@
 #include "GLSceneRenderer.hpp"
 #include "GLSLRenderer.hpp"
 
+// Physics
+#include "Simulator.hpp"
+
 
 
 // Implementation
@@ -70,7 +73,7 @@
 #include "GLProgram.cpp"
 #include "GLSLRenderer.cpp"
 #include "Modeler.cpp"
-
+#include "Simulator.cpp"
 
 #endif
 #endif

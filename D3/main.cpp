@@ -99,18 +99,20 @@ int main(int argc, char** argv)
     scene->getRoot()->createSubnode("Osi", new Renderable(GeometryFactory::createAxes()));
     
     Node *box = scene->getRoot()->createSubnode("Kocka", new Renderable(GeometryFactory::createBox()));
-    box->setScale(Vec3(0.5, 0.5, 0.5))->move(Vec3(0, 0.5, 0));
+    box->move(Vec3(0, 3.5, 0));
+    box->setBoundingBox(d3::Vec3(2,2,2));
+    box->setBoundingBoxVisibility(true);
     scene->getCamera()->setTarget(box);
     
     Renderable *earthPlane = new Renderable(GeometryFactory::createPlane());
-    earthPlane->setTexture(shared_ptr<Texture>(new Texture(new Image("Resources/earth.png"))));
+    earthPlane->setTexture(shared_ptr<Texture>(new Texture(new Image("/Users/srdan/Desktop/wormhole.png"))));
     scene->getRoot()->createSubnode("Earth", earthPlane)->setScale(Vec3(10, 10, 10));
     
     SpotLight *sl = new SpotLight;
     sl->setCutoff(30);
     sl->setDiffuseColor(Vec4(5.0, 5.0, 5.0, 1.0));
     scene->getRoot()->createSubnode("Svjetlo", sl);
-    sl->getParent()->setOrientation(Quat(Vec3(0, 1, 0), -kPiOver2))->setPosition(Vec3(0, 4, 0));
+    sl->getParent()->setPosition(Vec3(0, 4, 0));
     sl->setTarget(box);
     
     updateCamera();

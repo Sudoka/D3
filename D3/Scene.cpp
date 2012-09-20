@@ -13,8 +13,8 @@
 namespace d3 {
     Scene::Scene()
     {
-        root_node_ = new Node("Root");
-        root_node_->setNeedsUpdate(false);
+        root_node_ = new Node("Root", this);
+        root_node_->setNeedsUpdate(true);
         
         camera_ = (Camera*)root_node_->createSubnode("MainCamera", new Camera())->getAttachedObject();
     }
@@ -32,5 +32,20 @@ namespace d3 {
     Node * Scene::getRoot() const
     {
         return root_node_;
+    }
+    
+    Scene::NodeSet & Scene::getNodeSet()
+    {
+        return scene_nodes_;
+    }
+    
+    void Scene::registerNode(Node * node)
+    {
+        scene_nodes_.insert(node);
+    }
+    
+    void Scene::unregisterNode(Node * node)
+    {
+        scene_nodes_.erase(node);
     }
 }

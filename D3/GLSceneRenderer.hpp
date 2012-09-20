@@ -16,7 +16,13 @@ namespace d3 {
     protected:
         //! Rendering operation
         class GLNodeDrawOperation : public Node::VisitOperation {
+            GLSceneRenderer * renderer_;
+            
         public:
+            GLNodeDrawOperation(GLSceneRenderer * renderer);
+            
+            GLSceneRenderer * getRenderer() const;
+            
             virtual void beginNode(Node *node);
             virtual void endNode(Node *node);
         };
@@ -26,6 +32,9 @@ namespace d3 {
         public:
             virtual void beginNode(Node *node);
         };
+        
+    public:
+        std::stack<Mat4> modelview_matrix_stack_;
                 
     public:
         GLSceneRenderer(int width, int height);

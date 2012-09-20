@@ -17,8 +17,16 @@ namespace d3 {
     
     //! Scene.
     class Scene {
+    public:
+        //typedef std::map<d3::String, Node *> NodeMap;
+        typedef std::unordered_set<Node *> NodeSet;
+        
+    protected:
         Node *root_node_;
         Camera *camera_;
+        
+        NodeSet scene_nodes_;
+
         
     public:
         Scene();
@@ -30,6 +38,12 @@ namespace d3 {
         
         //! @return Root node
         Node * getRoot() const;
+        
+        NodeSet & getNodeSet();
+        
+        void registerNode(Node * node);
+        
+        void unregisterNode(Node * node);
     };
 }
 

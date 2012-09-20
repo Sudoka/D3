@@ -40,8 +40,6 @@ namespace d3 {
             
             //! Should override if object is renderable
             virtual bool isRenderable() const;
-                        
-            virtual StateOperation * getStateOperation() { return nullptr; }
             
             bool isAttached() const;
             
@@ -52,16 +50,27 @@ namespace d3 {
         //! Listens for actions on Node object
         class Listener {
         public:
+            virtual ~Listener() {}
+            
             //! Called upon collision
-            virtual void onCollision(std::list<Node *> nodes) {}
+            virtual void onCollision(Node * node) {}
+        };
+        
+        //! Use to store arbitrary data in Node
+        class UserData {
+        public:
+            virtual ~UserData() {}
         };
         
     protected:
-        Node *parent_;
+        Scene * scene_;
+        Node * parent_;
         
         Vec3 position_;
         Vec3 scale_;
         Quat orientation_;
+        
+        Mat4 cached_transform_;
         
         Vec3 derivedPosition_;
         Vec3 derivedScale_;
@@ -73,14 +82,18 @@ namespace d3 {
 
         std::list<Node*> sub_nodes_;
         
-        Attachment *attachedObject_;
+        Attachment * attachedObject_;
+        
+        Listener * listener_;
         
         Vec3 bounding_box_;
         bool show_bb_;
+        
+        UserData * user_data_;
               
     public:
         //! Creates new named node. To be used internaly!
-        Node(String node_name);
+        Node(String node_name, Scene * scene);
         
         //! Deletes all subnodes
         ~Node();
@@ -91,10 +104,19 @@ namespace d3 {
         //! @return Node name
         String getName() const;
         
+        //! @return Scene manager
+        Scene * getScene() const;
+        
         /*! Updates node's transformations
          *  @param cascade If TRUE, update cascades to all subnodes
          */
         void update(bool cascade = false);
+        
+        //! Manage listener
+        SETGET(Listener *, listener_, Listener)
+        
+        //! Manage User Data
+        SETGET(UserData *, user_data_, UserData)
         
         //! Attaches movable object
         void setAttachedObject(Attachment *obj);
@@ -141,11 +163,17 @@ namespace d3 {
         //! Removes subnode by name
         void removeSubnode(String name);
         
+        //! Deletes all subnodes
+        void deleteSubnodes();
+        
         //! @return True if node's transformation changed
         bool getNeedsUpdate() const;
         
         //! Set if transformations changed
         void setNeedsUpdate(bool needsUpdate = true);
+        
+        //! @return Derived transform matrix
+        Mat4 & getCachedTransformRef();
         
         //! Changes position by offset v
         void move(Vec3 v);

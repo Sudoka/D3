@@ -11,7 +11,7 @@
 #include "Vec3.hpp"
 
 namespace d3 {
-    Mat4 getTranslationMatrix(Vec3 v)
+    Mat4 getTranslationMat4(Vec3 v)
     {
         Mat4 m;
         m.a03 = v.x;
@@ -21,7 +21,7 @@ namespace d3 {
         return m;
     }
     
-    Mat4 getScalingMatrix(Vec3 v)
+    Mat4 getScalingMat4(Vec3 v)
     {
         Mat4 m;
         m.a00 = v.x;
@@ -30,7 +30,7 @@ namespace d3 {
         return m;
     }
     
-    bool aabbTest(Box &b1, Box &b2)
+    bool aabbTest(Box b1, Box b2)
     {
         if (absf(b1.origin.x - b2.origin.x) > (b1.size.x + b2.size.x) / 2.0)
             return false;
@@ -39,6 +39,27 @@ namespace d3 {
         if (absf(b1.origin.z - b2.origin.z) > (b1.size.z + b2.size.z) / 2.0)
             return false;
         return true;
+    }
+    
+    Mat4 getRotationMat4(Vec3 v, float angle)
+    {
+        float c = cosf(angle);
+        float s = sinf(angle);
+        
+        Mat4 m;
+        m.a00 = v.x * v.x * (1-c) + c;
+        m.a01 = v.x * v.y * (1-c) - v.z * s;
+        m.a02 = v.x * v.z * (1-c) + v.y * s;
+        
+        m.a10 = v.y * v.x * (1-c) + v.z * s;
+        m.a11 = v.y * v.y * (1-c) + c;
+        m.a12 = v.y * v.z * (1-c) - v.x * s;
+        
+        m.a20 = v.z * v.x * (1-c) - v.y * s;
+        m.a21 = v.z * v.y * (1-c) + v.x * s;
+        m.a22 = v.z * v.z * (1-c) + c;
+        
+        return m;
     }
     
     Mat3 getRotationMatrix(Vec3 axis, float angle)

@@ -164,7 +164,7 @@ namespace d3 {
     
     inline Quat Quat::operator-(const Quat& rq) const
     {
-        return Quat();
+        return Quat(x-rq.x, y-rq.y, z-rq.z, w-rq.w);
     }
     
     inline Quat Quat::operator*(const Quat& rq) const
@@ -213,24 +213,26 @@ namespace d3 {
     
     inline Quat::operator Mat4 () const
     {
-        Mat4 m;
-        // Compute a few values to optimize common subexpressions
-        float ww = 2.0f * w;
-        float xx = 2.0f * x;
-        float yy = 2.0f * y;
-        float zz = 2.0f * z;
-
-        m.a00 = 1.0f - yy*y - zz*z;
-        m.a01 = xx*y + ww*z;
-        m.a02 = xx*z - ww*x;
-        m.a10 = xx*y - ww*z;
-        m.a11 = 1.0f - xx*x - zz*z;
-        m.a12 = yy*z + ww*x;
-        m.a20 = xx*z + ww*y;
-        m.a21 = yy*z - ww*x;
-        m.a22 = 1.0f - xx*x - yy*y;
+//        Mat4 m;
+//        // Compute a few values to optimize common subexpressions
+//        float ww = 2.0f * w;
+//        float xx = 2.0f * x;
+//        float yy = 2.0f * y;
+//        float zz = 2.0f * z;
+//
+//        m.a00 = 1.0f - yy*y - zz*z;
+//        m.a01 = xx*y + ww*z;
+//        m.a02 = xx*z - ww*x;
+//        m.a10 = xx*y - ww*z;
+//        m.a11 = 1.0f - xx*x - zz*z;
+//        m.a12 = yy*z + ww*x;
+//        m.a20 = xx*z + ww*y;
+//        m.a21 = yy*z - ww*x;
+//        m.a22 = 1.0f - xx*x - yy*y;
+//        
+//        return m;
         
-        return m;
+        return getRotationMat4(getRotationAxis(), getRotationAngle());
     }
     
 }

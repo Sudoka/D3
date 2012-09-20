@@ -66,28 +66,42 @@ namespace d3 {
                 return;
             }
         }
-    }   
+    }
+    
+    GLSceneRenderer::GLNodeDrawOperation::GLNodeDrawOperation(GLSceneRenderer * renderer) : renderer_(renderer)
+    {
+    }
+    
+    GLSceneRenderer * GLSceneRenderer::GLNodeDrawOperation::getRenderer() const
+    {
+        return renderer_;
+    }
     
     void GLSceneRenderer::GLNodeDrawOperation::beginNode(Node *node)
     {
-        glPushMatrix();
-//        Mat4 translate = getTranslationMatrix(node->getPosition());
-//        Mat4 scale = getScalingMatrix(node->getScale());
-//        Mat4 rotate = node->getOrientation().normalized();
-//        
-//        Mat4 transform = (scale * rotate) * translate;
-//        glMultMatrixf(transform.transpose());
+        Mat4 modelview_matrix = getRenderer()->modelview_matrix_stack_.top();
         
         Vec3 position = node->getPosition();
         Vec3 scale = node->getScale();
         Quat orientation = node->getOrientation().normalized();
+        Vec3 axis = orientation.getRotationAxis().unit();
+        float angle = orientation.getRotationAngle();
         
-        glTranslatef(position.x, position.y, position.z);
-
-        Vec3 axis = orientation.getRotationAxis();
-        float angle = orientation.getRotationAngle() / kPiOver180;
-        glRotatef(angle, axis.x, axis.y, axis.z);
-        glScalef(scale.x, scale.y, scale.z);
+        Mat4 translation = getTranslationMat4(position);
+        Mat4 scaling = getScalingMat4(scale);
+        Mat4 rotation = getRotationMat4(axis, angle);
+        
+        modelview_matrix = modelview_matrix * ((translation * scaling) * rotation);
+        glLoadMatrixf(modelview_matrix.transpose());
+        getRenderer()->modelview_matrix_stack_.push(modelview_matrix);
+        
+//        glPushMatrix();
+//        Mat4 transform = (translation * rotation) * scaling;
+//        glMultMatrixf(transform.transpose());
+        
+//        glTranslatef(position.x, position.y, position.z);
+//        glRotatef(angle / kPiOver180, axis.x, axis.y, axis.z);
+//        glScalef(scale.x, scale.y, scale.z);
         
         // draw attached object
         Node::Attachment * attachment = node->getAttachedObject();
@@ -180,7 +194,8 @@ namespace d3 {
     
     void GLSceneRenderer::GLNodeDrawOperation::endNode(Node *node)
     {
-        glPopMatrix();
+        //glPopMatrix();
+        getRenderer()->modelview_matrix_stack_.pop();
     }
     
     GLSceneRenderer::GLSceneRenderer(int width, int height) : SceneRenderer(width, height)
@@ -194,7 +209,7 @@ namespace d3 {
         //glEnable(GL_CULL_FACE);
         glEnable(GL_NORMALIZE);
         
-        glPointSize(2.0);
+        glPointSize(1.0);
         
     }
     
@@ -223,7 +238,10 @@ namespace d3 {
         // Setup camera view point
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
-        glMultMatrixf(camera->getTransform());
+        glMultMatrixf(camera->getTransform().transpose());
+        
+        // Setup stack
+        modelview_matrix_stack_.push(camera->getTransform());
         
         // Setup lights ids
         next_free_light_id = 0;
@@ -232,7 +250,7 @@ namespace d3 {
         scene->getRoot()->traverse(shared_ptr<Node::VisitOperation>(new GLTurnLightsOperation()));
         
         // Render scene
-        scene->getRoot()->traverse(shared_ptr<Node::VisitOperation>(new GLNodeDrawOperation()));
+        scene->getRoot()->traverse(shared_ptr<Node::VisitOperation>(new GLNodeDrawOperation(this)));
 
         // Finish
         glFinish();

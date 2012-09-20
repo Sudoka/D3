@@ -9,7 +9,7 @@
 #ifndef _Vec3_hpp
 #define _Vec3_hpp
 
-#include "mat3.hpp"
+#include "Mat3.hpp"
 #include <cmath>
 
 namespace d3 {

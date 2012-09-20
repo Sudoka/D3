@@ -30,7 +30,7 @@ namespace d3 {
         return parent_node_;
     }
     
-    Node::Node(String node_name) : name_(node_name)
+    Node::Node(String node_name, Scene * scene) : name_(node_name), scene_(scene)
     {
         // Setup default value
         position_ = Vec3(0.f, 0.f, 0.f);
@@ -44,11 +44,19 @@ namespace d3 {
         parent_ = nullptr;
         
         show_bb_ = false;
-        bounding_box_ = Vec3(0.1, 0.1, 0.1);
+        bounding_box_ = Vec3(1, 1, 1);
+        
+        listener_ = nullptr;
+        user_data_ = nullptr;
+        
+        // register to scene
+        getScene()->registerNode(this);
     }
     
     Node::~Node()
     {
+        getScene()->unregisterNode(this);
+        
         // Delete subnodes
         for (Node *node : sub_nodes_) {
             delete node;
@@ -101,16 +109,26 @@ namespace d3 {
     {
         return name_;
     }
+    Scene * Node::getScene() const
+    {
+        return scene_;
+    }
     
     void Node::update(bool cascade)
     {
         // TODO: cascade
         if (getParent() == nullptr) {
+            cached_transform_ = (getTranslationMat4(position_) * getScalingMat4(scale_)) * orientation_;
+            
             derivedScale_ = scale_;
             derivedPosition_ = position_;
             derivedOrientation_ = orientation_;
+            
+            
         } else {
-            derivedPosition_ = parent_->getDerivedPosition() + position_;
+            cached_transform_ = getParent()->getCachedTransformRef() * ((getTranslationMat4(position_) * getScalingMat4(scale_)) * orientation_);
+            
+            derivedPosition_ = getParent()->getCachedTransformRef()  * position_;
             derivedScale_ = parent_->getDerivedScale().mul(scale_);
             derivedOrientation_ = parent_->getDerivedOrientation() * orientation_; //FIX?
         }
@@ -131,7 +149,7 @@ namespace d3 {
     
     Node * Node::createSubnode(String name, Attachment* object)
     {
-        Node *subnode = new Node(name);
+        Node *subnode = new Node(name, scene_);
         subnode->setAttachedObject(object);
         addSubnode(subnode);
         return subnode;
@@ -183,6 +201,13 @@ namespace d3 {
         removeSubnode(node);
     }
     
+    void Node::deleteSubnodes()
+    {
+        for (Node *n : sub_nodes_)
+            delete n;
+        sub_nodes_.clear();
+    }
+    
     bool Node::getNeedsUpdate() const
     {
         return needsUpdate_;
@@ -191,8 +216,18 @@ namespace d3 {
     void Node::setNeedsUpdate(bool needsUpdate)
     {
         needsUpdate_ = needsUpdate;
-        for (Node *n : sub_nodes_)
-            n->setNeedsUpdate();
+        
+        if (needsUpdate == true) {
+            for (Node *n : sub_nodes_)
+                n->setNeedsUpdate();
+        }
+    }
+    
+    Mat4 & Node::getCachedTransformRef()
+    {
+        if (getNeedsUpdate())
+            update();
+        return cached_transform_;
     }
     
     void Node::move(Vec3 v)
@@ -270,7 +305,7 @@ namespace d3 {
         if (needsUpdate_)
             update();
         
-        return v - derivedPosition_;
+        return cached_transform_.inverse() * position_;
     }
     
     Vec3 Node::convertLocalToWorldPosition(const Vec3 &v)
@@ -279,7 +314,7 @@ namespace d3 {
         if (needsUpdate_)
             update();
         
-        return v + derivedPosition_;
+        return cached_transform_ * position_;
     }
     
     Quat Node::convertWorldToLocalOrientation(const Quat &v)

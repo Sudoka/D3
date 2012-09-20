@@ -32,7 +32,7 @@ namespace d3 {
     Vec3 SpotLight::getDirection()
     {
         if (target_node_ != nullptr)
-            return target_node_->getPosition() - getParent()->getPosition();
+            return target_node_->getDerivedPosition() - getParent()->getDerivedPosition();
         
         return getParent()->getDerivedOrientation() * direction_;
     }

@@ -9,6 +9,8 @@
 #ifndef _Mat4_hpp
 #define _Mat4_hpp
 
+#include "Vec3.hpp"
+
 namespace d3 {
     
 #pragma mark Interface
@@ -61,6 +63,8 @@ namespace d3 {
         
         //! Convert to const float*
         operator float*();
+        
+        Vec3 operator*(const Vec3& b) const;
     };
     
 #pragma mark Implementation
@@ -189,6 +193,12 @@ namespace d3 {
     inline Mat4::operator float*()
     {
         return v;
+    }
+    
+    inline Vec3 Mat4::operator*(const Vec3 & b) const {
+        return Vec3(b.x * a00 + b.y * a01 + b.z * a02 + a03,
+                    b.x * a10 + b.y * a11 + b.z * a12 + a13,
+                    b.x * a20 + b.y * a21 + b.z * a22 + a23);
     }
 }
 

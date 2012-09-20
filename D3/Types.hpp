@@ -9,17 +9,21 @@
 #ifndef _core_hpp
 #define _core_hpp
 
+#include <sstream>
 #include <string>
 #include <list>
 #include <vector>
 #include <memory>
 #include <map>
+#include <queue>
+#include <stack>
 #include <unordered_map>
+#include <unordered_set>
 #include "OpenGLHeaders.hpp"
 
 namespace d3 {
     using std::shared_ptr;
-#pragma mark Custom data types
+    
     typedef std::string String;
     typedef unsigned int Size;
     
@@ -29,6 +33,11 @@ namespace d3 {
     
     enum ShaderType { D3_VERTEX_PROGRAM, D3_FRAGMENT_PROGRAM };
     
+    inline String toString(int num) {
+        std::stringstream ss;
+        ss << num;
+        return ss.str();
+    }
 
 #define SETGET(type, member, name) \
 inline void set##name(type value) { member = value; } \

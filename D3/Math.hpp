@@ -9,8 +9,10 @@
 #ifndef _math_hpp
 #define _math_hpp
 
+#include <ostream>
 #include <cmath>
 #include "Vec3.hpp"
+#include "Mat4.hpp"
 
 namespace d3 {
     class Mat3;
@@ -47,12 +49,14 @@ namespace d3 {
     float clamp(float min, float max, float value);
     
     //! Axis-aligned bounding box test
-    bool aabbTest(Box &b1, Box &b2);
+    bool aabbTest(Box b1, Box b2);
     
     //! Transform matrices
-    Mat4 getTranslationMatrix(Vec3 v);
+    Mat4 getTranslationMat4(Vec3 v);
     
-    Mat4 getScalingMatrix(Vec3 v);
+    Mat4 getScalingMat4(Vec3 v);
+    
+    Mat4 getRotationMat4(Vec3 axis, float angle);
     
     Mat3 getRotationMatrix(Vec3 axis, float angle);
     
@@ -66,9 +70,25 @@ namespace d3 {
     
     float randf();
     
+    float randf(float min, float max);
+    
     int randi(int min, int max);
     
     float absf(float a);
+    
+    // ostream
+    inline std::ostream& operator<< (std::ostream& os, const Vec3& v) {
+        os << "[" << v.x << ", " << v.y << ", " << v.z << "]";
+        return os;
+    }
+    
+    inline std::ostream& operator<< (std::ostream& os, const Mat4& m) {
+        os << "|" << m.a00 << ", " << m.a01 << ", " << m.a02 << ", " << m.a03 << "|" << std::endl;
+        os << "|" << m.a10 << ", " << m.a11 << ", " << m.a12 << ", " << m.a13 << "|" << std::endl;
+        os << "|" << m.a20 << ", " << m.a21 << ", " << m.a22 << ", " << m.a23 << "|" << std::endl;
+        os << "|" << m.a30 << ", " << m.a31 << ", " << m.a32 << ", " << m.a33 << "|" << std::endl;
+        return os;
+    }
     
     
 #pragma mark Implementation
@@ -95,6 +115,10 @@ namespace d3 {
     
     inline float randf() {
         return (float)(rand() % 65000) / 65000.0;
+    }
+    
+    inline float randf(float min, float max) {
+        return randf() * (max - min) + min;
     }
     
     inline int randi(int min, int max) {
