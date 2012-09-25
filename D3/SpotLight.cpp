@@ -11,12 +11,27 @@
 namespace d3 {
     SpotLight::SpotLight()
     {
-        spot_cutoff_ = 30;
-        spot_exponent_ = 0;
+        parameters.spotCutoff = 30;
+        parameters.spotCosCutoff = 0.866025404;
+        parameters.spotExponent = 0.0;
+        parameters.spotDirection = Vec3(0, -1, 0);
         
-        setDirection(Vec3(0, -1, 0));
+        direction_ = Vec3(0, -1, 0);
         
         target_node_ = nullptr;
+    }
+    
+    SpotLight::LightSourceParameters & SpotLight::getParametersRef()
+    {
+        if (target_node_ != nullptr)
+            parameters.spotDirection = target_node_->getDerivedPosition() - getParent()->getDerivedPosition();
+        
+        parameters.spotDirection = getParent()->getDerivedOrientation() * direction_;
+
+        Vec3 pos = getParent()->getDerivedPosition();
+        parameters.position = Vec4(pos.x, pos.y, pos.z, 1.0);
+        
+        return parameters;
     }
     
     void SpotLight::setTarget(Node *target_node)
@@ -29,17 +44,9 @@ namespace d3 {
         direction_ = dir;
     }
     
-    Vec3 SpotLight::getDirection()
-    {
-        if (target_node_ != nullptr)
-            return target_node_->getDerivedPosition() - getParent()->getDerivedPosition();
-        
-        return getParent()->getDerivedOrientation() * direction_;
-    }
+    void SpotLight::setCutoff(float v) { parameters.spotCutoff = v; parameters.spotCosCutoff = cosf(v * kPiOver180); }
+    float SpotLight::getCutoff() const { return parameters.spotCutoff; }
     
-    void SpotLight::setCutoff(int v) { spot_cutoff_ = v; }    // TODO Boudaries
-    int SpotLight::getCutoff() const { return spot_cutoff_; }
-    
-    void SpotLight::setExponent(int v) {spot_exponent_ = v; }
-    int SpotLight::getExponent() const { return spot_exponent_; }
+    void SpotLight::setExponent(float v) {parameters.spotExponent = v; }
+    float SpotLight::getExponent() const { return parameters.spotExponent; }
 }

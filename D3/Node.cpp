@@ -116,7 +116,6 @@ namespace d3 {
     
     void Node::update(bool cascade)
     {
-        // TODO: cascade
         if (getParent() == nullptr) {
             cached_transform_ = (getTranslationMat4(position_) * getScalingMat4(scale_)) * orientation_;
             
@@ -217,7 +216,7 @@ namespace d3 {
     {
         needsUpdate_ = needsUpdate;
         
-        if (needsUpdate == true) {
+        if (needsUpdate == true) {  // FIX: slow
             for (Node *n : sub_nodes_)
                 n->setNeedsUpdate();
         }

@@ -53,6 +53,9 @@ namespace d3 {
         //! Component-wise multiplication
         Vec3 mul(const Vec3& b) const;
         
+        //! Component-wise division
+        Vec3 div(const Vec3& b) const;
+        
         //! Vector length.
         float length() const;
         
@@ -118,8 +121,15 @@ namespace d3 {
     inline Vec3 Vec3::mul(const Vec3& b) const
     {
         return Vec3(x * b.x,
-                      y * b.y,
-                      z * b.z);
+                    y * b.y,
+                    z * b.z);
+    }
+    
+    inline Vec3 Vec3::div(const Vec3& b) const
+    {
+        return Vec3(x / b.x,
+                    y / b.y,
+                    z / b.z);
     }
     
     inline float Vec3::length() const

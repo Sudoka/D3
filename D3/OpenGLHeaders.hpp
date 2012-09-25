@@ -10,7 +10,7 @@
 #define _OpenGLHeaders_hpp
 
 #ifdef _IOS_
-#include <OpenGLES/ES1/gl.h>
+#include <OpenGLES/ES2/gl.h>
 
 inline void glFrustum(GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat nearVal, GLfloat farVal)
 {

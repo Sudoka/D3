@@ -11,31 +11,96 @@
 //TODO: Fix colors! Must be 4 floats!
 
 namespace d3 {
-    static float vertices_[72] = {
-        0.5, 0.5, 0.5,    -0.5, 0.5, 0.5,   -0.5,-0.5, 0.5,   0.5,-0.5, 0.5,    // v0,v1,v2,v3 (front)
-        0.5, 0.5, 0.5,    0.5,-0.5, 0.5,    0.5,-0.5,-0.5,    0.5, 0.5,-0.5,    // v0,v3,v4,v5 (right)
-        0.5, 0.5, 0.5,    0.5, 0.5,-0.5,    -0.5, 0.5,-0.5,   -0.5, 0.5, 0.5,   // v0,v5,v6,v1 (top)
-        -0.5, 0.5, 0.5,   -0.5, 0.5,-0.5,   -0.5,-0.5,-0.5,   -0.5,-0.5, 0.5,   // v1,v6,v7,v2 (left)
-        -0.5,-0.5,-0.5,   0.5,-0.5,-0.5,    0.5,-0.5, 0.5,    -0.5,-0.5, 0.5,   // v7,v4,v3,v2 (bottom)
-        0.5,-0.5,-0.5,    -0.5,-0.5,-0.5,   -0.5, 0.5,-0.5,   0.5, 0.5,-0.5     // v4,v7,v6,v5 (back)
+    static float CubeVertexData[108] =
+    {
+        // positionX, positionY, positionZ
+        0.5f, -0.5f, -0.5f,
+        0.5f, 0.5f, -0.5f,
+        0.5f, -0.5f, 0.5f,
+        0.5f, -0.5f, 0.5f,
+        0.5f, 0.5f, -0.5f,
+        0.5f, 0.5f, 0.5f,
+        
+        0.5f, 0.5f, -0.5f,
+        -0.5f, 0.5f, -0.5f,
+        0.5f, 0.5f, 0.5f,
+        0.5f, 0.5f, 0.5f,
+        -0.5f, 0.5f, -0.5f,
+        -0.5f, 0.5f, 0.5f,
+        
+        -0.5f, 0.5f, -0.5f,
+        -0.5f, -0.5f, -0.5f,
+        -0.5f, 0.5f, 0.5f,
+        -0.5f, 0.5f, 0.5f,
+        -0.5f, -0.5f, -0.5f,
+        -0.5f, -0.5f, 0.5f,
+        
+        -0.5f, -0.5f, -0.5f,
+        0.5f, -0.5f, -0.5f,
+        -0.5f, -0.5f, 0.5f,
+        -0.5f, -0.5f, 0.5f,
+        0.5f, -0.5f, -0.5f,
+        0.5f, -0.5f, 0.5f,
+        
+        0.5f, 0.5f, 0.5f,
+        -0.5f, 0.5f, 0.5f,
+        0.5f, -0.5f, 0.5f,
+        0.5f, -0.5f, 0.5f,
+        -0.5f, 0.5f, 0.5f,
+        -0.5f, -0.5f, 0.5f,
+        
+        0.5f, -0.5f, -0.5f,
+        -0.5f, -0.5f, -0.5f,
+        0.5f, 0.5f, -0.5f,
+        0.5f, 0.5f, -0.5f,
+        -0.5f, -0.5f, -0.5f,
+        -0.5f, 0.5f, -0.5f
     };
     
-    static float normals_[72] = {
-        0, 0, 1,   0, 0, 1,   0, 0, 1,   0, 0, 1,   // v0,v1,v2,v3 (front)
-        1, 0, 0,   1, 0, 0,   1, 0, 0,   1, 0, 0,   // v0,v3,v4,v5 (right)
-        0, 1, 0,   0, 1, 0,   0, 1, 0,   0, 1, 0,   // v0,v5,v6,v1 (top)
-        -1, 0, 0,  -1, 0, 0,  -1, 0, 0,  -1, 0, 0,  // v1,v6,v7,v2 (left)
-        0,-1, 0,   0,-1, 0,   0,-1, 0,   0,-1, 0,   // v7,v4,v3,v2 (bottom)
-        0, 0,-1,   0, 0,-1,   0, 0,-1,   0, 0,-1    // v4,v7,v6,v5 (back)
-    };
-    
-    static unsigned int indices_[36]  = {
-        0, 1, 2,   2, 3, 0,     // front
-        4, 5, 6,   6, 7, 4,     // right
-        8, 9,10,  10,11, 8,     // top
-        12,13,14,  14,15,12,    // left
-        16,17,18,  18,19,16,    // bottom
-        20,21,22,  22,23,20     // back
+    static float CubeNormalData[108] =
+    {
+        //normalX, normalY, normalZ,
+        1.0f, 0.0f, 0.0f,
+        1.0f, 0.0f, 0.0f,
+        1.0f, 0.0f, 0.0f,
+        1.0f, 0.0f, 0.0f,
+        1.0f, 0.0f, 0.0f,
+        1.0f, 0.0f, 0.0f,
+        
+        0.0f, 1.0f, 0.0f,
+        0.0f, 1.0f, 0.0f,
+        0.0f, 1.0f, 0.0f,
+        0.0f, 1.0f, 0.0f,
+        0.0f, 1.0f, 0.0f,
+        0.0f, 1.0f, 0.0f,
+        
+        -1.0f, 0.0f, 0.0f,
+        -1.0f, 0.0f, 0.0f,
+        -1.0f, 0.0f, 0.0f,
+        -1.0f, 0.0f, 0.0f,
+        -1.0f, 0.0f, 0.0f,
+        -1.0f, 0.0f, 0.0f,
+        
+        0.0f, -1.0f, 0.0f,
+        0.0f, -1.0f, 0.0f,
+        0.0f, -1.0f, 0.0f,
+        0.0f, -1.0f, 0.0f,
+        0.0f, -1.0f, 0.0f,
+        0.0f, -1.0f, 0.0f,
+        
+        0.0f, 0.0f, 1.0f,
+        0.0f, 0.0f, 1.0f,
+        0.0f, 0.0f, 1.0f,
+        0.0f, 0.0f, 1.0f,
+        0.0f, 0.0f, 1.0f,
+        0.0f, 0.0f, 1.0f,
+        
+        0.0f, 0.0f, -1.0f,
+        0.0f, 0.0f, -1.0f,
+        0.0f, 0.0f, -1.0f,
+        0.0f, 0.0f, -1.0f,
+        0.0f, 0.0f, -1.0f,
+        0.0f, 0.0f, -1.0f
     };
     
     
@@ -143,14 +208,10 @@ namespace d3 {
     
     shared_ptr<Geometry> GeometryFactory::createBox()
     {
-        float * vertices = new float[72]; memcpy(vertices, vertices_, sizeof(float)*72);
-        float * normals = new float[72]; memcpy(normals, normals_, sizeof(float)*72);
-        unsigned int * indices = new unsigned int[36]; memcpy(indices, indices_, sizeof(unsigned int)*36);
+        float * vertices = new float[108]; memcpy(vertices, CubeVertexData, sizeof(float)*108);
+        float * normals = new float[108]; memcpy(normals, CubeNormalData, sizeof(float)*108);
         
-        
-        Geometry * g = new Geometry(shared_ptr<float>(vertices),
-                                    shared_ptr<unsigned int>(indices),
-                                    36);
+        Geometry * g = new Geometry(shared_ptr<float>(vertices), 36);
         
         g->setNormalArray(shared_ptr<float>(normals));
 

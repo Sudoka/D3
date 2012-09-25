@@ -14,31 +14,26 @@
 namespace d3 {
     
     class SpotLight : public PointLight {
-    protected:
-        float spot_cutoff_;      // 0..90 or 180
-        float spot_exponent_;    // 0..128
-                
-        Vec3 direction_;
-        
+    protected:       
         Node * target_node_;
+        Vec3 direction_;
         
     public:
         SpotLight();
         
-        void setCutoff(int v);
-        int getCutoff() const;
+        virtual LightSourceParameters & getParametersRef();
         
-        void setExponent(int v);
-        int getExponent() const;
+        void setCutoff(float v);
+        float getCutoff() const;
+        
+        void setExponent(float v);
+        float getExponent() const;
         
         //! Look at target to follow
         void setTarget(Node *target_node);
         
         //! Sets direction (Note: direction is rotated by orientation)
         void setDirection(Vec3 dir);
-        
-        //! Gets direction
-        Vec3 getDirection();
     };
 }
 

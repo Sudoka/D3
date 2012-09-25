@@ -10,6 +10,8 @@
 #define _Mat4_hpp
 
 #include "Vec3.hpp"
+#include "Vec4.hpp"
+#include "Mat3.hpp"
 
 namespace d3 {
     
@@ -64,7 +66,12 @@ namespace d3 {
         //! Convert to const float*
         operator float*();
         
+        //! Convert to mat3
+        operator Mat3();
+        
         Vec3 operator*(const Vec3& b) const;
+        
+        Vec4 operator*(const Vec4& b) const;
     };
     
 #pragma mark Implementation
@@ -195,10 +202,22 @@ namespace d3 {
         return v;
     }
     
+    inline Mat4::operator Mat3()
+    {
+        return Mat3(a00, a01, a02, a10, a11, a12, a20, a21, a22);
+    }
+    
     inline Vec3 Mat4::operator*(const Vec3 & b) const {
         return Vec3(b.x * a00 + b.y * a01 + b.z * a02 + a03,
                     b.x * a10 + b.y * a11 + b.z * a12 + a13,
                     b.x * a20 + b.y * a21 + b.z * a22 + a23);
+    }
+    
+    inline Vec4 Mat4::operator*(const Vec4 & b) const {
+        return Vec4(b.x * a00 + b.y * a01 + b.z * a02 + b.w * a03,
+                    b.x * a10 + b.y * a11 + b.z * a12 + b.w * a13,
+                    b.x * a20 + b.y * a21 + b.z * a22 + b.w * a23,
+                    b.x * a30 + b.y * a31 + b.z * a32 + b.w * a33);
     }
 }
 

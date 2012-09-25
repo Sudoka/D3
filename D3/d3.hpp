@@ -35,6 +35,7 @@
 #include "Renderable.hpp"
 #include "Camera.hpp"
 #include "Image.hpp"
+#include "ParticleEmitter.hpp"
 
 // Primitives
 #include "GeometryFactory.hpp"
@@ -45,12 +46,12 @@
 #include "GLShader.hpp"
 #include "GLProgram.hpp"
 #include "SceneRenderer.hpp"
-#include "GLSceneRenderer.hpp"
+//#include "GLSceneRenderer.hpp"
 #include "GLSLRenderer.hpp"
 
 // Physics
 #include "Simulator.hpp"
-
+#include "ParticleSystem.hpp"
 
 
 // Implementation
@@ -66,7 +67,7 @@
 #include "Image.cpp"
 #include "Material.cpp"
 #include "Texture.cpp"
-#include "GLSceneRenderer.cpp"
+//#include "GLSceneRenderer.cpp"
 #include "GeometryFactory.cpp"
 #include "FileIO.cpp"
 #include "GLShader.cpp"
@@ -74,6 +75,8 @@
 #include "GLSLRenderer.cpp"
 #include "Modeler.cpp"
 #include "Simulator.cpp"
+#include "ParticleSystem.cpp"
+#include "ParticleEmitter.cpp"
 
 #endif
 #endif

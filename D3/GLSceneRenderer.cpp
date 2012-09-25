@@ -11,11 +11,15 @@
 
 namespace d3 {
     
-    static int next_free_light_id;
+    void renderParticleEmitter(ParticleEmitter * particle_emitter)
+    {
+    }
+    
+    static int next_free_light_id_;
     
     static int setupPointLight(PointLight *light)
     {
-        int light_id = GL_LIGHT0 + next_free_light_id++;
+        int light_id = GL_LIGHT0 + next_free_light_id_++;
         
         glEnable(light_id);
         
@@ -37,7 +41,7 @@ namespace d3 {
         
         glLightf(light_id, GL_SPOT_CUTOFF, ((SpotLight*)light)->getCutoff());
         glLightf(light_id, GL_SPOT_EXPONENT, ((SpotLight*)light)->getExponent());
-        glLightfv(light_id, GL_SPOT_DIRECTION, ((SpotLight*)light)->getDirection());
+        //glLightfv(light_id, GL_SPOT_DIRECTION, ((SpotLight*)light)->getDirection());
     }
     
     static void setupDirectionalLight(PointLight *light)
@@ -106,6 +110,12 @@ namespace d3 {
         // draw attached object
         Node::Attachment * attachment = node->getAttachedObject();
         if (attachment) {
+            // If particles system
+            ParticleEmitter * emitter;
+            if ((emitter = dynamic_cast<ParticleEmitter *>(attachment)) != nullptr) {
+                renderParticleEmitter(emitter);
+                return;
+            }
             
             // if renderable
             if (attachment->isRenderable()) {
@@ -244,7 +254,7 @@ namespace d3 {
         modelview_matrix_stack_.push(camera->getTransform());
         
         // Setup lights ids
-        next_free_light_id = 0;
+        next_free_light_id_ = 0;
         
         // Turn on lights
         scene->getRoot()->traverse(shared_ptr<Node::VisitOperation>(new GLTurnLightsOperation()));

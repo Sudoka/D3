@@ -35,13 +35,28 @@ namespace d3 {
     
     Frustum Camera::getFrustum() const
     {
-        float near = 0.1, far = 200, zoom = 1;
+        float near = 1, far = 100, zoom = 1;
         float half_height = near * tan( fovy_ * 0.5 * k2Pi / 360.f );
         float half_width = half_height * aspect_ratio_;
         
         Frustum frustum = {-half_width * zoom, half_width * zoom, -half_height * zoom, half_height * zoom, near, far};
         
         return frustum;
+    }
+    
+    Mat4 Camera::getProjection() const
+    {
+        Frustum f = getFrustum();
+        
+        float a00 = f.near / f.right;
+        float a11 = f.near / f.up;
+        float a22 = (f.far + f.near) / (f.near - f.far);
+        float a23 = 2.f * f.far * f.near / (f.near - f.far);
+        
+        return Mat4(a00, 0, 0, 0,
+                    0, a11, 0, 0,
+                    0, 0, a22, a23,
+                    0, 0, -1, 0);
     }
     
     Mat4 Camera::getTransform() const
@@ -64,8 +79,7 @@ namespace d3 {
         Mat4 matrix(side.x, side.y, side.z, 0,
                       up.x, up.y, up.z, 0,
                       -forward.x, -forward.y, -forward.z, 0,
-                      0, 0, 0, 1
-                      );
+                      0, 0, 0, 1);
         
         Mat4 translate_back = getTranslationMat4(getParent()->getPosition() * -1.0);
         

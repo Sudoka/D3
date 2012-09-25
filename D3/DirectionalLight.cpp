@@ -12,8 +12,17 @@
 namespace d3 {
     DirectionalLight::DirectionalLight()
     {
-        setDirection(Vec3(0, 0, 1));
+        setDirection(Vec3(0, -1, 0));
     }
+    
+    DirectionalLight::LightSourceParameters & DirectionalLight::getParametersRef()
+    {
+        Vec3 dir = getParent()->getDerivedOrientation() * direction_;
+        parameters.position = Vec4(-dir.x, -dir.y, -dir.z, 0.0);
+
+        return parameters;
+    }
+    
     
     void DirectionalLight::setDirection(Vec3 dir)
     {

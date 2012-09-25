@@ -46,8 +46,11 @@ namespace d3 {
         //! @return View frustum
         Frustum getFrustum() const;
         
+        //! @return Projection matrix
+        Mat4 getProjection() const; //FIX: slow
+        
         //! @return Inverse camera transform
-        Mat4 getTransform() const;
+        Mat4 getTransform() const; //FIX: slow
     };
 }
 

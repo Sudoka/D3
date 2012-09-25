@@ -38,7 +38,14 @@ namespace d3 {
         ss << num;
         return ss.str();
     }
+    
+    inline String operator+(const String & left, int & right) {
+        return left + toString(right);
+    }
 
+#define YES true
+#define NO false
+    
 #define SETGET(type, member, name) \
 inline void set##name(type value) { member = value; } \
 inline type get##name() const { return member; }

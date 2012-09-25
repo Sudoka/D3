@@ -23,6 +23,8 @@ namespace d3 {
     public:
         DirectionalLight();
         
+        virtual LightSourceParameters & getParametersRef();
+        
         //! Sets direction (Note: direction is rotated by orientation)
         void setDirection(Vec3 dir);
         

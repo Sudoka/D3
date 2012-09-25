@@ -26,29 +26,14 @@ namespace d3 {
     
     void GLShader::compile()
     {
-        const char *source = source_.c_str();
-        glShaderSource(shader_id_, 1, &source, NULL);
+        const char *sources[2] = { "#version 120\n", source_.c_str() };
+        glShaderSource(shader_id_, 2, sources, NULL);
         glCompileShader(shader_id_);
         
         GLint status;
         glGetShaderiv(shader_id_, GL_COMPILE_STATUS, &status);
         
         is_compiled_ = (status == GL_TRUE) ? true : false;
-    }
-    
-    int GLShader::getVarIndex(String name)
-    {
-        GLint location;
-        auto iter = parameters_.find(name);
-        if (iter == parameters_.end()) {
-            location = glGetUniformLocation(shader_id_, name.c_str()); // try Uniform
-            if (location == -1) location = glGetAttribLocation(shader_id_, name.c_str()); // try Attribute
-            assert(location != -1);
-            parameters_[name] = location;
-        } else {
-            location = iter->second;
-        }
-        return location;
     }
     
     void GLShader::printInfoLog()

@@ -26,6 +26,7 @@ namespace d3 {
         
     public:        
         void simulate(Scene * scene);
+        void simulate(std::vector<Node *> nodes);
     };
 }
 

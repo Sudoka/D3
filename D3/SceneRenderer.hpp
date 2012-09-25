@@ -11,7 +11,7 @@
 
 namespace d3 {
     class SceneRenderer {
-    private:
+    protected:
         int screen_width_;
         int screen_height_;
         
@@ -23,7 +23,7 @@ namespace d3 {
         virtual void render(Scene * scene) =0;
         
         //! Sets screen (window) size
-        void setScreenSize(int width, int height) { screen_width_ = width; screen_height_ = height; }
+        virtual void setScreenSize(int width, int height) { screen_width_ = width; screen_height_ = height; }
         
         //! @return Screen width
         int getScreenWidth() const { return screen_width_; }

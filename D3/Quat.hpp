@@ -118,7 +118,7 @@ namespace d3 {
             z *= oneOverMag;
         } else {
             // Houston, we have a problem
-            assert(false);
+            //assert(false);
             // In a release build, just slam it to something
             w = 1.0f;
             x = y = z = 0.0f;

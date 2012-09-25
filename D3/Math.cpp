@@ -11,6 +11,17 @@
 #include "Vec3.hpp"
 
 namespace d3 {
+    bool aabbTest(Box b1, Box b2)
+    {
+        if (absf(b1.origin.x - b2.origin.x) > (b1.size.x + b2.size.x) / 2.0)
+            return false;
+        if (absf(b1.origin.y - b2.origin.y) > (b1.size.y + b2.size.y) / 2.0)
+            return false;
+        if (absf(b1.origin.z - b2.origin.z) > (b1.size.z + b2.size.z) / 2.0)
+            return false;
+        return true;
+    }
+    
     Mat4 getTranslationMat4(Vec3 v)
     {
         Mat4 m;
@@ -28,17 +39,6 @@ namespace d3 {
         m.a11 = v.y;
         m.a22 = v.z;
         return m;
-    }
-    
-    bool aabbTest(Box b1, Box b2)
-    {
-        if (absf(b1.origin.x - b2.origin.x) > (b1.size.x + b2.size.x) / 2.0)
-            return false;
-        if (absf(b1.origin.y - b2.origin.y) > (b1.size.y + b2.size.y) / 2.0)
-            return false;
-        if (absf(b1.origin.z - b2.origin.z) > (b1.size.z + b2.size.z) / 2.0)
-            return false;
-        return true;
     }
     
     Mat4 getRotationMat4(Vec3 v, float angle)
@@ -60,6 +60,19 @@ namespace d3 {
         m.a22 = v.z * v.z * (1-c) + c;
         
         return m;
+    }
+    
+    Mat4 getFrustumMat4(float left, float right, float bottom, float top, float zNear, float zFar)
+    {
+        Vec3 delta = Vec3(right, top, zFar) - Vec3(left, bottom, zNear);
+        Vec3 sum = Vec3(right, top, zFar) + Vec3(left, bottom, zNear);
+        Vec3 ratio = sum.div(delta);
+        Vec3 twoRatio = Vec3(1, 1, 1).div(delta) * 2.0 * zNear;
+        
+        return Mat4(twoRatio.x, 0.0, ratio.x, 0.0,
+                    0.0, twoRatio.y, ratio.y, 0.0,
+                    0.0, 0.0, -ratio.z, -zNear*twoRatio.z,
+                    0.0, 0.0, -1.0, 0.0);
     }
     
     Mat3 getRotationMatrix(Vec3 axis, float angle)

@@ -12,6 +12,7 @@
 #include <ostream>
 #include <cmath>
 #include "Vec3.hpp"
+#include "Vec4.hpp"
 #include "Mat4.hpp"
 
 namespace d3 {
@@ -58,6 +59,8 @@ namespace d3 {
     
     Mat4 getRotationMat4(Vec3 axis, float angle);
     
+    Mat4 getFrustumMat4(float left, float right, float bottom, float top, float zNear, float zFar);
+    
     Mat3 getRotationMatrix(Vec3 axis, float angle);
     
     Vec3 lerp(Vec3 v0, Vec3 v1, float t);
@@ -72,6 +75,10 @@ namespace d3 {
     
     float randf(float min, float max);
     
+    Vec3 randv3(float min, float max);
+    
+    Vec4 randv4(float min, float max);
+    
     int randi(int min, int max);
     
     float absf(float a);
@@ -79,6 +86,11 @@ namespace d3 {
     // ostream
     inline std::ostream& operator<< (std::ostream& os, const Vec3& v) {
         os << "[" << v.x << ", " << v.y << ", " << v.z << "]";
+        return os;
+    }
+    
+    inline std::ostream& operator<< (std::ostream& os, const Vec4& v) {
+        os << "[" << v.x << ", " << v.y << ", " << v.z << ", " << v.w << "]";
         return os;
     }
     
@@ -119,6 +131,14 @@ namespace d3 {
     
     inline float randf(float min, float max) {
         return randf() * (max - min) + min;
+    }
+    
+    inline Vec3 randv3(float min, float max) {
+        return Vec3(randf(-1, 1), randf(-1, 1), randf(-1, 1));
+    }
+    
+    inline Vec4 randv4(float min, float max) {
+        return Vec4(randf(-1, 1), randf(-1, 1), randf(-1, 1), randf(-1, 1));
     }
     
     inline int randi(int min, int max) {

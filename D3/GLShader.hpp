@@ -19,9 +19,7 @@ namespace d3 {
         ShaderType program_type_;
         
         GLuint shader_id_;
-        
-        std::unordered_map<String, int> parameters_;
-        
+                
         bool is_compiled_;
         
     public:
@@ -37,9 +35,7 @@ namespace d3 {
         void compile();
         
         bool isCompiled() const { return is_compiled_; };
-        
-        int getVarIndex(String name);
-        
+                
         void printInfoLog();
     };
 }

@@ -16,24 +16,31 @@ namespace d3 {
     
 #pragma mark Interface
     class PointLight : public Node::Attachment {
-    protected:
-        Vec4 ambient_color_;
-        Vec4 diffuse_color_;
-        Vec4 specular_color_;
+    public:
+        struct LightSourceParameters {
+            Vec4 ambient;
+            Vec4 diffuse;
+            Vec4 specular;
+            Vec4 position;
+            Vec3 spotDirection;
+            float spotExponent;
+            float spotCutoff; // (range: [0.0,90.0], 180.0)
+            float spotCosCutoff; // (range: [1.0,0.0],-1.0)
+            Vec3 attenuation;
+        };
         
-        Vec3 attenuation_;    // constant, linear and quadratic attenuation
-
-        bool is_on_;
+    protected:
+        LightSourceParameters parameters;
         
     public:
         PointLight();
         
-        void setOn(bool state);
-        
-        SETGET(Vec4, ambient_color_, AmbientColor)
-        SETGET(Vec4, diffuse_color_, DiffuseColor)
-        SETGET(Vec4, specular_color_, SpecularColor)
-        SETGET(Vec3, attenuation_, Attenuation)               
+        virtual LightSourceParameters & getParametersRef();
+                
+        SETGET(Vec4, parameters.ambient, AmbientColor)
+        SETGET(Vec4, parameters.diffuse, DiffuseColor)
+        SETGET(Vec4, parameters.specular, SpecularColor)
+        SETGET(Vec3, parameters.attenuation, Attenuation)
     };
 }
 

@@ -19,7 +19,7 @@ namespace d3 {
     public:
         Renderable() : geometry_(nullptr), material_(nullptr), texture_(nullptr) {}
         
-        Renderable(shared_ptr<Geometry> geometry) : geometry_(geometry), material_(nullptr), texture_(nullptr) {}
+        Renderable(shared_ptr<Geometry> geometry) : geometry_(geometry), material_(new Material()), texture_(nullptr) {}
         
         virtual ~Renderable() {}
                 
