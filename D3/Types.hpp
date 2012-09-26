@@ -45,6 +45,12 @@ namespace d3 {
 
 #define YES true
 #define NO false
+
+#ifdef DEBUG
+#define DEBUG_PRINT(what) std::cout << "[" << __FUNCTION__ << "] " << what << std::endl;
+#else
+#define DEBUG_PRINT(what) ;
+#endif
     
 #define SETGET(type, member, name) \
 inline void set##name(type value) { member = value; } \

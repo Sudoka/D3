@@ -1,5 +1,5 @@
 //
-//  Simulator.h
+//  SceneSimulator.h
 //  D3
 //
 //  Created by Srđan Rašić on 9/16/12.
@@ -10,7 +10,7 @@
 #define __D3__Simulator__
 
 namespace d3 {
-    class Simulator {
+    class SceneSimulator {
     protected:
         //! Rendering operation
         class CollisionDetectOperation : public Node::VisitOperation {
@@ -25,7 +25,7 @@ namespace d3 {
         };
         
     public:        
-        void simulate(Scene * scene);
+        void simulate(shared_ptr<Scene> scene);
         void simulate(std::vector<Node *> nodes);
     };
 }

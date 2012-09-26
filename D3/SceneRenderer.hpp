@@ -20,7 +20,7 @@ namespace d3 {
         virtual ~SceneRenderer() {}
         
         //! Renders scene
-        virtual void render(Scene * scene) =0;
+        virtual void render(shared_ptr<Scene> scene) =0;
         
         //! Sets screen (window) size
         virtual void setScreenSize(int width, int height) { screen_width_ = width; screen_height_ = height; }

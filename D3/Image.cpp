@@ -45,7 +45,7 @@ namespace d3 {
         delete data_;
     }
     
-    Image::Image(const char* filename) {
+    Image::Image(String filename) {
         // Loads only PNG for now
         png_byte color_type;
         png_byte bit_depth;
@@ -57,7 +57,7 @@ namespace d3 {
         char header[8];
         
         // Open file.
-        FILE *fp = fopen(filename, "rb");
+        FILE *fp = fopen(filename.c_str(), "rb");
         assert(fp);
         
         // Test if PNG.

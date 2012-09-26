@@ -69,14 +69,10 @@ namespace d3 {
         //! Inserts new framebuffer (id)
         void registerFramebuffer(String name, GLuint id);
         
-        //! SceneRenderer derived: reinitialise framebuffers
-        virtual void setScreenSize(int width, int height);
-
-        
     public:
         GLSLRenderer(int width, int height);
         
-        virtual void render(Scene * scene);
+        virtual void render(shared_ptr<Scene> scene);
     };
 }
 

@@ -10,7 +10,7 @@ varying vec2 textureCoordinate;
 
 uniform sampler2D tex;
 uniform sampler2D lightning_tex;
-uniform int has_texture = 0;
+uniform int has_texture ;
 
 void main()
 {

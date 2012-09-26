@@ -32,11 +32,11 @@ struct MaterialParameters {
 };
 
 /* Maximum number of lights */
-const int MaxLights = 5;
+//const int MaxLights;
 
 uniform int numberOfLights;
 
-uniform LightSourceParameters lightSource[MaxLights];
+uniform LightSourceParameters lightSource[3];
 uniform MaterialParameters material;
 
 attribute vec4 position;

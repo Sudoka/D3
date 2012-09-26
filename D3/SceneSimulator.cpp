@@ -6,19 +6,19 @@
 //  Copyright (c) 2012 Srđan Rašić. All rights reserved.
 //
 
-#include "Simulator.hpp"
+#include "SceneSimulator.hpp"
 
 namespace d3 {
-    Simulator::CollisionDetectOperation::CollisionDetectOperation(Scene * scene) : scene_(scene)
+    SceneSimulator::CollisionDetectOperation::CollisionDetectOperation(Scene * scene) : scene_(scene)
     {
     }
     
-    Scene * Simulator::CollisionDetectOperation::getScene() const
+    Scene * SceneSimulator::CollisionDetectOperation::getScene() const
     {
         return scene_;
     }
     
-    void Simulator::CollisionDetectOperation::beginNode(d3::Node *node)
+    void SceneSimulator::CollisionDetectOperation::beginNode(d3::Node *node)
     {
         for (Node * node2 : getScene()->getNodeSet()) {
             //Node * node2 = n;
@@ -35,9 +35,9 @@ namespace d3 {
         }
     }
     
-    void Simulator::simulate(Scene * scene)
+    void SceneSimulator::simulate(shared_ptr<Scene> scene)
     {
         // detect collisions
-        scene->getRoot()->traverse(shared_ptr<Node::VisitOperation>(new CollisionDetectOperation(scene)));
+        scene->getRoot()->traverse(shared_ptr<Node::VisitOperation>(new CollisionDetectOperation(scene.get())));
     }
 }

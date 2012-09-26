@@ -9,12 +9,15 @@
 #include "GLProgram.hpp"
 
 namespace d3 {
-    GLProgram::GLProgram(shared_ptr<GLShader> vertex_shader, shared_ptr<GLShader> fragment_shader)
+    GLProgram::GLProgram(shared_ptr<GLShader> vertex_shader, shared_ptr<GLShader> fragment_shader, bool compile_and_link)
     {
         program_id_ = glCreateProgram();
         
         setVertexShader(vertex_shader);
         setFragmentShader(fragment_shader);
+        
+        if (compile_and_link)
+            compileAndLink();
     }
     
     GLProgram::GLProgram(String vertex_shader_path, String fragment_shader_path, bool compile_and_link)

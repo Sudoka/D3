@@ -16,7 +16,7 @@ uniform mat4 modelViewMatrix;
 
 varying vec2 textureCoordinate;
 
-uniform int has_texture = 0;
+uniform int has_texture ;
 
 
 void main()

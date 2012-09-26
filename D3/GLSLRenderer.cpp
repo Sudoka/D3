@@ -155,35 +155,41 @@ namespace d3 {
         glDepthFunc(GL_LEQUAL);
         
         /* Initialize shaders */
-        registerProgram("light", new GLProgram("/Users/srdan/Development/D3/D3/light.vsh", "/Users/srdan/Development/D3/D3/light.fsh", YES));
-        registerProgram("texture", new GLProgram("/Users/srdan/Development/D3/D3/texture.vsh", "/Users/srdan/Development/D3/D3/texture.fsh", YES));
-        registerProgram("ambient", new GLProgram("/Users/srdan/Development/D3/D3/ambient.vsh", "/Users/srdan/Development/D3/D3/ambient.fsh", YES));
-        
+        registerProgram("light", new GLProgram(Engine::get()->getResourceManagerRef().loadShader("light.vsh", "light.vsh", D3_VERTEX_PROGRAM),
+                                               Engine::get()->getResourceManagerRef().loadShader("light.fsh", "light.fsh", D3_FRAGMENT_PROGRAM),
+                                               YES));
+        registerProgram("texture", new GLProgram(Engine::get()->getResourceManagerRef().loadShader("texture.vsh", "texture.vsh", D3_VERTEX_PROGRAM),
+                                               Engine::get()->getResourceManagerRef().loadShader("texture.fsh", "texture.fsh", D3_FRAGMENT_PROGRAM),
+                                               YES));
+        registerProgram("ambient", new GLProgram(Engine::get()->getResourceManagerRef().loadShader("ambient.vsh", "ambient.vsh", D3_VERTEX_PROGRAM),
+                                               Engine::get()->getResourceManagerRef().loadShader("ambient.fsh", "ambient.fsh", D3_FRAGMENT_PROGRAM),
+                                               YES));
+
         /* Initialise framebuffers */
         registerFramebuffer("default", 0);
         
-        GLuint fbo; glGenFramebuffers(1, &fbo);
-        registerFramebuffer("auxiliary", fbo);
-        
-        glBindFramebuffer(GL_FRAMEBUFFER, fbo);
-
-        glGenTextures(1, &buffer_[0]);
-        glBindTexture(GL_TEXTURE_2D, buffer_[0]);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, buffer_[0], 0);
-        
-        glGenRenderbuffers(1, &buffer_[1]);
-        glBindRenderbuffer(GL_RENDERBUFFER, buffer_[1]);
-        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, width, height);
-        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, buffer_[1]);
-        
-        GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
-        assert(status == GL_FRAMEBUFFER_COMPLETE);
+//        GLuint fbo; glGenFramebuffers(1, &fbo);
+//        registerFramebuffer("auxiliary", fbo);
+//        
+//        glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+//
+//        glGenTextures(1, &buffer_[0]);
+//        glBindTexture(GL_TEXTURE_2D, buffer_[0]);
+//        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+//        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+//        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+//        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, buffer_[0], 0);
+//        
+//        glGenRenderbuffers(1, &buffer_[1]);
+//        glBindRenderbuffer(GL_RENDERBUFFER, buffer_[1]);
+//        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, width, height);
+//        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, buffer_[1]);
+//        
+//        GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+//        assert(status == GL_FRAMEBUFFER_COMPLETE);
     }
     
-    void GLSLRenderer::render(Scene *scene)
+    void GLSLRenderer::render(shared_ptr<Scene> scene)
     {        
         // Clear framebuffer
         glClearColor(0.1f, 0.1f, 0.2f, 1.0f);
@@ -197,12 +203,12 @@ namespace d3 {
         
         // Setup viewport
         #ifndef _IOS_
-        glViewport(0, 0, getScreenWidth(), getScreenHeight()); // comment this line for iOS
+        glViewport(0, 0, Engine::get()->getWindowRef().getWidth(), Engine::get()->getWindowRef().getHeight()); // comment this line for iOS
         #endif
         
         // Get and update camera if window has been resized
         camera_ = scene->getCamera();
-        getCamera()->setAspectRatio(getScreenWidth()/(float)getScreenHeight());
+        getCamera()->setAspectRatio(Engine::get()->getWindowRef().getWidth() / (float)Engine::get()->getWindowRef().getHeight());
         
         // Setup lights
         useProgram("light");
@@ -217,7 +223,7 @@ namespace d3 {
         glFinish();
     }
     
-     GLProgram *  GLSLRenderer::useProgram(String name)
+    GLProgram *  GLSLRenderer::useProgram(String name)
     {
         current_program_ = program_map_[name];
         current_program_->bind();
@@ -237,10 +243,5 @@ namespace d3 {
     void GLSLRenderer::registerFramebuffer(String name, GLuint id)
     {
         framebuffer_map_[name] = id;
-    }
-    
-    void GLSLRenderer::setScreenSize(int width, int height) {
-        screen_width_ = width;
-        screen_height_ = height;
     }
 }

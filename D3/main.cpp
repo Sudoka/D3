@@ -5,14 +5,12 @@
 //  Created by Srđan Rašić on 8/11/12.
 //  Copyright (c) 2012 Srđan Rašić. All rights reserved.
 //
+//  Eaxample of simple scene and per-pixel lightning
+//  Usage: arrows to move camera, 'wasd' to move box
+//
 
-#include <stdio.h>
-#include <stdlib.h>
-
-#define D3_COMPILE  // Compile engine
+#define D3_COMPILE  // Compile engine (include all cpps to avoid libraries for now)
 #include "d3.hpp"
-
-#include <stdlib.h>
 
 #if defined(__APPLE_CC__)
 #include <GLUT/glut.h>
@@ -22,30 +20,14 @@
 
 using namespace d3;
 
-shared_ptr<ParticleSystem::Emitter> emitter;
-SceneRenderer * renderer;
-d3::Simulator * simulator;
-Scene * scene;
-
-float cam_radius = 15.0;
-float cam_rotation = 0.0;
-float cam_y = 8;
-
 void display(void)
 {
-    renderer->render(scene);    // render scene
+    Engine::getRef().renderScene();
     glutSwapBuffers();
 }
 
-void reshape(int width, int height)
-{
-    renderer->setScreenSize(width, height);   // set screen size
-}
-
 void update(int value) {
-    simulator->simulate(scene);
-    ParticleSystem::getInstance()->simulate(1000.0/60);
-    //game->update(0.05);
+    Engine::getRef().simulateScene();
     glutTimerFunc( 1000.0/60, update, 0);
 }
 
@@ -54,29 +36,26 @@ void idle(void)
     glutPostRedisplay();
 }
 
-void updateCamera() {
-    Vec3 pos = Vec3(cosf(cam_rotation) * cam_radius, cam_y, sinf(cam_rotation) * cam_radius);
-    scene->getCamera()->getParent()->setPosition(pos);
-    
-    std::cout << pos << std::endl;
-}
-
+// Move Box accordinaly
 void processNormalKeys(unsigned char key, int x, int y) {
 	switch(key) {
         case 'd' :
-            scene->getRoot()->getSubnode("Kocka")->move(Vec3(0, 0, -0.5)); break;
+            Engine::getRef().getSceneRef().getRoot()->getSubnode("Kocka")->move(Vec3(0, 0, -0.5)); break;
         case 'a' :
-            scene->getRoot()->getSubnode("Kocka")->move(Vec3(0, 0, 0.5)); break;
+            Engine::getRef().getSceneRef().getRoot()->getSubnode("Kocka")->move(Vec3(0, 0, 0.5)); break;
         case 'w' :
-            scene->getRoot()->getSubnode("Kocka")->move(Vec3(-0.5, 0, 0)); break;
+            Engine::getRef().getSceneRef().getRoot()->getSubnode("Kocka")->move(Vec3(-0.5, 0, 0)); break;
         case 's' :
-            scene->getRoot()->getSubnode("Kocka")->move(Vec3(0.5, 0, 0)); break;
-        case 'b' :
-            emitter->emitting_duration = 0.2; break;
+            Engine::getRef().getSceneRef().getRoot()->getSubnode("Kocka")->move(Vec3(0.5, 0, 0)); break;
 	}
 }
 
-void processSpecialKeys(int key, int x, int y) {
+// We just manage camera position here
+void processSpecialKeys(int key, int x, int y)
+{
+    static float cam_radius = 15.0;
+    static float cam_rotation = 0.0;
+    static float cam_y = 8;
     
 	switch(key) {
 		case GLUT_KEY_UP :
@@ -89,88 +68,51 @@ void processSpecialKeys(int key, int x, int y) {
             cam_rotation -= kPi/6.0; break; break;
 	}
     
-    updateCamera();
+    Vec3 pos = Vec3(cosf(cam_rotation) * cam_radius, cam_y, sinf(cam_rotation) * cam_radius);
+    Engine::getRef().getSceneRef().getCamera()->getParent()->setPosition(pos);
 }
 
 int main(int argc, char** argv)
 {
-    srand((unsigned)time(0));
-    
-    glutInit(&argc, argv);
-    
-    glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH );
-    glutInitWindowSize(640, 480);    
-        
-    (void)glutCreateWindow("GLUT Program");
+    /* Initialize */
+    Window * main_window = new GLUTWindow(&argc, argv, "Prozor", 640, 480);
+    Engine::initialize("Resources", main_window);   // Change first arg to reflect your main resource package path (Resources dir full path)
+
     glutKeyboardFunc(processNormalKeys);
     glutSpecialFunc(processSpecialKeys);
     glutDisplayFunc(display);
-    glutReshapeFunc(reshape);
     glutIdleFunc(idle);
-    std::cout << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
-    renderer = new GLSLRenderer(640, 480);
-    scene = new Scene();
     
-    //scene->getRoot()->createSubnode("Osi", new Renderable(GeometryFactory::createAxes()));
+    /* Setup scene */
+    Node * root = Engine::getRef().getSceneRef().getRoot();
     
-    Node *box = scene->getRoot()->createSubnode("Kocka", new Renderable(GeometryFactory::createBox()));
+    /* Create box */
+    Node *box = root->createSubnode("Kocka", new Renderable(GeometryFactory::createBox()));
     box->setScale(d3::Vec3(3,3,3));
+    
+    /* Draw BB :) */
     box->setBoundingBox(d3::Vec3(2,2,2));
     box->setBoundingBoxVisibility(true);
-    scene->getCamera()->setTarget(scene->getRoot());
     
+    /* Set camera to always look at the box */
+    Engine::getRef().getSceneRef().getCamera()->setTarget(box);
+    
+    /* Create plane */
     Renderable *earthPlane = new Renderable(GeometryFactory::createPlane());
-    earthPlane->setTexture(shared_ptr<Texture>(new Texture(new Image("/Users/srdan/Desktop/road.png"))));
-    scene->getRoot()->createSubnode("Plane", earthPlane)->setScale(Vec3(10, 10, 10));
+    earthPlane->setTexture(Engine::get()->getResourceManagerRef().loadTexture("road.png", "road.png"));
+    root->createSubnode("Plane", earthPlane)->setScale(Vec3(10, 10, 10));
     
-//    SpotLight *sl = new SpotLight;
-//    sl->setCutoff(60);
-//    sl->setDiffuseColor(Vec4(5.0, 5.0, 5.0, 1.0));
-//    scene->getRoot()->createSubnode("Svjetlo", sl);
-//    sl->getParent()->setPosition(Vec3(0, 4, 0));
-//    sl->setTarget(box);
-    
+    /* Create light */
     PointLight *dl = new PointLight;
-    scene->getRoot()->createSubnode("SvjetloDir", dl)->setPosition(d3::Vec3(0,3,0));
+    root->createSubnode("SvjetloDir", dl)->setPosition(d3::Vec3(0,3,0));
     dl->setDiffuseColor(d3::Vec4(4,2,2,1));
     dl->setAttenuation(d3::Vec3(1,1,0));
-    
-    updateCamera();
-    
-//    /* Particle System test */
-//    ParticleSystem::Emitter & e = * new ParticleSystem::Emitter();
-//    
-//    e.position_variance = Vec3(0, 0, 0);
-//    e.direction = Vec3(0, 1, 0);
-//    e.direction_variance = Vec3(0.3, 0, 0.3);
-//    e.start_color = Vec4(0.5, 0.5, 0.5, 0.5);
-//    e.start_color_variance = Vec4(0, 0, 0, 0);
-//    e.finish_color = Vec4(0, 0, 0, 0);
-//    e.finish_color_variance = Vec4(0, 0, 0, 0);
-//    e.lifespan = 3;
-//    e.lifespan_variance = 0;
-//    e.speed = 1.0;
-//    e.speed_variance = 1.0;
-//    e.start_size = 110.0;
-//    e.start_size_variance = 0.0;
-//    e.finish_size = 110.0;
-//    e.finish_size_variance = 0.0;
-//    //shared_ptr<Texture> texture;
-//    e.particle_count = 0;
-//    e.particles_per_second = 30;
-//    e.particles_par_second_variance = 10;
-//    e.emitting_duration = 10;
-//    
-//    
-//    emitter = shared_ptr<ParticleSystem::Emitter>(&e);
-//    
-//    ParticleSystem::getInstance()->insertEmitter(emitter);
-//    
-//    shared_ptr<Texture> particle_texture(new Texture(new Image("/Users/srdan/Development/D3/Resources/smoke.png")));
-//    
-//    scene->getRoot()->createSubnode("Cestice", new ParticleEmitter(emitter, particle_texture));
-    
+        
+    // Bahh
     update(0);
+    processSpecialKeys(0, 0, 0);
+    
+    // Engage
     glutMainLoop();
     
     return EXIT_SUCCESS;

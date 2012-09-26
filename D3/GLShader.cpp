@@ -26,7 +26,12 @@ namespace d3 {
     
     void GLShader::compile()
     {
+#ifdef _IOS_
+        const char *sources[2] = { "precision mediump float;\n", source_.c_str() };
+#else
         const char *sources[2] = { "#version 120\n", source_.c_str() };
+#endif
+        
         glShaderSource(shader_id_, 2, sources, NULL);
         glCompileShader(shader_id_);
         

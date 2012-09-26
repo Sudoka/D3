@@ -19,7 +19,7 @@ namespace d3 {
         
         std::unordered_map<String, int> parameters_;
     public:
-        GLProgram(shared_ptr<GLShader> vertex_shader, shared_ptr<GLShader> fragment_shader);
+        GLProgram(shared_ptr<GLShader> vertex_shader, shared_ptr<GLShader> fragment_shader, bool compile_and_link = NO);
         
         GLProgram(String vertex_shader_path, String fragment_shader_path, bool compile_and_link = NO);
         

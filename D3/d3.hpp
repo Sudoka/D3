@@ -13,6 +13,10 @@
 // Resources
 #include "FileIO.hpp"
 
+// Window
+#include "Window.hpp"
+#include "GLUTWindow.hpp"
+
 // Math
 #include "Math.hpp"
 #include "Vec3.hpp"
@@ -50,8 +54,13 @@
 #include "GLSLRenderer.hpp"
 
 // Physics
-#include "Simulator.hpp"
+#include "SceneSimulator.hpp"
 #include "ParticleSystem.hpp"
+
+// Resources
+#include "ResourceManager.hpp"
+
+#include "Engine.hpp"
 
 
 // Implementation
@@ -74,9 +83,13 @@
 #include "GLProgram.cpp"
 #include "GLSLRenderer.cpp"
 #include "Modeler.cpp"
-#include "Simulator.cpp"
+#include "SceneSimulator.cpp"
 #include "ParticleSystem.cpp"
 #include "ParticleEmitter.cpp"
+#include "ResourceManager.cpp"
+#include "GLUTWindow.cpp"
+
+#include "Engine.cpp"
 
 #endif
 #endif

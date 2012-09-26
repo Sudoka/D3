@@ -41,8 +41,7 @@ namespace d3 {
                  );
         
         //! Loads image from file.
-        Image(const char* filename      //!> Image full path
-                 );
+        Image(String filename);
         
         //! Destructor.
         ~Image();

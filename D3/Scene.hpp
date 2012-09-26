@@ -27,12 +27,11 @@ namespace d3 {
         
         NodeSet scene_nodes_;
 
-        
     public:
         Scene();
         
         ~Scene();
-        
+                
         //! @return Scene camera
         Camera * getCamera() const;
         
