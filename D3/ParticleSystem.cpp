@@ -37,8 +37,6 @@ namespace d3 {
     {
         static float prev_dt = 0.0;
         
-        dt /= 1000.0;
-
         for (auto it : emitters_map_) {
             Emitter & e = * it.first.get();
             Particle * particles = it.second;
@@ -50,7 +48,7 @@ namespace d3 {
                 if (p.time_to_live > 0.0) {
                     p.position = p.position + p.direction * dt * e.speed;
                     p.color = p.color + p.color_delta * dt;
-                    p.size = 150;
+                    p.size = p.size + p.size_delta * dt;
                     
                     p.time_to_live -= dt;
                     idx++;

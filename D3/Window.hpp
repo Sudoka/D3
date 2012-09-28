@@ -10,14 +10,25 @@
 #define D3_Window_hpp
 
 namespace d3 {
+    class Application;
+    
     /*! Abstract class.
      *  It's main function is to hide platfrom
      *  specific window and context setup and their management.
      */
     class Window {
     protected:
+        Application * application;
         
     public:
+        Window(Application * application) : application(application) {}
+        
+        //! @return Application
+        Application * getApplication() const { return application; }
+        
+        //! Virtual destructor
+        virtual ~Window() {}
+        
         //! Setup Rendering System's (OpenGL) context
         virtual void setupContext() =0;
         
@@ -26,6 +37,15 @@ namespace d3 {
         
         //! @return Active window's (view's) width
         virtual unsigned getHeight() =0;
+        
+        //! @return Time in [s] since window creation
+        virtual float getTimerValue() =0;
+        
+        //! Start main loop
+        virtual void runLoop() =0;
+        
+        //! @return Systems' window or view object (wrapped stuff)
+        virtual void * getSystemObject() { return nullptr; }
     };
 }
 

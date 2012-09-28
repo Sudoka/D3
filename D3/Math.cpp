@@ -25,9 +25,9 @@ namespace d3 {
     Mat4 getTranslationMat4(Vec3 v)
     {
         Mat4 m;
-        m.a03 = v.x;
-        m.a13 = v.y;
-        m.a23 = v.z;
+        m.m[12] = v.x;
+        m.m[13] = v.y;
+        m.m[14] = v.z;
         
         return m;
     }
@@ -35,9 +35,9 @@ namespace d3 {
     Mat4 getScalingMat4(Vec3 v)
     {
         Mat4 m;
-        m.a00 = v.x;
-        m.a11 = v.y;
-        m.a22 = v.z;
+        m.m[0] = v.x;
+        m.m[5] = v.y;
+        m.m[10] = v.z;
         return m;
     }
     
@@ -45,21 +45,35 @@ namespace d3 {
     {
         float c = cosf(angle);
         float s = sinf(angle);
+        float cc = 1.0f - c;
         
-        Mat4 m;
-        m.a00 = v.x * v.x * (1-c) + c;
-        m.a01 = v.x * v.y * (1-c) - v.z * s;
-        m.a02 = v.x * v.z * (1-c) + v.y * s;
+        return Mat4(
+            c + cc * v.x * v.x,
+            cc * v.x * v.y + v.z * s,
+            cc * v.x * v.z - v.y * s,
+            0.0f,
+            cc * v.x * v.y - v.z * s,
+            c + cc * v.y * v.y,
+            cc * v.y * v.z + v.x * s,
+            0.0f,
+            cc * v.x * v.z + v.y * s,
+            cc * v.y * v.z - v.x * s,
+            c + cc * v.z * v.z,
+            0.0f,
+            0.0f,
+            0.0f,
+            0.0f,
+            1.0f);
+    }
+    
+    Mat4 getPerspective(float fovy, float aspect, float zNear, float zFar)
+    {
+        float ctg = 1.0f / tanf(fovy / 2.0f);
         
-        m.a10 = v.y * v.x * (1-c) + v.z * s;
-        m.a11 = v.y * v.y * (1-c) + c;
-        m.a12 = v.y * v.z * (1-c) - v.x * s;
-        
-        m.a20 = v.z * v.x * (1-c) - v.y * s;
-        m.a21 = v.z * v.y * (1-c) + v.x * s;
-        m.a22 = v.z * v.z * (1-c) + c;
-        
-        return m;
+        return Mat4(ctg / aspect, 0.0f, 0.0f, 0.0f,
+                    0.0f, ctg, 0.0f, 0.0f,
+                    0.0f, 0.0f, (zFar + zNear) / (zNear - zFar), -1.0f,
+                    0.0f, 0.0f, (2.0f * zFar * zNear) / (zNear - zFar), 0.0f);
     }
     
     Mat4 getFrustumMat4(float left, float right, float bottom, float top, float zNear, float zFar)
@@ -74,35 +88,35 @@ namespace d3 {
                     0.0, 0.0, -ratio.z, -zNear*twoRatio.z,
                     0.0, 0.0, -1.0, 0.0);
     }
-    
-    Mat3 getRotationMatrix(Vec3 axis, float angle)
-    {
-        Mat3 m;
-        
-        double c = cosf(angle);
-        double s = sinf(angle);
-        double t = 1.0 - c;
-        
-        axis.normalize();
-    
-        m.a00 = c + axis.x*axis.x*t;
-        m.a11 = c + axis.y*axis.y*t;
-        m.a22 = c + axis.z*axis.z*t;
-        
-        double tmp1 = axis.x*axis.y*t;
-        double tmp2 = axis.z*s;
-        m.a10 = tmp1 + tmp2;
-        m.a01 = tmp1 - tmp2;
-        tmp1 = axis.x*axis.z*t;
-        tmp2 = axis.y*s;
-        m.a20 = tmp1 - tmp2;
-        m.a02 = tmp1 + tmp2;    tmp1 = axis.y*axis.z*t;
-        tmp2 = axis.x*s;
-        m.a21 = tmp1 + tmp2;
-        m.a12 = tmp1 - tmp2;
-        
-        return m;
-    }
+//
+//    Mat3 getRotationMatrix(Vec3 axis, float angle)
+//    {
+//        Mat3 m;
+//        
+//        double c = cosf(angle);
+//        double s = sinf(angle);
+//        double t = 1.0 - c;
+//        
+//        axis.normalize();
+//    
+//        m.a00 = c + axis.x*axis.x*t;
+//        m.a11 = c + axis.y*axis.y*t;
+//        m.a22 = c + axis.z*axis.z*t;
+//        
+//        double tmp1 = axis.x*axis.y*t;
+//        double tmp2 = axis.z*s;
+//        m.a10 = tmp1 + tmp2;
+//        m.a01 = tmp1 - tmp2;
+//        tmp1 = axis.x*axis.z*t;
+//        tmp2 = axis.y*s;
+//        m.a20 = tmp1 - tmp2;
+//        m.a02 = tmp1 + tmp2;    tmp1 = axis.y*axis.z*t;
+//        tmp2 = axis.x*s;
+//        m.a21 = tmp1 + tmp2;
+//        m.a12 = tmp1 - tmp2;
+//        
+//        return m;
+//    }
     
     Vec3 lerp(Vec3 v0, Vec3 v1, float t)
     {

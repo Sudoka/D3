@@ -43,9 +43,14 @@ namespace d3 {
         return left + toString(right);
     }
 
+#ifndef _IOS_
 #define YES true
 #define NO false
-
+#define D3_TRANSPOSE 1
+#else
+#define D3_TRANSPOSE 0
+#endif
+    
 #ifdef DEBUG
 #define DEBUG_PRINT(what) std::cout << "[" << __FUNCTION__ << "] " << what << std::endl;
 #else

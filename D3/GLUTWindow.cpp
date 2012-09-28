@@ -17,15 +17,56 @@
 namespace d3 {
     static GLUTWindow * glut_window_instance = nullptr;
     
-    GLUTWindow::GLUTWindow(int *argcp, char **argv, const char * title, unsigned width, unsigned height)
+    void GLUTWindow::glut_display_callback(void)
+    {
+        glut_window_instance->application->render();
+        glFinish();
+        glutSwapBuffers();
+    }
+    
+    void GLUTWindow::glut_idle_callback(void)
+    {
+        glutPostRedisplay();
+    }
+    
+    void GLUTWindow::glut_timer_callback(int value)
+    {
+        glut_window_instance->application->idle();
+        glutTimerFunc( 1000.0/60, GLUTWindow::glut_timer_callback, 0);
+    }
+    
+    void GLUTWindow::glut_reshape_callback(int width, int height)
+    {
+        glut_window_instance->application->getRenderer()->setScreenSize(width, height);
+    }
+    
+    void GLUTWindow::glut_keydown_callback(unsigned char key, int x, int y)
+    {
+        glut_window_instance->application->onKeyDown(key);
+    }
+    
+    void GLUTWindow::glut_special_keydown_callback(int key, int x, int y)
+    {
+        glut_window_instance->application->onKeyDown(key + 1000);
+    }
+    
+    GLUTWindow::GLUTWindow(String title, unsigned width, unsigned height,  Application * application) : Window(application)
     {
         assert(glut_window_instance == nullptr);
         glut_window_instance = this;
         
-        glutInit(argcp, argv);
-        glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH );
+        int null = 0;
+        glutInit(&null, NULL);
+        glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH | GLUT_DOUBLE);
         glutInitWindowSize(width, height);
-        glutCreateWindow(title);
+        glutCreateWindow(title.c_str());
+        
+        glutDisplayFunc(GLUTWindow::glut_display_callback);
+        glutIdleFunc(GLUTWindow::glut_idle_callback);
+        glutReshapeFunc(GLUTWindow::glut_reshape_callback);
+        
+        glutKeyboardFunc(GLUTWindow::glut_keydown_callback);
+        glutSpecialFunc(GLUTWindow::glut_special_keydown_callback);
     }
     
     void GLUTWindow::setupContext()
@@ -40,5 +81,16 @@ namespace d3 {
     unsigned GLUTWindow::getHeight()
     {
         return glutGet(GLUT_WINDOW_HEIGHT);
+    }
+    
+    float GLUTWindow::getTimerValue()
+    {
+        return glutGet(GLUT_ELAPSED_TIME) / 1000.f;
+    }
+    
+    void GLUTWindow::runLoop()
+    {
+        GLUTWindow::glut_timer_callback(0);
+        glutMainLoop();
     }
 }

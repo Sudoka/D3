@@ -13,7 +13,7 @@ namespace d3 {
     {
         parameters.spotCutoff = 30;
         parameters.spotCosCutoff = 0.866025404;
-        parameters.spotExponent = 0.0;
+        parameters.spotExponent = 1.0;
         parameters.spotDirection = Vec3(0, -1, 0);
         
         direction_ = Vec3(0, -1, 0);

@@ -25,7 +25,7 @@ namespace d3 {
         };
         
     public:        
-        void simulate(shared_ptr<Scene> scene);
+        void simulate(Scene * scene, float dt);
         void simulate(std::vector<Node *> nodes);
     };
 }

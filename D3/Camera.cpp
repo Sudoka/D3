@@ -14,9 +14,10 @@ namespace d3 {
     {
         // Setup default values
         setUpVector(Vec3(0.f, 1.f, 0.f));
-        setDirection(Vec3(0.f, 0.f, -1.f));
+        setDirection(Vec3(-1.f, -1.f, -1.f));
         setTarget(nullptr);
         setFovy(60);
+        setAspectRatio(4/3.f);
     }
     
     void Camera::setTarget(Node *node) { target_node_ = node; }
@@ -46,43 +47,35 @@ namespace d3 {
     
     Mat4 Camera::getProjection() const
     {
-        Frustum f = getFrustum();
+        return getPerspective(fovy_ * kPiOver180, aspect_ratio_, 0.1, 100);
         
-        float a00 = f.near / f.right;
-        float a11 = f.near / f.up;
-        float a22 = (f.far + f.near) / (f.near - f.far);
-        float a23 = 2.f * f.far * f.near / (f.near - f.far);
+        ///Frustum f = getFrustum();
         
-        return Mat4(a00, 0, 0, 0,
-                    0, a11, 0, 0,
-                    0, 0, a22, a23,
-                    0, 0, -1, 0);
+        //return getFrustumMat4(f.left, f.right, f.down, f.up, f.near, f.far);
     }
     
     Mat4 Camera::getTransform() const
     {
         // Look at
-        Vec3 position = getParent()->getDerivedPosition();
+        Vec3 eye = getParent()->getDerivedPosition();
         
-        Vec3 look_at;
+        Vec3 center;
         
         if (target_node_ != nullptr) {
-            look_at = target_node_->getDerivedPosition();
+            center = target_node_->getDerivedPosition();
         } else {
-            look_at = getParent()->getDerivedPosition() + getParent()->getDerivedOrientation() * direction_;
+            center = getParent()->getDerivedPosition() + getParent()->getDerivedOrientation() * direction_;
         }
         
-        Vec3 forward = look_at - position; forward.normalize();
-        Vec3 side = forward.cross(up_vector_); side.normalize();
-        Vec3 up = side.cross(forward);
+        Vec3 forward = eye - center; forward.normalize();
+        Vec3 side = up_vector_.cross(forward); side.normalize();
+        Vec3 up = forward.cross(side);
         
-        Mat4 matrix(side.x, side.y, side.z, 0,
-                      up.x, up.y, up.z, 0,
-                      -forward.x, -forward.y, -forward.z, 0,
-                      0, 0, 0, 1);
+        Mat4 lookat(side.x, up.x, forward.x, 0,
+                    side.y, up.y, forward.y, 0,
+                    side.z, up.z, forward.z, 0,
+                    (side * -1) * eye, (up * -1) * eye, (forward * -1) * eye, 1.0);
         
-        Mat4 translate_back = getTranslationMat4(getParent()->getPosition() * -1.0);
-        
-        return (matrix * translate_back);    // GL uses column-major
+        return lookat;
     }
 }

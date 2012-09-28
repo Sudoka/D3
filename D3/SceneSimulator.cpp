@@ -35,9 +35,11 @@ namespace d3 {
         }
     }
     
-    void SceneSimulator::simulate(shared_ptr<Scene> scene)
+    void SceneSimulator::simulate(Scene * scene, float dt)
     {
         // detect collisions
-        scene->getRoot()->traverse(shared_ptr<Node::VisitOperation>(new CollisionDetectOperation(scene.get())));
+        scene->getRoot()->traverse(shared_ptr<Node::VisitOperation>(new CollisionDetectOperation(scene)));
+        
+        ParticleSystem::getInstance()->simulate(dt);
     }
 }

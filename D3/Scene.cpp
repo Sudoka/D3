@@ -16,7 +16,7 @@ namespace d3 {
         root_node_ = new Node("Root", this);
         root_node_->setNeedsUpdate(true);
         
-        camera_ = (Camera*)root_node_->createSubnode("MainCamera", new Camera())->getAttachedObject();
+        camera_ = (Camera*)root_node_->createSubnode("MainCamera", new Camera())->setPosition(Vec3(5,5,5))->getAttachedObject();
     }
     
     Scene::~Scene()

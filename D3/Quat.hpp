@@ -232,7 +232,29 @@ namespace d3 {
 //        
 //        return m;
         
-        return getRotationMat4(getRotationAxis(), getRotationAngle());
+//        return getRotationMat4(getRotationAxis(), getRotationAngle());
+               
+        float _2x = x + x;
+        float _2y = y + y;
+        float _2z = z + z;
+        float _2w = w + w;
+        
+        return Mat4( 1.0f - _2y * y - _2z * z,
+            _2x * y + _2w * z,
+            _2x * z - _2w * y,
+            0.0f,
+            _2x * y - _2w * z,
+            1.0f - _2x * x - _2z * z,
+            _2y * z + _2w * x,
+            0.0f,
+            _2x * z + _2w * y,
+            _2y * z - _2w * x,
+            1.0f - _2x * x - _2y * y,
+            0.0f,
+            0.0f,
+            0.0f,
+            0.0f,
+            1.0f );
     }
     
 }

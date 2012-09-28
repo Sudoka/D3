@@ -10,11 +10,20 @@
 #define __D3__GLUTWindow__
 
 namespace d3 {
+    /* GLUT Window implementation 
+     */
     class GLUTWindow : public Window {
     protected:
+        /* GLUT callbacks */
+        static void glut_display_callback();
+        static void glut_idle_callback();
+        static void glut_timer_callback(int value);
+        static void glut_reshape_callback(int width, int height);
+        static void glut_keydown_callback(unsigned char key, int x, int y);
+        static void glut_special_keydown_callback(int key, int x, int y);
         
     public:
-        GLUTWindow(int *argcp, char **argv, const char * title, unsigned width, unsigned height);
+        GLUTWindow(String title, unsigned width, unsigned height, Application * application);
         
         //! Setup Rendering System's (OpenGL) context
         virtual void setupContext();
@@ -24,6 +33,12 @@ namespace d3 {
         
         //! @return Active window's (view's) width
         virtual unsigned getHeight();
+        
+        //! @return Time in [s] since window creation
+        virtual float getTimerValue();
+        
+        //! Start main loop
+        virtual void runLoop();
     };
 }
 

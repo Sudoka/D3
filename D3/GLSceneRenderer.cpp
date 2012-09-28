@@ -263,6 +263,6 @@ namespace d3 {
         scene->getRoot()->traverse(shared_ptr<Node::VisitOperation>(new GLNodeDrawOperation(this)));
 
         // Finish
-        glFinish();
+        //glFinish();
     }
 }

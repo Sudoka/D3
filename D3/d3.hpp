@@ -15,7 +15,11 @@
 
 // Window
 #include "Window.hpp"
+#ifdef GLUT
 #include "GLUTWindow.hpp"
+#elif defined _IOS_
+#include "EAGLWindow.hpp"
+#endif
 
 // Math
 #include "Math.hpp"
@@ -52,6 +56,8 @@
 #include "SceneRenderer.hpp"
 //#include "GLSceneRenderer.hpp"
 #include "GLSLRenderer.hpp"
+#include "SimpleRenderer.hpp"
+
 
 // Physics
 #include "SceneSimulator.hpp"
@@ -60,8 +66,9 @@
 // Resources
 #include "ResourceManager.hpp"
 
-#include "Engine.hpp"
+//#include "Engine.hpp"
 
+#include "Application.hpp"
 
 // Implementation
 // Simple method to avoid compiling lib
@@ -82,14 +89,23 @@
 #include "GLShader.cpp"
 #include "GLProgram.cpp"
 #include "GLSLRenderer.cpp"
+#include "SimpleRenderer.cpp"
 #include "Modeler.cpp"
 #include "SceneSimulator.cpp"
 #include "ParticleSystem.cpp"
 #include "ParticleEmitter.cpp"
 #include "ResourceManager.cpp"
-#include "GLUTWindow.cpp"
 
-#include "Engine.cpp"
+#ifdef GLUT
+#include "GLUTWindow.cpp"
+#elif defined _IOS_
+#include "EAGLWindow.mm"
+#endif
+
+//#include "Engine.cpp"
+
+#include "Application.cpp"
+#include "Example.hpp"
 
 #endif
 #endif

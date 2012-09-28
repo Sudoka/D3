@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EC123C5F15F192B8004447ED /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECCB7DF315F13BD100495973 /* main.cpp */; };
 		ECCB7DCB15F13B3A00495973 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECCB7DC915F13B3A00495973 /* GLUT.framework */; };
 		ECCB7DCC15F13B3A00495973 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECCB7DCA15F13B3A00495973 /* OpenGL.framework */; };
+		ECDF82EC16146A8D005B89F3 /* Example.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECDF82EA16146A4B005B89F3 /* Example.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -47,21 +47,22 @@
 		EC369C02160F16A50092F9E3 /* ParticleSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ParticleSystem.hpp; sourceTree = "<group>"; };
 		EC369C04160F4AA40092F9E3 /* ParticleEmitter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ParticleEmitter.cpp; sourceTree = "<group>"; };
 		EC369C05160F4AA40092F9E3 /* ParticleEmitter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ParticleEmitter.hpp; sourceTree = "<group>"; };
+		EC4142871615C1A700E77795 /* ff_shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = ff_shader.vsh; sourceTree = "<group>"; };
+		EC4142891615D34900E77795 /* ff_shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = ff_shader.fsh; sourceTree = "<group>"; };
 		EC51B0E516065CB400E11226 /* SceneSimulator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneSimulator.cpp; sourceTree = "<group>"; };
 		EC51B0E616065CB400E11226 /* SceneSimulator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SceneSimulator.hpp; sourceTree = "<group>"; };
+		EC61158F161486CA00D02A01 /* EAGLWindow.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = EAGLWindow.mm; sourceTree = "<group>"; };
+		EC611590161486CA00D02A01 /* EAGLWindow.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EAGLWindow.hpp; sourceTree = "<group>"; };
+		EC6115921614941500D02A01 /* Example.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Example.hpp; sourceTree = "<group>"; };
+		EC61159B1614A78A00D02A01 /* SimpleRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleRenderer.cpp; sourceTree = "<group>"; };
+		EC61159C1614A78A00D02A01 /* SimpleRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SimpleRenderer.hpp; sourceTree = "<group>"; };
 		ECB09A3F161356D100677A13 /* ResourceManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ResourceManager.cpp; sourceTree = "<group>"; };
 		ECB09A40161356D100677A13 /* ResourceManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ResourceManager.hpp; sourceTree = "<group>"; };
-		ECB09A4216135BE900677A13 /* Engine.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Engine.cpp; sourceTree = "<group>"; };
-		ECB09A4316135BE900677A13 /* Engine.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Engine.hpp; sourceTree = "<group>"; };
 		ECB09A4A16136D6900677A13 /* Window.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Window.hpp; sourceTree = "<group>"; };
 		ECB09A4B16136E4B00677A13 /* GLUTWindow.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GLUTWindow.cpp; sourceTree = "<group>"; };
 		ECB09A4C16136E4B00677A13 /* GLUTWindow.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GLUTWindow.hpp; sourceTree = "<group>"; };
-		ECB09A511613774E00677A13 /* ambient.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ambient.fsh; sourceTree = "<group>"; };
-		ECB09A521613774E00677A13 /* ambient.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ambient.vsh; sourceTree = "<group>"; };
-		ECB09A531613774E00677A13 /* light.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = light.fsh; sourceTree = "<group>"; };
-		ECB09A541613774E00677A13 /* light.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = light.vsh; sourceTree = "<group>"; };
-		ECB09A551613774E00677A13 /* texture.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = texture.fsh; sourceTree = "<group>"; };
-		ECB09A561613774E00677A13 /* texture.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = texture.vsh; sourceTree = "<group>"; };
+		ECB09A551613774E00677A13 /* particle_system.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = particle_system.fsh; sourceTree = "<group>"; };
+		ECB09A561613774E00677A13 /* particle_system.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = particle_system.vsh; sourceTree = "<group>"; };
 		ECB09A581613774E00677A13 /* earth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = earth.png; sourceTree = "<group>"; };
 		ECB09A591613774E00677A13 /* fbo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fbo.png; sourceTree = "<group>"; };
 		ECB09A5A1613774E00677A13 /* particle01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = particle01.png; sourceTree = "<group>"; };
@@ -101,7 +102,9 @@
 		ECCB7DF015F13BD100495973 /* Types.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Types.hpp; sourceTree = "<group>"; };
 		ECCB7DF115F13BD100495973 /* Vec3.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Vec3.hpp; sourceTree = "<group>"; };
 		ECCB7DF215F13BD100495973 /* Vec4.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Vec4.hpp; sourceTree = "<group>"; };
-		ECCB7DF315F13BD100495973 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		ECDF82E71614687F005B89F3 /* Application.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Application.cpp; sourceTree = "<group>"; };
+		ECDF82E81614687F005B89F3 /* Application.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Application.hpp; sourceTree = "<group>"; };
+		ECDF82EA16146A4B005B89F3 /* Example.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Example.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +127,8 @@
 				EC33295515F8F106007A85D5 /* GLShader.cpp */,
 				EC33295B15F90D2B007A85D5 /* GLProgram.hpp */,
 				EC33295A15F90D2B007A85D5 /* GLProgram.cpp */,
+				EC61159C1614A78A00D02A01 /* SimpleRenderer.hpp */,
+				EC61159B1614A78A00D02A01 /* SimpleRenderer.cpp */,
 				EC33295F15F91431007A85D5 /* GLSLRenderer.hpp */,
 				EC33295E15F91431007A85D5 /* GLSLRenderer.cpp */,
 				ECCB7DD915F13BD100495973 /* GLSceneRenderer.hpp */,
@@ -192,6 +197,8 @@
 			children = (
 				ECB09A4C16136E4B00677A13 /* GLUTWindow.hpp */,
 				ECB09A4B16136E4B00677A13 /* GLUTWindow.cpp */,
+				EC611590161486CA00D02A01 /* EAGLWindow.hpp */,
+				EC61158F161486CA00D02A01 /* EAGLWindow.mm */,
 			);
 			name = "Platform Window System";
 			sourceTree = "<group>";
@@ -199,9 +206,9 @@
 		ECB09A4E16136E5F00677A13 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				ECB09A4316135BE900677A13 /* Engine.hpp */,
-				ECB09A4216135BE900677A13 /* Engine.cpp */,
 				ECB09A4A16136D6900677A13 /* Window.hpp */,
+				ECDF82E81614687F005B89F3 /* Application.hpp */,
+				ECDF82E71614687F005B89F3 /* Application.cpp */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -218,12 +225,10 @@
 		ECB09A501613774E00677A13 /* shaders */ = {
 			isa = PBXGroup;
 			children = (
-				ECB09A511613774E00677A13 /* ambient.fsh */,
-				ECB09A521613774E00677A13 /* ambient.vsh */,
-				ECB09A531613774E00677A13 /* light.fsh */,
-				ECB09A541613774E00677A13 /* light.vsh */,
-				ECB09A551613774E00677A13 /* texture.fsh */,
-				ECB09A561613774E00677A13 /* texture.vsh */,
+				ECB09A561613774E00677A13 /* particle_system.vsh */,
+				ECB09A551613774E00677A13 /* particle_system.fsh */,
+				EC4142871615C1A700E77795 /* ff_shader.vsh */,
+				EC4142891615D34900E77795 /* ff_shader.fsh */,
 			);
 			path = shaders;
 			sourceTree = "<group>";
@@ -274,7 +279,8 @@
 		ECCB7D8215F139FC00495973 /* D3 */ = {
 			isa = PBXGroup;
 			children = (
-				ECCB7DF315F13BD100495973 /* main.cpp */,
+				EC6115921614941500D02A01 /* Example.hpp */,
+				ECDF82EA16146A4B005B89F3 /* Example.cpp */,
 				ECB09A4E16136E5F00677A13 /* Core */,
 				ECB09A4D16136E5500677A13 /* Platform Window System */,
 				ECCB7DF415F13BE300495973 /* Headers */,
@@ -379,7 +385,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC123C5F15F192B8004447ED /* main.cpp in Sources */,
+				ECDF82EC16146A8D005B89F3 /* Example.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

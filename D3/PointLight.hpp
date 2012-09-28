@@ -35,6 +35,12 @@ namespace d3 {
     public:
         PointLight();
         
+        virtual PointLight * clone() const {
+            PointLight * p = new PointLight();
+            p->parameters = parameters;
+            return p;
+        }
+        
         virtual LightSourceParameters & getParametersRef();
                 
         SETGET(Vec4, parameters.ambient, AmbientColor)

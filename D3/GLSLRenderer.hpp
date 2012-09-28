@@ -10,6 +10,8 @@
 #define ____GLSLRenderer__
 
 namespace d3 {
+    class ResourceManager;
+    
     // Renderer with shader support (TBD)
     class GLSLRenderer : public SceneRenderer {
     protected:
@@ -64,15 +66,15 @@ namespace d3 {
         void useFramebuffer(String name);
         
         //! Inserts new program
-        void registerProgram(String name, GLProgram * program);
+        void registerProgram(GLProgram * program);
         
         //! Inserts new framebuffer (id)
         void registerFramebuffer(String name, GLuint id);
         
     public:
-        GLSLRenderer(int width, int height);
+        GLSLRenderer(ResourceManager * resource_manager, int width, int height);
         
-        virtual void render(shared_ptr<Scene> scene);
+        virtual void render(Scene * scene);
     };
 }
 

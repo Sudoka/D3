@@ -12,6 +12,7 @@
 namespace d3 {
     class GLProgram {
     protected:
+        String name;
         GLuint program_id_;
         
         shared_ptr<GLShader> vertex_shader_;
@@ -19,10 +20,8 @@ namespace d3 {
         
         std::unordered_map<String, int> parameters_;
     public:
-        GLProgram(shared_ptr<GLShader> vertex_shader, shared_ptr<GLShader> fragment_shader, bool compile_and_link = NO);
-        
-        GLProgram(String vertex_shader_path, String fragment_shader_path, bool compile_and_link = NO);
-        
+        GLProgram(String name, shared_ptr<GLShader> vertex_shader, shared_ptr<GLShader> fragment_shader, bool compile_and_link = NO);
+                
         void setVertexShader(shared_ptr<GLShader> vertex_shader);
         
         shared_ptr<GLShader> & getVertexShaderRef();
@@ -32,6 +31,16 @@ namespace d3 {
         shared_ptr<GLShader> & getFragmentShaderRef();
         
         int getLocation(String name);
+        
+        void setParamMat4(String name, const Mat4 & mat);
+        void setParamMat3(String name, const Mat3 & mat);
+        void setParamVec4(String name, const Vec4 & vec);
+        void setParamVec3(String name, const Vec3 & vec);
+        void setParamBool(String name, bool value);
+        void setParamInt(String name, int value);
+        void setParamFloat(String name, float value);
+        void disableArrayPtr(String name);
+        void enableFloatArrayPtr(String, int size, GLsizei stride, const float * ptr);
         
         //! Compile, link and validate
         void compileAndLink();
@@ -45,6 +54,12 @@ namespace d3 {
         void bind();
         
         void printInfoLog();
+        
+        GLuint getProgramID() const;
+        
+        void printParams();
+        
+        String getName() const;
     };
 }
 

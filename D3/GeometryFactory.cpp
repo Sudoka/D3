@@ -214,7 +214,8 @@ namespace d3 {
         Geometry * g = new Geometry(shared_ptr<float>(vertices), 36);
         
         g->setNormalArray(shared_ptr<float>(normals));
-
+        g->setVertexPointerStride(0);
+        g->setNormalPointerStride(0);
         g->setGeometryType(GL_TRIANGLES);
         
         return shared_ptr<Geometry>(g);

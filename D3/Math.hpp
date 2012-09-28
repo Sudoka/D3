@@ -59,9 +59,11 @@ namespace d3 {
     
     Mat4 getRotationMat4(Vec3 axis, float angle);
     
+    Mat4 getPerspective(float fovy, float aspect, float zNear, float zFar);
+    
     Mat4 getFrustumMat4(float left, float right, float bottom, float top, float zNear, float zFar);
     
-    Mat3 getRotationMatrix(Vec3 axis, float angle);
+    //Mat3 getRotationMatrix(Vec3 axis, float angle);
     
     Vec3 lerp(Vec3 v0, Vec3 v1, float t);
     
@@ -91,6 +93,13 @@ namespace d3 {
     
     inline std::ostream& operator<< (std::ostream& os, const Vec4& v) {
         os << "[" << v.x << ", " << v.y << ", " << v.z << ", " << v.w << "]";
+        return os;
+    }
+    
+    inline std::ostream& operator<< (std::ostream& os, const Mat3& m) {
+        os << "|" << m.a00 << ", " << m.a01 << ", " << m.a02 << "|" << std::endl;
+        os << "|" << m.a10 << ", " << m.a11 << ", " << m.a12 << "|" << std::endl;
+        os << "|" << m.a20 << ", " << m.a21 << ", " << m.a22 << "|" << std::endl;
         return os;
     }
     
