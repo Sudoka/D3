@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Srđan Rašić. All rights reserved.
 //
 
-#define GLUT
+#define GLUT        // Use GLUT as Window manager
 #define D3_COMPILE  // Compile engine (include all cpps to avoid libraries for now)
 #include "d3.hpp"
 

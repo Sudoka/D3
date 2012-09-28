@@ -15,10 +15,10 @@ endif
 
 BINDIR = bin
 
-seminar:
+compile:
 	@echo "Compiling example..."
 	@mkdir -p $(BINDIR)
-	@${COMPILER} /main.cpp ${LIBS} ${CPP11_FLAGS} -o ${BINDIR}/d3
+	@${COMPILER} ./D3/Example.cpp ${LIBS} ${CPP11_FLAGS} -o ${BINDIR}/d3
 
 	@echo "Successfully completed!"
 	@echo "To try, execute: make run"
