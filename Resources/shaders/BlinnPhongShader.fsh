@@ -1,5 +1,5 @@
 //
-//  ff_shader.fsh
+//  BlinnPhongShader.fsh
 //  D3
 //
 //  Created by Srđan Rašić on 9/28/12.

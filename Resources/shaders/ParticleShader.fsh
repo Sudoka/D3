@@ -1,5 +1,5 @@
 //
-//  particle_system.fsh
+//  ParticleShader.fsh
 //  D3
 //
 //  Created by Srđan Rašić on 9/25/12.

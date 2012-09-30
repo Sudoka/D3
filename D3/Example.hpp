@@ -15,7 +15,7 @@ namespace d3 {
         Example(String resources_path) : Application("Example App", resources_path)
         {
             /* Create box */
-            Node *box = getScene()->getRoot()->createSubnode("Kocka", new Renderable(GeometryFactory::createBox()));
+            SceneNode *box = getScene()->getRoot()->createSubnode("Kocka", shared_ptr<Renderable>(new Renderable(GeometryFactory::createBox())));
             box->setPosition(d3::Vec3(0,0,2))->setScale(d3::Vec3(1,1,1));
             
             /* Draw BB :) */
@@ -24,50 +24,37 @@ namespace d3 {
             
             /* Set camera to always look at the box */
             getScene()->getCamera()->getParent()->setPosition(d3::Vec3(0,0,2));
-            getScene()->getCamera()->setTarget(getScene()->getRoot());
+            SceneNode * camera_target = getScene()->getRoot()->createSubnode("CameraTarget");
+            camera_target->setPosition(Vec3(0,2,0));
+            getScene()->getCamera()->setTarget(camera_target);
             
             /* Create plane */
-            Renderable *earthPlane = new Renderable(GeometryFactory::createPlane());
-            earthPlane->setTexture(getResourceManager()->loadTexture("road.png", "road.png"));
-            earthPlane->getMaterial()->setShininess(40);
-            getScene()->getRoot()->createSubnode("Plane", earthPlane)->setScale(Vec3(5, 5, 5));
+            shared_ptr<Renderable> earthPlane(new Renderable(GeometryFactory::createPlane()));
+            earthPlane->setTexture(getResourceManager()->getTexture("road.png"));
+            //earthPlane->getMaterial()->setShininess(40);
+            getScene()->getRoot()->createSubnode("Plane1", earthPlane)->setScale(Vec3(5, 5, 5));
+            getScene()->getRoot()->createSubnode("Plane2", earthPlane)->setPosition(d3::Vec3(-10,0,0))->setScale(Vec3(5, 5, 5));
             
             /* Create light */
-            PointLight *dl = new PointLight;
-            getScene()->getRoot()->createSubnode("Svjetlo", dl)->setPosition(d3::Vec3(3,1,0));
+            shared_ptr<PointLight> dl(new PointLight);
+            getScene()->getRoot()->createSubnode("Svjetlo1", dl)->setPosition(d3::Vec3(3,1,0));
+            getScene()->getRoot()->getSubnode("Svjetlo1")->createSubnode("KCK", shared_ptr<Renderable>(new Renderable(GeometryFactory::createBox())));
             dl->setDiffuseColor(d3::Vec4(4,1,8,1));
             dl->setAttenuation(d3::Vec3(1,1,0));
             
-            /* Particle System test */
-            ParticleSystem::Emitter & e = * new ParticleSystem::Emitter();
+            /* Create light */
+            shared_ptr<SpotLight> sl(new SpotLight);
+            getScene()->getRoot()->createSubnode("Svjetlo2", (shared_ptr<PointLight>)sl)->setPosition(d3::Vec3(3,2,0));
+            //sl->setTarget(getScene()->getRoot()->getSubnode("Plane2"));
+            sl->setDirection(d3::Vec3(-1,-1,0));
+            sl->setDiffuseColor(d3::Vec4(4,1,8,1));
+            sl->setAttenuation(d3::Vec3(1,0,0));
             
-            e.position_variance = Vec3(0, 0, 0);
-            e.direction = Vec3(0, 1, 0);
-            e.direction_variance = Vec3(0.3, 0, 0.3);
-            e.start_color = Vec4(0.6, 0.6, 0.6, 1.0);
-            e.start_color_variance = Vec4(0, 0, 0, 0);
-            e.finish_color = Vec4(0.9, 0.5, 0.5, 0.0);
-            e.finish_color_variance = Vec4(0, 0, 0, 0);
-            e.lifespan = 1.5;
-            e.lifespan_variance = 0;
-            e.speed = 2;
-            e.speed_variance = 0.5;
-            e.start_size = 0;
-            e.start_size_variance = 0.0;
-            e.finish_size = 64;
-            e.finish_size_variance = 0.0;
-            e.particle_count = 0;
-            e.particles_per_second = 50;
-            e.particles_par_second_variance = 10;
-            e.emitting_duration = 30;
+            shared_ptr<ParticleEmitterProperties> props = getResourceManager()->getParticleEmitterProperties("fire.xml");
             
-            shared_ptr<ParticleSystem::Emitter> emitter = shared_ptr<ParticleSystem::Emitter>(&e);
+            shared_ptr<BillboardParticleEmitter> emitter(new BillboardParticleEmitter(props));
             
-            ParticleSystem::getInstance()->insertEmitter(emitter);
-            
-            shared_ptr<Texture> particle_texture(getResourceManager()->loadTexture("smoke", "particle01.png"));
-            
-            scene->getRoot()->createSubnode("Cestice", new ParticleEmitter(emitter, particle_texture));
+            scene->getRoot()->createSubnode("Cestice", emitter);
         }
         
         virtual void update(float dt)

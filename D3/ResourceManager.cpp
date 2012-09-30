@@ -28,15 +28,36 @@ namespace d3 {
         return shader;
     }
     
-    shared_ptr<Texture> ResourceManager::loadTexture(String resource_name, String filename)
+    shared_ptr<Texture> ResourceManager::getTexture(String resource_name)
     {
-        Image * image = new Image(package_path + textures_group + delimiter + filename);
+        /* Get existing if exists */
+        auto it = texture_map.find(resource_name);
+        if (it != texture_map.end())
+            return it->second;
+        
+        /* Otherwise load new */
+        Image * image = new Image(package_path + textures_group + delimiter + resource_name);
         shared_ptr<Texture> texture(new Texture(image));
         texture_map[resource_name] = texture;
         delete image;
         
-        DEBUG_PRINT("File loaded: " << textures_group << delimiter << filename);
+        DEBUG_PRINT("File loaded: " << textures_group << delimiter << resource_name);
         return texture;
+    }
+    
+    shared_ptr<ParticleEmitterProperties> ResourceManager::getParticleEmitterProperties(String resource_name)
+    {
+        /* Get existing if exists */
+        auto it = particle_emitter_map.find(resource_name);
+        if (it != particle_emitter_map.end())
+            return it->second;
+        
+        /* Otherwise load new */
+        shared_ptr<ParticleEmitterProperties> properties(new ParticleEmitterProperties(package_path + emitters_group + delimiter + resource_name));
+        particle_emitter_map[resource_name] = properties;
+        
+        DEBUG_PRINT("File loaded: " << emitters_group << delimiter << resource_name);
+        return properties;
     }
     
     shared_ptr<GLShader> ResourceManager::getShader(String name)

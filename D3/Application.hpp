@@ -34,6 +34,9 @@ namespace d3 {
         //! Creates new app
         Application(String name, String main_resources_package_path);
         
+        //! Gets instance to singleton
+        static Application * get();
+        
         //! @return Reference to main resource manager
         ResourceManager * getResourceManager() const;
         
@@ -66,6 +69,9 @@ namespace d3 {
         
         //! Called upon key down
         virtual void onKeyDown(int key) {}
+        
+        //! Called upon key up
+        virtual void onKeyUp(int key) {}
     };
 }
 

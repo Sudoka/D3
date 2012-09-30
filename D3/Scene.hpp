@@ -10,39 +10,50 @@
 #define _Scene_hpp
 
 namespace d3 {
-   
 #pragma mark Interface
     class Camera;
-    class Node;
+    class SceneNode;
     
     //! Scene.
     class Scene {
     public:
-        //typedef std::map<d3::String, Node *> NodeMap;
-        typedef std::unordered_set<Node *> NodeSet;
+        typedef std::unordered_set<SceneNode *> RenderableSet;
+        typedef std::unordered_set<SceneNode *> EmittersSet;
+        typedef std::unordered_set<SceneNode *> LightSourceSet;
         
     protected:
-        Node *root_node_;
-        Camera *camera_;
+        SceneNode * root_node;
+        shared_ptr<Camera> camera;
         
-        NodeSet scene_nodes_;
+        /* Set of with all nodes in scene that cointains renderable attachment */
+        RenderableSet renderable_nodes;
+        
+        /* Set of with all nodes in scene that cointains light source attachment */
+        LightSourceSet light_sources;
+        
+        EmittersSet emitter_nodes;
 
     public:
+        //! Default constructor
         Scene();
         
+        //! Destructor
         ~Scene();
                 
         //! @return Scene camera
-        Camera * getCamera() const;
+        shared_ptr<Camera> getCamera() const { return camera; }
         
         //! @return Root node
-        Node * getRoot() const;
+        SceneNode * getRoot() const { return root_node; };
         
-        NodeSet & getNodeSet();
+        //! @return Reference to light sources set
+        LightSourceSet & getLightSourcesRef() { return light_sources; }
         
-        void registerNode(Node * node);
+        //! @return Reference to renderable nodes set
+        RenderableSet & getRenderablesRef() { return renderable_nodes; }
         
-        void unregisterNode(Node * node);
+        //! @return Reference to emitter nodes set
+        RenderableSet & getEmittersRef() { return emitter_nodes; }
     };
 }
 

@@ -13,39 +13,15 @@
 namespace d3 {
     Scene::Scene()
     {
-        root_node_ = new Node("Root", this);
-        root_node_->setNeedsUpdate(true);
+        root_node = new SceneNode("Root", this);
+        root_node->setNeedsUpdate(true);
         
-        camera_ = (Camera*)root_node_->createSubnode("MainCamera", new Camera())->setPosition(Vec3(5,5,5))->getAttachedObject();
+        camera = shared_ptr<Camera>(new Camera());
+        root_node->createSubnode("MainCamera", camera)->setPosition(Vec3(5,5,5));
     }
     
     Scene::~Scene()
     {
-        delete root_node_;
-    }
-        
-    Camera * Scene::getCamera() const
-    {
-        return camera_;
-    }
-    
-    Node * Scene::getRoot() const
-    {
-        return root_node_;
-    }
-    
-    Scene::NodeSet & Scene::getNodeSet()
-    {
-        return scene_nodes_;
-    }
-    
-    void Scene::registerNode(Node * node)
-    {
-        scene_nodes_.insert(node);
-    }
-    
-    void Scene::unregisterNode(Node * node)
-    {
-        scene_nodes_.erase(node);
+        delete root_node;
     }
 }

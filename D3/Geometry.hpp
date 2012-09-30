@@ -12,6 +12,8 @@
 #include <iostream>
 
 namespace d3 {
+    class GLProgram;
+    
     class Geometry {
     protected:
         shared_ptr<unsigned int> indices_;

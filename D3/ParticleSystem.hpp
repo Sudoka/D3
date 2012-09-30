@@ -22,7 +22,7 @@ namespace d3 {
             Vec4 color;
             Vec4 color_delta;
         };
-        
+                
         //! Emiter properties
         struct Emitter {
             Vec3 position_variance;

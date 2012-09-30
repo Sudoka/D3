@@ -15,7 +15,7 @@ namespace d3 {
     
     class SpotLight : public PointLight {
     protected:       
-        Node * target_node_;
+        SceneNode * target_node_;
         Vec3 direction_;
         
     public:
@@ -30,7 +30,7 @@ namespace d3 {
         float getExponent() const;
         
         //! Look at target to follow
-        void setTarget(Node *target_node);
+        void setTarget(SceneNode * target_node);
         
         //! Sets direction (Note: direction is rotated by orientation)
         void setDirection(Vec3 dir);

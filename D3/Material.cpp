@@ -1,5 +1,5 @@
 //
-//  Material.cpp
+//  BlinnPhongMaterial.cpp
 //  
 //
 //  Created by Srđan Rašić on 8/29/12.

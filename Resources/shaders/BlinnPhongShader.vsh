@@ -1,5 +1,5 @@
 //
-//  ff_shader.vsh
+//  BlinnPhongShader.vsh
 //  D3
 //
 //  Created by Srđan Rašić on 9/28/12.
@@ -185,10 +185,7 @@ void main()
     /* Calculate texture coordinate(s) */
     texcoord = texture_matrix * in_texcoord;
     
-    /* Calculate positions */
-    eye_vertex_position4 = model_view_matrix * in_vertex;
-    eye_vertex_position3 = (vec3(eye_vertex_position4)) / eye_vertex_position4.w;
-    
+    /* Calculate positions */   
     if (need_local_viewer == 1) {
         eye_vertex_position4 = model_view_matrix * in_vertex;
         eye_vertex_position3 = (vec3(eye_vertex_position4)) / eye_vertex_position4.w;

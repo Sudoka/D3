@@ -85,6 +85,12 @@ namespace d3 {
     
     float absf(float a);
     
+    inline int to8BitVec4(Vec4 v) {
+        int f = 0;
+        f = (((int)v.a << 24) & 0xFF000000) | (((int)v.z << 16) & 0x00FF0000) | (((int)v.y << 8) & 0x0000FF00) | (((int)v.x << 0) & 0x000000FF);
+        return f;
+    }
+    
     // ostream
     inline std::ostream& operator<< (std::ostream& os, const Vec3& v) {
         os << "[" << v.x << ", " << v.y << ", " << v.z << "]";

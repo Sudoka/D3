@@ -18,12 +18,11 @@ namespace d3 {
         
         parameters.spotCosCutoff = -1.0;
         parameters.spotCutoff = 180.0;
+        parameters.position = Vec4(0.0, 0.0, 0.0, 1.0);
     }
     
      PointLight::LightSourceParameters &  PointLight::getParametersRef()
     {
-        Vec3 pos = getParent()->getDerivedPosition();
-        parameters.position = Vec4(pos.x, pos.y, pos.z, 1.0);
         return parameters;
     }
 }

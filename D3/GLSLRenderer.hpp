@@ -14,37 +14,8 @@ namespace d3 {
     
     // Renderer with shader support (TBD)
     class GLSLRenderer : public SceneRenderer {
-    protected:
-        //! Enable lights operation
-        class GLTurnLightsOperation : public Node::VisitOperation {
-            GLSLRenderer * renderer_;
-            
-        public:
-            GLTurnLightsOperation(GLSLRenderer * renderer) : renderer_(renderer) {}
-            
-            GLSLRenderer * getRenderer() const { return renderer_; }
-
-            virtual void beginNode(Node *node);
-            virtual void endNode(Node *node);
-        };
-        
-        //! Rendering operation
-        class GLNodeDrawOperation : public Node::VisitOperation {
-            GLSLRenderer * renderer_;
-            
-        public:
-            GLNodeDrawOperation(GLSLRenderer * renderer) : renderer_(renderer) {}
-            
-            GLSLRenderer * getRenderer() const { return renderer_; }
-            
-            virtual void beginNode(Node *node);
-            virtual void endNode(Node *node);
-        };
-        
+    protected:              
     public:
-        /* Viewing camera */
-        Camera * camera_;
-        GLuint buffer_[2];
         /* Shader programs */
         GLProgram * current_program_;
         std::unordered_map<String, GLProgram *> program_map_;
@@ -52,12 +23,12 @@ namespace d3 {
         /* Framebuffers */
         std::unordered_map<String, GLuint> framebuffer_map_;
         
-    protected:
-        //! @return reference to current camera
-        SETGET(Camera *, camera_, Camera)
-        
+    protected:        
         //! Sets program 'program' as current and binds it (and returns it)
-         GLProgram *  useProgram(String name);
+         GLProgram * useProgram(String name);
+        
+        //! Inserts new program
+        void registerProgram(GLProgram * program);
         
         //! @return Reference to currently active program
         GLProgram * getProgram() const { return current_program_; }
@@ -65,15 +36,14 @@ namespace d3 {
         //! Binds framebuffer
         void useFramebuffer(String name);
         
-        //! Inserts new program
-        void registerProgram(GLProgram * program);
-        
         //! Inserts new framebuffer (id)
         void registerFramebuffer(String name, GLuint id);
         
     public:
+        //! Constructor
         GLSLRenderer(ResourceManager * resource_manager, int width, int height);
         
+        //! Draws scene
         virtual void render(Scene * scene);
     };
 }

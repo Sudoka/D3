@@ -28,6 +28,10 @@ namespace d3 {
     public:
         Vec4();
         
+        Vec4(const Vec3 & vec) {
+            Vec4(vec.x, vec.y, vec.z, 1.0);
+        }
+        
         Vec4(float x, float y, float z, float w);
         
         bool operator==(const Vec4& b) const;

@@ -11,6 +11,11 @@
 
 #ifdef _IOS_
 #import <OpenGLES/ES2/gl.h>
+
+#define glMapBuffer glMapBufferOES
+#define glUnmapBuffer glUnmapBufferOES
+#define GL_WRITE_ONLY GL_WRITE_ONLY_OES
+
 #else
 #include <OpenGL/gl.h>
 #endif

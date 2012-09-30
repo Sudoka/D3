@@ -23,8 +23,8 @@ namespace d3 {
     {
         Emitter & e = * emitter.get();
         
-        unsigned int max_particle_count = e.emitting_duration
-                                        * (e.lifespan + e.lifespan_variance)
+        unsigned int max_particle_count = /*e.emitting_duration
+                                        */ (e.lifespan + e.lifespan_variance)
                                         * (e.particles_per_second + e.particles_par_second_variance);
         
         Particle * particles = new Particle[max_particle_count];

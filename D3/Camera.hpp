@@ -10,9 +10,9 @@
 #define _Camera_hpp
 
 namespace d3 {
-    class Camera : public Node::Attachment {
+    class Camera : public SceneNode::Attachment {
     protected:
-        Node *target_node_;
+        SceneNode * target_node_;
         Vec3 direction_;
         Vec3 up_vector_;
         
@@ -24,7 +24,7 @@ namespace d3 {
         Camera();
         
         //! Look at target to follow
-        void setTarget(Node *target_node);
+        void setTarget(SceneNode *target_node);
         
         //! Direction (Note: direction is rotated by orientation)
         void setDirection(Vec3 dir);

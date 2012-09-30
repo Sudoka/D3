@@ -50,6 +50,11 @@ namespace d3 {
         glut_window_instance->application->onKeyDown(key + 1000);
     }
     
+    void GLUTWindow::glut_special_keyup_callback(int key, int x, int y)
+    {
+        glut_window_instance->application->onKeyUp(key + 1000);
+    }
+    
     GLUTWindow::GLUTWindow(String title, unsigned width, unsigned height,  Application * application) : Window(application)
     {
         assert(glut_window_instance == nullptr);
@@ -67,6 +72,7 @@ namespace d3 {
         
         glutKeyboardFunc(GLUTWindow::glut_keydown_callback);
         glutSpecialFunc(GLUTWindow::glut_special_keydown_callback);
+        glutSpecialUpFunc(GLUTWindow::glut_special_keyup_callback);
     }
     
     void GLUTWindow::setupContext()

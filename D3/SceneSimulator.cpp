@@ -18,9 +18,9 @@ namespace d3 {
         return scene_;
     }
     
-    void SceneSimulator::CollisionDetectOperation::beginNode(d3::Node *node)
+    void SceneSimulator::CollisionDetectOperation::beginNode(d3::SceneNode *node)
     {
-        for (Node * node2 : getScene()->getNodeSet()) {
+        for (SceneNode * node2 : getScene()->getRenderablesRef()) {
             //Node * node2 = n;
             
             // skip self
@@ -38,8 +38,11 @@ namespace d3 {
     void SceneSimulator::simulate(Scene * scene, float dt)
     {
         // detect collisions
-        scene->getRoot()->traverse(shared_ptr<Node::VisitOperation>(new CollisionDetectOperation(scene)));
+        scene->getRoot()->traverse(shared_ptr<SceneNode::VisitOperation>(new CollisionDetectOperation(scene)));
         
-        ParticleSystem::getInstance()->simulate(dt);
+        //ParticleSystem::getInstance()->simulate(dt);
+        for (SceneNode * node : scene->getEmittersRef()) {
+            node->getAttachedEmitter()->simulate(dt);
+        }
     }
 }

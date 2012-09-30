@@ -57,6 +57,12 @@ namespace d3 {
 #define DEBUG_PRINT(what) ;
 #endif
     
+#ifdef DEBUG_LEVEL_2
+#define DEBUG_PRINT_2(what) DEBUG_PRINT(what)
+#else
+#define DEBUG_PRINT_2(what) ;
+#endif
+    
 #define SETGET(type, member, name) \
 inline void set##name(type value) { member = value; } \
 inline type get##name() const { return member; }

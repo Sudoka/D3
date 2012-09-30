@@ -15,6 +15,7 @@ namespace d3 {
         parameters.spotCosCutoff = 0.866025404;
         parameters.spotExponent = 1.0;
         parameters.spotDirection = Vec3(0, -1, 0);
+        parameters.position = Vec4(0.0, 0.0, 0.0, 1.0);
         
         direction_ = Vec3(0, -1, 0);
         
@@ -27,14 +28,11 @@ namespace d3 {
             parameters.spotDirection = target_node_->getDerivedPosition() - getParent()->getDerivedPosition();
         
         parameters.spotDirection = getParent()->getDerivedOrientation() * direction_;
-
-        Vec3 pos = getParent()->getDerivedPosition();
-        parameters.position = Vec4(pos.x, pos.y, pos.z, 1.0);
         
         return parameters;
     }
     
-    void SpotLight::setTarget(Node *target_node)
+    void SpotLight::setTarget(SceneNode *target_node)
     {
         target_node_ = target_node;
     }

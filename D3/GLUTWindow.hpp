@@ -21,6 +21,7 @@ namespace d3 {
         static void glut_reshape_callback(int width, int height);
         static void glut_keydown_callback(unsigned char key, int x, int y);
         static void glut_special_keydown_callback(int key, int x, int y);
+        static void glut_special_keyup_callback(int key, int x, int y);
         
     public:
         GLUTWindow(String title, unsigned width, unsigned height, Application * application);

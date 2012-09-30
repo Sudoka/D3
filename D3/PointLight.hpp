@@ -9,13 +9,13 @@
 #ifndef _PointLight_hpp
 #define _PointLight_hpp
 
-#include "Node.hpp"
+#include "SceneNode.hpp"
 
 namespace d3 {
     class Vec4;
     
 #pragma mark Interface
-    class PointLight : public Node::Attachment {
+    class PointLight : public SceneNode::Attachment {
     public:
         struct LightSourceParameters {
             Vec4 ambient;

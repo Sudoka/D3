@@ -21,10 +21,12 @@ namespace d3 {
         const String delimiter = "/";
         const String shaders_group = "shaders";
         const String textures_group = "textures";
+        const String emitters_group = "emitters";
         
         /* Maps */
         std::unordered_map<String, shared_ptr<GLShader>> shader_map;
         std::unordered_map<String, shared_ptr<Texture>> texture_map;
+        std::unordered_map<String, shared_ptr<ParticleEmitterProperties>> particle_emitter_map;
         
         /* Package info */
         String package_path;
@@ -36,7 +38,9 @@ namespace d3 {
         /* Loads resource (if not already loaded) and returns pointer to it */
         shared_ptr<GLShader> loadShader(String resource_name, String filename, ShaderType type);
         
-        shared_ptr<Texture> loadTexture(String resource_name, String filename);
+        shared_ptr<Texture> getTexture(String resource_name);
+        
+        shared_ptr<ParticleEmitterProperties> getParticleEmitterProperties(String resource_name);
         
         shared_ptr<GLShader> getShader(String resource_name);
     };

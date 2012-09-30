@@ -71,7 +71,7 @@ GLint height;
 }
 
 - (void)setupContext {
-    eagl_context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+    eagl_context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
     
     if (!eagl_context) {
         NSLog(@"Failed to initialize OpenGLES 2.0 context");

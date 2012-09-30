@@ -20,7 +20,7 @@ namespace d3 {
         setAspectRatio(4/3.f);
     }
     
-    void Camera::setTarget(Node *node) { target_node_ = node; }
+    void Camera::setTarget(SceneNode *node) { target_node_ = node; }
     
     void Camera::setAspectRatio(float a) { aspect_ratio_ = a; }
     

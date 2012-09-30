@@ -9,21 +9,52 @@
 #include "Application.hpp"
 
 namespace d3 {
+    static Application * application_instance__ = nullptr;
+    
     Application::Application(String name, String main_resources_package_path) : name(name)
     {
+        //! Singleton!
+        assert(application_instance__ == nullptr);
+        application_instance__ = this;
+        
 #ifdef GLUT
         this->window = new GLUTWindow(name, 640, 480, this);
 #elif defined _IOS_
         this->window = new EAGLWindow(this);
 #endif
         this->resource_manager = new ResourceManager(main_resources_package_path);
-        this->renderer = new GLSLRenderer(resource_manager, window->getWidth(), window->getHeight());
+        //this->renderer = new GLSLRenderer(resource_manager, window->getWidth(), window->getHeight());
+        this->renderer = new GL13Renderer(window->getWidth(), window->getHeight());
         this->simulator = new SceneSimulator();
         this->scene = new Scene();
     }
     
+    Application * Application::get()
+    {
+        assert(application_instance__);
+        return application_instance__;
+    }
+    
     void Application::render()
     {
+        /* Calc FPS */
+        static int num_of_frames = 0;
+        static float duration = 0.0;
+        static float last_call_time = window->getTimerValue();
+        static float fps = 0;
+        
+        duration += window->getTimerValue() - last_call_time;
+        if (duration > 1.0) {
+            fps = num_of_frames / duration;
+            duration = 0.0;
+            num_of_frames = 0;
+                    DEBUG_PRINT("FPS: " << fps)
+        }
+        
+        last_call_time = window->getTimerValue();
+        num_of_frames++;
+        
+
         renderer->render(scene);
     }
     

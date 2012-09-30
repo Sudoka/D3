@@ -1,70 +1,28 @@
 //
-//  Node.hpp
+//  TransformNode.hpp
 //  
 //
 //  Created by Srđan Rašić on 8/12/12.
 //  Copyright (c) 2012 Srđan Rašić. All rights reserved.
 //
 
-#ifndef _Node_hpp
-#define _Node_hpp
+#ifndef _TransformNode_hpp
+#define _TransformNode_hpp
 
 #include "Types.hpp"
 
 namespace d3 {
     class Vec3;
     class Quat;
-    class RenderOperation;
-    class StateOperation;
     
     //! Scene graph node
-    class Node {
+    class TransformNode {
     public:
-        typedef std::list<Node*>::const_iterator subnodeIterator;
+        typedef std::list<TransformNode *>::const_iterator subnodeIterator;
         
-    public:
-        //! Is performed on each node while traversing graph
-        class VisitOperation {
-        public:
-            virtual void beginNode(Node *node) {}
-            virtual void endNode(Node *node) {}
-        };
-        
-        //! Represents attachable object
-        class Attachment {
-        protected:
-            Node *parent_node_;
-            
-        public:
-            virtual ~Attachment() {}
-            
-            //! Should override if object is renderable
-            virtual bool isRenderable() const;
-            
-            bool isAttached() const;
-            
-            void setParent(Node *parent);
-            Node * getParent() const;
-        };
-        
-        //! Listens for actions on Node object
-        class Listener {
-        public:
-            virtual ~Listener() {}
-            
-            //! Called upon collision
-            virtual void onCollision(Node * node) {}
-        };
-        
-        //! Use to store arbitrary data in Node
-        class UserData {
-        public:
-            virtual ~UserData() {}
-        };
-        
+    public:        
     protected:
-        Scene * scene_;
-        Node * parent_;
+        TransformNode * parent_;
         
         Vec3 position_;
         Vec3 scale_;
@@ -80,73 +38,34 @@ namespace d3 {
         
         String name_;
 
-        std::list<Node*> sub_nodes_;
-        
-        Attachment * attachedObject_;
-        
-        Listener * listener_;
-        
-        Vec3 bounding_box_;
-        bool show_bb_;
-        
-        UserData * user_data_;
+        std::list<TransformNode *> sub_nodes_;
               
     public:
         //! Creates new named node. To be used internaly!
-        Node(String node_name, Scene * scene);
+        TransformNode(String node_name);
         
         //! Deletes all subnodes
-        ~Node();
-        
-        //! Traverse node and subnodes.
-        virtual void traverse(shared_ptr<VisitOperation> op);
+        virtual ~TransformNode();
 
         //! @return Node name
-        String getName() const;
-        
-        //! @return Scene manager
-        Scene * getScene() const;
-        
+        virtual String getName() const;
+
         /*! Updates node's transformations
          *  @param cascade If TRUE, update cascades to all subnodes
          */
         void update(bool cascade = false);
         
-        //! Manage listener
-        SETGET(Listener *, listener_, Listener)
-        
-        //! Manage User Data
-        SETGET(UserData *, user_data_, UserData)
-        
-        //! Attaches movable object
-        void setAttachedObject(Attachment *obj);
-        
-        //! @return Attached object
-        Attachment * getAttachedObject() const;
-        
-        //! Sets bounding box
-        void setBoundingBox(Vec3 box);
-        
-        //! @return Bounding box
-        Box getBoundingBox(bool derived_position = false);
-        
-        //! Pass TRUE to show bounding box
-        void setBoundingBoxVisibility(bool visible);
-        
-        //! @return TRUE is BB is to be shown, FALSE otherwise
-        bool getBoundingBoxVisibility() const;
-        
         //! Creates subnode (registers parent-child relationship)
-        Node * createSubnode(String name, Attachment* object = nullptr);
+        TransformNode * createSubnode(String name);
         
         //! Sets parent node
-        void setParent(Node *parent);
+        void setParent(TransformNode * parent);
         
         //! @return Parent node
-        Node * getParent() const;
+        TransformNode * getParent() const;
         
         //! Inserts 'node' as subnode
-        void addSubnode(Node *node);
+        void addSubnode(TransformNode * node);
         
         //! @return Number of subnodes
         unsigned int numSubnodes() const;
@@ -155,16 +74,16 @@ namespace d3 {
         subnodeIterator getSubnodeIterator() const;
         
         //! Returns subnode named 'name' or nullptr
-        Node * getSubnode(String name);
+        TransformNode * getSubnode(String name) const;
         
         //! Removes subnode by pointer
-        void removeSubnode(Node *node);
+        void removeSubnode(TransformNode * node);
         
         //! Removes subnode by name
         void removeSubnode(String name);
         
         //! Deletes all subnodes
-        void deleteSubnodes();
+        virtual void deleteSubnodes();
         
         //! @return True if node's transformation changed
         bool getNeedsUpdate() const;
@@ -179,7 +98,7 @@ namespace d3 {
         void move(Vec3 v);
         
         //! Changes position
-        Node * setPosition(Vec3 v);
+        TransformNode * setPosition(Vec3 v);
         
         //! @return Nodes position
         Vec3 getPosition() const;
@@ -188,7 +107,7 @@ namespace d3 {
         Vec3 getDerivedPosition();
         
         //! Sets scaling factor (in all dims)
-        Node * setScale(Vec3 k);
+        TransformNode * setScale(Vec3 k);
         
         //! @return Nodes scale factor
         Vec3 getScale() const;
@@ -200,7 +119,7 @@ namespace d3 {
         void rotate(Vec3 axis, float angle);
         
         //! Changes orientation
-        Node * setOrientation(Quat q);
+        TransformNode * setOrientation(Quat q);
         
         //! @return Nodes orientation
         Quat getOrientation() const;

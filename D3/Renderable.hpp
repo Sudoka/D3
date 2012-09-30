@@ -10,7 +10,7 @@
 #define _Renderable_hpp
 
 namespace d3 {
-    class Renderable : public Node::Attachment {
+    class Renderable : public SceneNode::Attachment {
     protected:
         shared_ptr<Geometry> geometry_;
         shared_ptr<Material> material_;
@@ -26,9 +26,6 @@ namespace d3 {
         SETGET(shared_ptr<Geometry>, geometry_, Geometry)
         SETGET(shared_ptr<Material>, material_, Material)
         SETGET(shared_ptr<Texture>, texture_, Texture)
-        
-        //! Node::Attachment::isRenderable();
-        virtual bool isRenderable() const { return true; }
     };
 }
 

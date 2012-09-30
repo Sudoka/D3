@@ -6,50 +6,51 @@
 //  Copyright (c) 2012 Srđan Rašić. All rights reserved.
 //
 
-#ifndef _material_hpp
-#define _material_hpp
+#ifndef _Material_hpp
+#define _Material_hpp
 
 namespace d3 {
     class Vec4;
     
 #pragma mark Interface
     class Material {
+    public:       
     protected:
-        Vec4 ambient_color_;
-        Vec4 diffuse_color_;
-        Vec4 specular_color_;
-        int shininess_;             // 0..128
+        Vec4 ambient_color;
+        Vec4 diffuse_color;
+        Vec4 specular_color;
+        float shininess;
         
     public:
         Material();
         
+        //! Sets up ambient and diffuse color
         void setAmbientAndDiffuseColor(Vec4 color);
         
-        const Vec4 & getAmbientColor() const {
-            return ambient_color_;
-        }
+        //! @return reference to ambient color
+        const Vec4 & getAmbientColor() const { return ambient_color; }
         
-        void setAmbientColor(const Vec4 color) {
-            ambient_color_ = color;
-        }
+        //! Sets up ambient color
+        void setAmbientColor(const Vec4 color) { ambient_color = color; }
         
-        const Vec4 & getDiffuseColor() const {
-            return diffuse_color_;
-        }
+        //! @return reference to diffuse color
+        const Vec4 & getDiffuseColor() const { return diffuse_color; }
         
-        void setDiffuseColor(const Vec4 color) {
-            diffuse_color_ = color;
-        }
+        //! Sets up diffuse color
+        void setDiffuseColor(const Vec4 color) { diffuse_color = color; }
         
-        const Vec4 & getSpecularColor() const {
-            return specular_color_;
-        }
+        //! @return reference to specular color
+        const Vec4 & getSpecularColor() const { return specular_color; }
         
-        void setSpecularColor(const Vec4 color) {
-            specular_color_ = color;
-        }
+        //! Sets up specular color
+        void setSpecularColor(const Vec4 color) { specular_color = color; }
         
-        SETGET(int, shininess_, Shininess)
+        //! @return material's shininess exponent
+        float getShininess() const { return shininess; }
+        
+        //! Sets up shininess exponent
+        void setShininess(float value) { shininess = value; }
+        
     };
 }
 

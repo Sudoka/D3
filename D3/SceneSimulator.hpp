@@ -13,7 +13,7 @@ namespace d3 {
     class SceneSimulator {
     protected:
         //! Rendering operation
-        class CollisionDetectOperation : public Node::VisitOperation {
+        class CollisionDetectOperation : public SceneNode::VisitOperation {
             Scene * scene_;
             
         public:
@@ -21,12 +21,12 @@ namespace d3 {
             
             Scene * getScene() const;
             
-            virtual void beginNode(Node *node);
+            virtual void beginNode(SceneNode *node);
         };
         
     public:        
         void simulate(Scene * scene, float dt);
-        void simulate(std::vector<Node *> nodes);
+        void simulate(std::vector<SceneNode *> nodes);
     };
 }
 
