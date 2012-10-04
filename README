@@ -13,7 +13,7 @@
     3. Instanciate your class and call base mathod run() on it.
 
 * EXAMPLE
-    (new d3::Example("Resources"))->run();
+    (new d3::Example("/path/to/resources"))->run();
 
 * NOTE
     This is a work in progress.
