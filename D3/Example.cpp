@@ -16,6 +16,6 @@ int main(int argc, char** argv)
     
     DEBUG_PRINT(d3::to8BitVec4(v))
     
-    (new d3::Example("Resources"))->run();
+    (new d3::Example("/Users/srdan/Development/D3/Resources"))->run();
     return EXIT_SUCCESS;
 }

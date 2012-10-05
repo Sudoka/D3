@@ -93,7 +93,7 @@ namespace d3 {
             glDisable(GL_BLEND);
             
             /* Draw renderable */
-            Renderable * renderable = dynamic_cast<Renderable *>(node->getAttachedObject().get());
+            TexturedGeometry * renderable = dynamic_cast<TexturedGeometry *>(node->getAttachedObject().get());
             if (renderable != nullptr) {
                 /* Get and check geometry */
                 const Geometry * g = renderable->getGeometry().get();
@@ -153,13 +153,13 @@ namespace d3 {
         }
         
         /* Draw Particle Emitters */
-        for (SceneNode * node : scene->getEmittersRef()) {
-            shared_ptr<BillboardParticleEmitter> emitter = node->getAttachedEmitter();
-            
-            Mat4 model_view = node->getScene()->getCamera()->getTransform() * node->getCachedTransformRef();
-            Mat4 model_view_projection = node->getScene()->getCamera()->getProjection() * model_view;
-            
-        }
+//        for (SceneNode * node : scene->getEmittersRef()) {
+//            shared_ptr<BillboardParticleEmitter> emitter = node->getAttachedEmitter();
+//            
+//            Mat4 model_view = node->getScene()->getCamera()->getTransform() * node->getCachedTransformRef();
+//            Mat4 model_view_projection = node->getScene()->getCamera()->getProjection() * model_view;
+//            
+//        }
         
         
         

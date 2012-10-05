@@ -69,7 +69,7 @@ namespace d3 {
         return node;
     }
     
-    SceneNode * SceneNode::createSubnode(String name, shared_ptr<Renderable> renderable)
+    SceneNode * SceneNode::createSubnode(String name, shared_ptr<TexturedGeometry> renderable)
     {
         DEBUG_PRINT_2("New renderable node named " << name)
         SceneNode * node = createSubnode(name, (shared_ptr<Attachment>)renderable);

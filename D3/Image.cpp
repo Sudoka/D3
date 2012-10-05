@@ -55,7 +55,7 @@ namespace d3 {
         int number_of_passes;
         
         char header[8];
-        
+        DEBUG_PRINT(filename)
         // Open file.
         FILE *fp = fopen(filename.c_str(), "rb");
         assert(fp);

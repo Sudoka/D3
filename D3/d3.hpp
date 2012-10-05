@@ -33,15 +33,19 @@
 #include "Scene.hpp"
 #include "TransformNode.hpp"
 #include "SceneNode.hpp"
-#include "ArrayDescriptor.hpp"
+#include "Program.hpp"
+#include "VertexData.hpp"
+#include "BufferedVertexData.hpp"
 #include "Geometry.hpp"
 #include "Material.hpp"
 #include "Texture.hpp"
-#include "StateOperation.hpp"
 #include "PointLight.hpp"
 #include "SpotLight.hpp"
 #include "DirectionalLight.hpp"
+#include "Technique.hpp"
+#include "PlainTechnique.hpp"
 #include "Renderable.hpp"
+#include "TexturedGeometry.hpp"
 #include "Camera.hpp"
 #include "Image.hpp"
 //#include "ParticleEmitter.hpp"
@@ -52,6 +56,7 @@
 
 
 // Rendering system
+#include "Device.hpp"
 #include "GLShader.hpp"
 #include "GLProgram.hpp"
 #include "SceneRenderer.hpp"
@@ -95,6 +100,9 @@
 #include "GLProgram.cpp"
 #include "GLSLRenderer.cpp"
 #include "SimpleRenderer.cpp"
+
+#include "PlainTechnique.cpp"
+
 #include "Modeler.cpp"
 #include "SceneSimulator.cpp"
 #include "ParticleEmitterProperties.cpp"
