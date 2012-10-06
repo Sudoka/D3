@@ -201,12 +201,12 @@
 			name = Math;
 			sourceTree = "<group>";
 		};
-		EC1496BA1617312E0074E0B1 /* mitters */ = {
+		EC1496BA1617312E0074E0B1 /* emitters */ = {
 			isa = PBXGroup;
 			children = (
 				EC1496B9161731290074E0B1 /* fire.xml */,
 			);
-			name = mitters;
+			name = emitters;
 			sourceTree = "<group>";
 		};
 		ECB09A4D16136E5500677A13 /* Platform Window System */ = {
@@ -233,7 +233,7 @@
 		ECB09A4F1613774E00677A13 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				EC1496BA1617312E0074E0B1 /* mitters */,
+				EC1496BA1617312E0074E0B1 /* emitters */,
 				ECB09A501613774E00677A13 /* shaders */,
 				ECB09A571613774E00677A13 /* textures */,
 			);
