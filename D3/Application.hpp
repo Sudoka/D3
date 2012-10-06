@@ -23,6 +23,7 @@ namespace d3 {
         ResourceManager * resource_manager;
         SceneRenderer * renderer;
         SceneSimulator * simulator;
+        Device * device;
         
         /* Main window */
         Window * window;
@@ -42,6 +43,9 @@ namespace d3 {
         
         //! @return Reference to main renderer
         SceneRenderer * getRenderer() const;
+        
+        //! @return Reference to default device
+        Device * getDevice() const;
         
         //! @return Reference to main simlator
         SceneSimulator * getSimulator() const;

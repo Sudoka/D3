@@ -84,6 +84,11 @@ namespace d3 {
         return renderer;
     }
     
+    Device * Application::getDevice() const
+    {
+        return device;
+    }
+    
     SceneSimulator * Application::getSimulator() const
     {
         return simulator;

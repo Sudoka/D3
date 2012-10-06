@@ -25,7 +25,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		EC06057915F28DB5009CB3E0 /* Renderable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Renderable.hpp; sourceTree = "<group>"; };
+		EC06057915F28DB5009CB3E0 /* TexturedGeometry.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TexturedGeometry.hpp; sourceTree = "<group>"; };
 		EC06057A15F28E73009CB3E0 /* Geometry.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Geometry.hpp; sourceTree = "<group>"; };
 		EC06057D15F29589009CB3E0 /* GeometryFactory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GeometryFactory.cpp; sourceTree = "<group>"; };
 		EC06057E15F29589009CB3E0 /* GeometryFactory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GeometryFactory.hpp; sourceTree = "<group>"; };
@@ -56,6 +56,12 @@
 		EC369C05160F4AA40092F9E3 /* ParticleEmitter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ParticleEmitter.hpp; sourceTree = "<group>"; };
 		EC4142871615C1A700E77795 /* BlinnPhongShader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = BlinnPhongShader.vsh; sourceTree = "<group>"; };
 		EC4142891615D34900E77795 /* BlinnPhongShader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = BlinnPhongShader.fsh; sourceTree = "<group>"; };
+		EC4A0A59161F15630044A834 /* PlainTechnique.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PlainTechnique.hpp; sourceTree = "<group>"; };
+		EC4A0A5B161F18550044A834 /* VertexData.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = VertexData.hpp; sourceTree = "<group>"; };
+		EC4A0A5D161F1FAD0044A834 /* BufferedVertexData.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BufferedVertexData.hpp; sourceTree = "<group>"; };
+		EC4A0A5F161F25960044A834 /* Device.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Device.hpp; sourceTree = "<group>"; };
+		EC4A0A60161F25A70044A834 /* Program.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Program.hpp; sourceTree = "<group>"; };
+		EC4A0A61161F41860044A834 /* PlainTechnique.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PlainTechnique.cpp; sourceTree = "<group>"; };
 		EC51B0E516065CB400E11226 /* SceneSimulator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneSimulator.cpp; sourceTree = "<group>"; };
 		EC51B0E616065CB400E11226 /* SceneSimulator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SceneSimulator.hpp; sourceTree = "<group>"; };
 		EC61158F161486CA00D02A01 /* EAGLWindow.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = EAGLWindow.mm; sourceTree = "<group>"; };
@@ -63,6 +69,10 @@
 		EC6115921614941500D02A01 /* Example.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Example.hpp; sourceTree = "<group>"; };
 		EC61159B1614A78A00D02A01 /* SimpleRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleRenderer.cpp; sourceTree = "<group>"; };
 		EC61159C1614A78A00D02A01 /* SimpleRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SimpleRenderer.hpp; sourceTree = "<group>"; };
+		EC7B8992161DF674000C0F9F /* Renderable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Renderable.hpp; sourceTree = "<group>"; };
+		EC7B8993161DF686000C0F9F /* Technique.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Technique.hpp; sourceTree = "<group>"; };
+		EC7B8994161DFDF0000C0F9F /* concrete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = concrete.png; sourceTree = "<group>"; };
+		EC953FD01618DE9900ECBE0A /* fire.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = fire.xml; path = emitters/fire.xml; sourceTree = "<group>"; };
 		ECB09A3F161356D100677A13 /* ResourceManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ResourceManager.cpp; sourceTree = "<group>"; };
 		ECB09A40161356D100677A13 /* ResourceManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ResourceManager.hpp; sourceTree = "<group>"; };
 		ECB09A4A16136D6900677A13 /* Window.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Window.hpp; sourceTree = "<group>"; };
@@ -79,7 +89,6 @@
 		ECCB7DC915F13B3A00495973 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		ECCB7DCA15F13B3A00495973 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		ECCB7DCE15F13BD100495973 /* d3.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; lineEnding = 0; path = d3.hpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
-		ECCB7DCF15F13BD100495973 /* ArrayDescriptor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ArrayDescriptor.hpp; sourceTree = "<group>"; };
 		ECCB7DD315F13BD100495973 /* Camera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
 		ECCB7DD415F13BD100495973 /* Camera.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Camera.hpp; sourceTree = "<group>"; };
 		ECCB7DD515F13BD100495973 /* DirectionalLight.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DirectionalLight.cpp; sourceTree = "<group>"; };
@@ -103,7 +112,6 @@
 		ECCB7DEA15F13BD100495973 /* Scene.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Scene.hpp; sourceTree = "<group>"; };
 		ECCB7DEB15F13BD100495973 /* SpotLight.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SpotLight.cpp; sourceTree = "<group>"; };
 		ECCB7DEC15F13BD100495973 /* SpotLight.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SpotLight.hpp; sourceTree = "<group>"; };
-		ECCB7DED15F13BD100495973 /* StateOperation.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = StateOperation.hpp; sourceTree = "<group>"; };
 		ECCB7DEE15F13BD100495973 /* Texture.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Texture.cpp; sourceTree = "<group>"; };
 		ECCB7DEF15F13BD100495973 /* Texture.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Texture.hpp; sourceTree = "<group>"; };
 		ECCB7DF015F13BD100495973 /* Types.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Types.hpp; sourceTree = "<group>"; };
@@ -147,9 +155,14 @@
 		EC123C4515F13C5F004447ED /* Rendering system */ = {
 			isa = PBXGroup;
 			children = (
-				EC06057915F28DB5009CB3E0 /* Renderable.hpp */,
-				ECCB7DCF15F13BD100495973 /* ArrayDescriptor.hpp */,
-				ECCB7DED15F13BD100495973 /* StateOperation.hpp */,
+				EC4A0A5F161F25960044A834 /* Device.hpp */,
+				EC4A0A60161F25A70044A834 /* Program.hpp */,
+				EC4A0A5B161F18550044A834 /* VertexData.hpp */,
+				EC4A0A5D161F1FAD0044A834 /* BufferedVertexData.hpp */,
+				EC7B8993161DF686000C0F9F /* Technique.hpp */,
+				EC7B8992161DF674000C0F9F /* Renderable.hpp */,
+				EC4A0A5A161F15710044A834 /* Techniques */,
+				EC06057915F28DB5009CB3E0 /* TexturedGeometry.hpp */,
 				EC06058115F2ACE1009CB3E0 /* SceneRenderer.hpp */,
 				EC06057A15F28E73009CB3E0 /* Geometry.hpp */,
 				EC1293C516163E16006B69F1 /* Geometry.cpp */,
@@ -253,6 +266,7 @@
 			isa = PBXGroup;
 			children = (
 				ECB09A581613774E00677A13 /* earth.png */,
+				EC7B8994161DFDF0000C0F9F /* concrete.png */,
 				ECB09A591613774E00677A13 /* fbo.png */,
 				ECB09A5A1613774E00677A13 /* particle01.png */,
 				ECB09A5B1613774E00677A13 /* road.png */,

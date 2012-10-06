@@ -49,6 +49,7 @@ namespace d3 {
         glMatrixMode(GL_MODELVIEW);
 
         glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
         
         // Setup lights ids
         int next_free_light_id = 0;
@@ -86,7 +87,7 @@ namespace d3 {
             //glDisable(GL_BLEND);
             
             /* Draw renderable */
-            Renderable * renderable = dynamic_cast<Renderable *>(node->getAttachedObject().get());
+            TexturedGeometry * renderable = dynamic_cast<TexturedGeometry *>(node->getAttachedObject().get());
             if (renderable != nullptr) {
                 /* Get and check geometry */
                 const Geometry * g = renderable->getGeometry().get();
@@ -149,28 +150,23 @@ namespace d3 {
                 }
             }
         }
-        
+
         for (SceneNode * node : scene->getEmittersRef()) {
             shared_ptr<BillboardParticleEmitter> emitter = node->getAttachedEmitter();
             
-            glMatrixMode(GL_PROJECTION);
-            //glLoadIdentity();
-            
             glMatrixMode(GL_MODELVIEW);
             Mat4 model_view = node->getScene()->getCamera()->getTransform() * node->getCachedTransformRef();
-            
-            for(int i=0; i<3; i++ )
-                for(int j=0; j<3; j++ ) {
-                    if ( i==j )
-                        model_view.m[i*4+j] = 1.0;
-                    else
-                        model_view.m[i*4+j] = 0.0;
-                }
+
+//            for(int i=0; i<3; i++ )
+//                for(int j=0; j<3; j++ ) {
+//                    if ( i==j )
+//                        model_view.m[i*4+j] = 1.0;
+//                    else
+//                        model_view.m[i*4+j] = 0.0;
+//                }
             
             glLoadMatrixf(model_view);
-            
-            GLsizei stride = sizeof(BillboardParticleEmitter::TexColorVertex);
-            
+                        
             //GLsizei color_offset = sizeof(BillboardParticleEmitter::VertexGeometryTemplate);
             //GLsizei texcoord_offset = color_offset + sizeof(BillboardParticleEmitter::VertexTexcoordTemplate);
             
@@ -181,8 +177,9 @@ namespace d3 {
             glDisable(GL_LIGHTING);
             glEnable(GL_COLOR_MATERIAL);
             
+            glBindBuffer(GL_ARRAY_BUFFER, emitter->vertex_buffer);
             glEnableClientState(GL_VERTEX_ARRAY);
-            glVertexPointer(3, GL_FLOAT, stride, &(emitter->data[0].left_bottom.position.x));
+            glVertexPointer(3, GL_FLOAT, sizeof(Vec3), 0);
             
             glEnable(GL_TEXTURE_2D);
             emitter->properties->texture->bind();
@@ -209,6 +206,7 @@ namespace d3 {
             glEnable(GL_LIGHTING);
             glDisable(GL_BLEND);
             glDepthMask(GL_TRUE);
+
         }
     }
 }

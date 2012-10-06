@@ -27,9 +27,15 @@ namespace d3 {
             indices[i] = (i/6)*4 + tmp.indices[i%6];
         
         /* Initialize vertex array buffer */
+        glGenBuffers(1, &vertex_buffer);
+        glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
+        //glBufferData(GL_ARRAY_BUFFER, sizeof(Vec3) * max_particle_count * 4, NULL, GL_STREAM_DRAW);
+        
+        /* Initialize color buffer */
         glGenBuffers(1, &vertex_color_buffer);
         glBindBuffer(GL_ARRAY_BUFFER, vertex_color_buffer);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(int) * max_particle_count * 4, NULL, GL_STREAM_DRAW);
+        //glBufferData(GL_ARRAY_BUFFER, sizeof(int) * max_particle_count * 4, NULL, GL_STREAM_DRAW);
+        
         
         Vec3 * texcoords = new Vec3[max_particle_count * 4];
         
@@ -42,7 +48,7 @@ namespace d3 {
         
         glGenBuffers(1, &vertex_texcoord_buffer);
         glBindBuffer(GL_ARRAY_BUFFER, vertex_texcoord_buffer);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(Vec3) * max_particle_count * 4, texcoords, GL_STREAM_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(Vec3) * max_particle_count * 4, texcoords, GL_STATIC_DRAW);
         
         glGenBuffers(1, &element_buffer);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer);
@@ -89,7 +95,8 @@ namespace d3 {
         } else {
             prev_dt = 0.0;
         }
-
+        
+        Quat orientation = getParent()->getOrientation();
         for (unsigned i = 0; i < particles_to_emit; i++) {
             /* Get particle ref and increase conuter */
             ParticleProperties & p = properties_array[particle_count++];
@@ -99,30 +106,46 @@ namespace d3 {
             
             p.position = e.position_variance.mul(randv3(-1, 1));
             
-            p.direction = e.direction + e.direction_variance.mul(randv3(-1, 1));
+            p.direction = orientation * (e.direction + e.direction_variance.mul(randv3(-1, 1)));
             
-            p.color = e.start_color + e.start_color_variance.mul(randv4(-1, 1));
+            p.color = e.start_color + e.start_color_variance.mul(randv4(0, 1));
             
-            Vec4 finish_color_variance = e.finish_color_variance.mul(randv4(-1, 1));
+            Vec4 finish_color_variance = e.finish_color_variance.mul(randv4(0, 1));
             float one_over_ttl = 1.0 / p.time_to_live;
-            p.color_delta = (e.finish_color + finish_color_variance - p.color).mul(Vec4(one_over_ttl, one_over_ttl, one_over_ttl, one_over_ttl));
+            p.color_delta = (e.finish_color - finish_color_variance - p.color).mul(Vec4(one_over_ttl, one_over_ttl, one_over_ttl, one_over_ttl));
             
             p.size = e.start_size + e.start_size_variance * randf(-1, 1);
             p.size_delta = (e.finish_size + e.finish_size_variance * randf(-1, 1) - p.size) / p.time_to_live;
         }
         
         //glUnmapBuffer(GL_ARRAY_BUFFER);
-        glBindBuffer(GL_ARRAY_BUFFER, vertex_color_buffer);
-        int * color_buffer = (int*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
-        GLenum error = glGetError();
+        glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(Vec3) * max_particle_count * 4, NULL, GL_STREAM_DRAW);
+        Vec3 * position_buffer = (Vec3*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
         
+        Mat4 cam_transform = getParent()->getScene()->getCamera()->getTransform();
+        
+        Vec3 up(cam_transform.a01, cam_transform.a11, cam_transform.a21);
+        Vec3 right(cam_transform.a00, cam_transform.a10, cam_transform.a20);
+        
+        for (unsigned i = 0; i < particle_count; i++) {
+            float size = properties_array[i].size;
+            Vec3 position = properties_array[i].position;
+            
+            position_buffer[i*4+0] = (up * (-1) - right) * size + position;
+            position_buffer[i*4+1] = (up - right) * size + position;
+            position_buffer[i*4+2] = (up + right) * size + position;
+            position_buffer[i*4+3] = (right - up) * size + position;
+        }
+        
+        
+        glUnmapBuffer(GL_ARRAY_BUFFER);
+        glBindBuffer(GL_ARRAY_BUFFER, vertex_color_buffer);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(int) * max_particle_count * 4, NULL, GL_STREAM_DRAW);
+        int * color_buffer = (int*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+                
         /* Fill buffer */
-         for (unsigned i = 0; i < particle_count; i++){
-             data[i].left_bottom.position =  Vec3(-0.5, -0.5, 0.0) * properties_array[i].size + properties_array[i].position;
-             data[i].right_bottom.position = Vec3( 0.5, -0.5, 0.0) * properties_array[i].size + properties_array[i].position;
-             data[i].right_up.position =     Vec3( 0.5,  0.5, 0.0) * properties_array[i].size + properties_array[i].position;
-             data[i].left_up.position =      Vec3(-0.5,  0.5, 0.0) * properties_array[i].size + properties_array[i].position;
-             
+         for (unsigned i = 0; i < particle_count; i++){            
              int color = to8BitVec4(properties_array[i].color);
              color_buffer[i*4+0] = color;
              color_buffer[i*4+1] = color;

@@ -12,7 +12,7 @@
 #include "Types.hpp"
 
 namespace d3 {
-    class Renderable;
+    class TexturedGeometry;
     class PointLight;
     class BillboardParticleEmitter;
     
@@ -77,7 +77,7 @@ namespace d3 {
         SceneNode * createSubnode(String name);
         SceneNode * createSubnode(String name, shared_ptr<Attachment> attachment);
         SceneNode * createSubnode(String name, shared_ptr<Camera> camera);
-        SceneNode * createSubnode(String name, shared_ptr<Renderable> renderable);
+        SceneNode * createSubnode(String name, shared_ptr<TexturedGeometry> renderable);
         SceneNode * createSubnode(String name, shared_ptr<PointLight> light_source);
         SceneNode * createSubnode(String name, shared_ptr<BillboardParticleEmitter> emitter);
         

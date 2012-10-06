@@ -1,31 +1,42 @@
 //
 //  Renderable.hpp
-//  
+//  D3
 //
-//  Created by Srđan Rašić on 9/1/12.
+//  Created by Srđan Rašić on 10/4/12.
 //  Copyright (c) 2012 Srđan Rašić. All rights reserved.
 //
 
-#ifndef _Renderable_hpp
-#define _Renderable_hpp
+#ifndef D3_Renderable_hpp
+#define D3_Renderable_hpp
 
 namespace d3 {
-    class Renderable : public SceneNode::Attachment {
-    protected:
-        shared_ptr<Geometry> geometry_;
-        shared_ptr<Material> material_;
-        shared_ptr<Texture> texture_;
-        
+    /*! Represents any renderable entity.
+     *  Each renderable is rendered by Technique.
+     */
+    class Renderable {
     public:
-        Renderable() : geometry_(nullptr), material_(nullptr), texture_(nullptr) {}
         
-        Renderable(shared_ptr<Geometry> geometry) : geometry_(geometry), material_(new Material()), texture_(nullptr) {}
-        
+    public:       
+        //! Virtual destructor
         virtual ~Renderable() {}
-                
-        SETGET(shared_ptr<Geometry>, geometry_, Geometry)
-        SETGET(shared_ptr<Material>, material_, Material)
-        SETGET(shared_ptr<Texture>, texture_, Texture)
+        
+        //! Vertex data
+        virtual std::list<VertexData *> getVertexData() =0;
+        
+        //! Index data
+        virtual VertexData * getIndexData() { return nullptr; };
+        
+        //! Number of elements
+        virtual unsigned getElementCount() =0;
+        
+        //! Primitive type
+        virtual unsigned getPrimitiveType() =0;
+        
+        //! Who renders me?
+        virtual Technique * getTechnique() =0;
+        
+        //! Renders object
+        virtual void render() { getTechnique()->render(this); }
     };
 }
 
