@@ -40,7 +40,6 @@
 		EC1496B516172A610074E0B1 /* BillboardParticleEmitter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BillboardParticleEmitter.hpp; sourceTree = "<group>"; };
 		EC1496B616172B230074E0B1 /* ParticleEmitterProperties.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ParticleEmitterProperties.hpp; sourceTree = "<group>"; };
 		EC1496B716172E720074E0B1 /* ParticleEmitterProperties.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ParticleEmitterProperties.cpp; sourceTree = "<group>"; };
-		EC1496B9161731290074E0B1 /* fire.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = fire.xml; path = emitters/fire.xml; sourceTree = "<group>"; };
 		EC19985115FA7CAF00717FE3 /* Modeler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Modeler.cpp; sourceTree = "<group>"; };
 		EC19985215FA7CAF00717FE3 /* Modeler.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Modeler.hpp; sourceTree = "<group>"; };
 		EC33295215F8EDEF007A85D5 /* FileIO.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FileIO.hpp; sourceTree = "<group>"; };
@@ -204,7 +203,6 @@
 		EC1496BA1617312E0074E0B1 /* emitters */ = {
 			isa = PBXGroup;
 			children = (
-				EC1496B9161731290074E0B1 /* fire.xml */,
 			);
 			name = emitters;
 			sourceTree = "<group>";
