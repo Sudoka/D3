@@ -1,4 +1,4 @@
-![Screenshot](http://raw.github.com/srdanrasic/D3/master/screenshot.png)
+![Screenshot](http://www.deviantpics.com/images/TBm60.png)
 
 * ABOUT
      D3 is a user-friendly cross-platfrom scene graph based OpenGL graphics & physics engine.
