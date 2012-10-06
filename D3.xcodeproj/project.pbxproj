@@ -32,7 +32,7 @@
 		EC06057F15F2AA44009CB3E0 /* Math.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Math.cpp; sourceTree = "<group>"; };
 		EC06058115F2ACE1009CB3E0 /* SceneRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SceneRenderer.hpp; sourceTree = "<group>"; };
 		EC06058315F2DAF2009CB3E0 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; lineEnding = 0; path = Makefile; sourceTree = "<group>"; };
-		EC123C4A15F13E09004447ED /* README */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; lineEnding = 0; path = README; sourceTree = "<group>"; };
+		EC123C4A15F13E09004447ED /* README.md */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; lineEnding = 0; path = README.md; sourceTree = "<group>"; };
 		EC1293C516163E16006B69F1 /* Geometry.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Geometry.cpp; sourceTree = "<group>"; };
 		EC1293C716165238006B69F1 /* SceneNode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SceneNode.cpp; sourceTree = "<group>"; };
 		EC1293C816165238006B69F1 /* SceneNode.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SceneNode.hpp; sourceTree = "<group>"; };
@@ -290,7 +290,7 @@
 		ECCB7D7415F139FC00495973 = {
 			isa = PBXGroup;
 			children = (
-				EC123C4A15F13E09004447ED /* README */,
+				EC123C4A15F13E09004447ED /* README.md */,
 				EC06058315F2DAF2009CB3E0 /* Makefile */,
 				EC3AC5D6162094A800199585 /* screenshot.png */,
 				ECB09A4F1613774E00677A13 /* Resources */,
