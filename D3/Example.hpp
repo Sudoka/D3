@@ -14,60 +14,48 @@ namespace d3 {
     public:
         Example(String resources_path) : Application("Example App", resources_path)
         {
-            /* Create box */
-            //SceneNode *box = getScene()->getRoot()->createSubnode("Kocka", shared_ptr<TexturedGeometry>(new TexturedGeometry(GeometryFactory::createBox())));
-            //box->setPosition(d3::Vec3(0,0,0))->setScale(d3::Vec3(1,1,1));
+            /* Create scene graph tree */
+            getScene().getRoot().createSubnode("Box");
+            getScene().getRoot().createSubnode("Plane").setScale(Vec3(10, 10, 10));
+            getScene().getRoot().createSubnode("Light").setPosition(d3::Vec3(0,2,0));
+            getScene().getRoot().createSubnode("Emitter").setPosition(Vec3(0,3,0)).setOrientation(Quat(Vec3(1,0,0), kPi/4));
+            getScene().getRoot().createSubnode("CameraTarget").setPosition(Vec3(0,1,0));
             
-            /* Draw BB :) */
-            //box->setBoundingBox(d3::Vec3(2,2,2));
-            //box->setBoundingBoxVisibility(true);
+            /* Create drawable objects */
+            shared_ptr<TexturedMesh> box_object = GeometryFactory::getPrimitive("box");
+            shared_ptr<TexturedMesh> plane_object = GeometryFactory::getPrimitive("plane");
             
-            /* Set camera to always look at the box */
-            getScene()->getCamera()->getParent()->setPosition(d3::Vec3(0,0,2));
-            SceneNode * camera_target = getScene()->getRoot()->createSubnode("CameraTarget");
-            camera_target->setPosition(Vec3(0,1,0));
-            getScene()->getCamera()->setTarget(camera_target);
+            /* Setup Drawables */
+            box_object->addPointOfOrigin(getScene().getNode("Box"));
+            plane_object->addPointOfOrigin(getScene().getNode("Plane"));
+            plane_object->setTexture(getResourceManager().getTexture("road.png"));
             
-            /* Create plane */
-            shared_ptr<TexturedGeometry> earthPlane(new TexturedGeometry(GeometryFactory::createPlane()));
-            earthPlane->setTexture(getResourceManager()->getTexture("concrete.png"));
-            //earthPlane->getMaterial()->setShininess(40);
-            getScene()->getRoot()->createSubnode("Plane1", earthPlane)->setScale(Vec3(5, 5, 5));
+            /* Setup Camera (always to look at the some target node) */
+            getScene().getCamera().getMover().setPosition(d3::Vec3(0,0,2));
+            getScene().getCamera().setTarget(&getScene().getNode("CameraTarget"));
             
-            /* Create light */
-            shared_ptr<PointLight> dl(new PointLight);
-            getScene()->getRoot()->createSubnode("Svjetlo1", dl)->setPosition(d3::Vec3(0,2,0));
+            /* Setup light */
+            Light * dl = new Light(getScene().getNode("Light"));
             dl->setDiffuseColor(d3::Vec4(5,3,1,1));
             dl->setAttenuation(d3::Vec3(1,0,0.5));
-            
-            /* Create light */
-//            shared_ptr<SpotLight> sl(new SpotLight);
-//            getScene()->getRoot()->createSubnode("Svjetlo2", (shared_ptr<PointLight>)sl)->setPosition(d3::Vec3(3,2,0));
-//            //sl->setTarget(getScene()->getRoot()->getSubnode("Plane2"));
-//            sl->setDirection(d3::Vec3(-1,-1,0));
-//            sl->setDiffuseColor(d3::Vec4(4,1,8,1));
-//            sl->setAttenuation(d3::Vec3(1,0,0));
-            
-            shared_ptr<ParticleEmitterProperties> props = getResourceManager()->getParticleEmitterProperties("fire.xml");
-            
-            shared_ptr<BillboardParticleEmitter> emitter1(new BillboardParticleEmitter(props));
-            //shared_ptr<BillboardParticleEmitter> emitter2(new BillboardParticleEmitter(props));
-            
-            scene->getRoot()->createSubnode("Cestice", emitter1)->setPosition(Vec3(0,2,0));
-            
-            //box->createSubnode("Cestice2", emitter2)->setOrientation(Quat(Vec3(1,1,0).unit(), kPiOver2));
+
+            /* Load ParticleSystem and create BillboardParticles drawable to draw it */
+            shared_ptr<ParticleSystem> particle_system = getResourceManager().getParticleSystem("fire.xml");
+            BillboardParticles * billboard_particles = new BillboardParticles(particle_system);
+            billboard_particles->addPointOfOrigin(getScene().getNode("Emitter"));
         }
         
         virtual void update(float dt)
         {
+            /* Create simple camera rotation */
             static float cam_radius = 4.0;
             static float cam_rotation = 0.0;
-            static float cam_y = 2;
+            static float cam_y = 3;
             
             cam_rotation += dt;
             
             Vec3 pos = Vec3(cosf(cam_rotation) * cam_radius, cam_y, sinf(cam_rotation) * cam_radius);
-            getScene()->getCamera()->getParent()->setPosition(pos);
+            getScene().getCamera().getMover().setPosition(pos);
         }
     };
 }

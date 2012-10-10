@@ -9,24 +9,48 @@
 #include "SceneSimulator.hpp"
 
 namespace d3 {
-    SceneSimulator::CollisionDetectOperation::CollisionDetectOperation(Scene * scene) : scene_(scene)
+    /* Updatable */
+    SceneSimulator::Updatable::Updatable()
+    {
+        Application::get().getSimulator().registerUpdatable(this);
+    }
+    
+    SceneSimulator::Updatable::~Updatable()
+    {
+        Application::get().getSimulator().unregisterUpdatable(this);
+    }
+    
+    /* Scene Simulator */
+    SceneSimulator::SceneSimulator(Scene * scene) : scene(scene)
     {
     }
     
-    Scene * SceneSimulator::CollisionDetectOperation::getScene() const
+    //! Registers updatable
+    void SceneSimulator::registerUpdatable(Updatable * updatable)
     {
-        return scene_;
+        updatable_list.push_back(updatable);
     }
     
-    void SceneSimulator::CollisionDetectOperation::beginNode(d3::SceneNode *node)
+    //! Unregisters updatable
+    void SceneSimulator::unregisterUpdatable(Updatable * updatable)
     {
-        for (SceneNode * node2 : getScene()->getRenderablesRef()) {
-            //Node * node2 = n;
-            
-            // skip self
-            if (node == node2)
-                continue;
-            
+        updatable_list.remove(updatable);
+    }
+    
+    //! Simulate scene animables nad updatables
+    void SceneSimulator::simulate(float dt)
+    {
+        for(Updatable * u : updatable_list)
+            u->update(dt);
+    }
+    
+    //! Check for collisions between node and part of scene graph
+    void SceneSimulator::checkForCollisions(SceneNode * root_node, SceneNode * node)
+    {
+        NodeList list;
+        root_node->traverse(shared_ptr<SceneNode::VisitOperation>(new NodeGatherOperation(list)));
+        
+        for (SceneNode * node2 : list) {            
             if (aabbTest(node->getBoundingBox(true), node2->getBoundingBox(true))) {
                 if (node->getListener()) {
                     node->getListener()->onCollision(node2);
@@ -35,14 +59,13 @@ namespace d3 {
         }
     }
     
-    void SceneSimulator::simulate(Scene * scene, float dt)
+    /* Node Gather operation */
+    SceneSimulator::NodeGatherOperation::NodeGatherOperation(NodeList & list) : list(list) {}
+    
+    void SceneSimulator::NodeGatherOperation::beginNode(SceneNode * node)
     {
-        // detect collisions
-        scene->getRoot()->traverse(shared_ptr<SceneNode::VisitOperation>(new CollisionDetectOperation(scene)));
-        
-        //ParticleSystem::getInstance()->simulate(dt);
-        for (SceneNode * node : scene->getEmittersRef()) {
-            node->getAttachedEmitter()->simulate(dt);
-        }
+        list.push_back(node);
     }
+    
+
 }

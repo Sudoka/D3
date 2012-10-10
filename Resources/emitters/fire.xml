@@ -2,21 +2,21 @@
 <!-- motor -->
 <particleEmitterConfiguration>
 	<texture name="particle01.png"></texture>
-	<positionVariance x="0.1" y="0.1" z="0.1"></positionVariance>
-	<particleLifeSpan value="2"></particleLifeSpan>
+	<positionVariance x="0.0" y="0.0" z="0.0"></positionVariance>
+	<particleLifeSpan value="1"></particleLifeSpan>
 	<particleLifeSpanVariance value="0.2"></particleLifeSpanVariance>
-	<speed value="0.5"></speed>
+	<speed value="1.0"></speed>
 	<speedVariance value="0.0"></speedVariance>
 	<emittingDirection x="0.0" y="0.0" z="0.0"></emittingDirection>
-	<emittingDirectionVariance x="1" y="1" z="1"></emittingDirectionVariance>
-	<emittingDuration value="2222"></emittingDuration>
+	<emittingDirectionVariance x="1.0" y="1.0" z="1.0"></emittingDirectionVariance>
+	<emittingDuration value="-1"></emittingDuration>
 	<startColor r="0.4" g="0.5" b="0.4" a="1.0"></startColor>
 	<startColorVariance r="0.0" g="0.0" b="0.0" a="0.0"></startColorVariance>
-	<finishColor r="1.0" g="1.0" b="1.0" a="0.1"></finishColor>
+	<finishColor r="1.0" g="0.7" b="0.5" a="0.1"></finishColor>
 	<finishColorVariance r="0.0" g="0.0" b="0.0" a="0.0"></finishColorVariance>
-	<startParticleSize value="1.0"></startParticleSize>
+	<startParticleSize value="1.1"></startParticleSize>
 	<startParticleSizeVariance value="0.0"></startParticleSizeVariance>
-	<finishParticleSize value="2.0"></finishParticleSize>
+	<finishParticleSize value="1.5"></finishParticleSize>
 	<finishParticleSizeVariance value="0.0"></finishParticleSizeVariance>
 	<particlesPerSecond value="20"></particlesPerSecond>
 	<particlesPerSecondVariance value="0.0"></particlesPerSecondVariance>

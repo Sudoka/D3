@@ -15,23 +15,29 @@ namespace d3 {
     /*! Vertex / Pixel program.
      */
     class Program {
-    protected:
-        
     public:
+        //! Default constructor
+        Program(String name);
         
-        /* Parameters configurators */
-        virtual void setParamMat4(String name, const Mat4 & mat) =0;
-        virtual void setParamMat3(String name, const Mat3 & mat) =0;
-        virtual void setParamVec4(String name, const Vec4 & vec) =0;
-        virtual void setParamVec3(String name, const Vec3 & vec) =0;
-        virtual void setParamBool(String name, bool value) =0;
-        virtual void setParamInt(String name, int value) =0;
-        virtual void setParamFloat(String name, float value) =0;
+        //! Virtual destructor
+        virtual ~Program() {}
         
-        virtual void setVertexData(VertexData * vertex_data) =0;
+        //! @return program name
+        String getName() const;
         
-        virtual void disableArrayPtr(String name) =0;
-        virtual void enableFloatArrayPtr(String, int size, GLsizei stride, const float * ptr) =0;
+        /* Parameters configurators */        
+        virtual void setParamMat4(String name, const Mat4 & mat) {}
+        virtual void setParamMat3(String name, const Mat3 & mat) {}
+        virtual void setParamVec4(String name, const Vec4 & vec) {}
+        virtual void setParamVec3(String name, const Vec3 & vec) {}
+        virtual void setParamBool(String name, bool value) {}
+        virtual void setParamInt(String name, int value) {}
+        virtual void setParamFloat(String name, float value) {}
+        virtual void setVertexData(VertexData * vertex_data, unsigned global_offset = 0) {}
+        virtual void disableArrayPtr(String name) {}
+    
+    protected:
+        String name;
     };
 }
 

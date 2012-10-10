@@ -7,166 +7,145 @@
 //
 
 #include "GeometryFactory.hpp"
+#include "Drawable.hpp"
 
 //TODO: Fix colors! Must be 4 floats!
 
 namespace d3 {
-    static float CubeVertexData[108] =
+    static float CubeVertexData[216] =
     {
         // positionX, positionY, positionZ
-        0.5f, -0.5f, -0.5f,
-        0.5f, 0.5f, -0.5f,
-        0.5f, -0.5f, 0.5f,
-        0.5f, -0.5f, 0.5f,
-        0.5f, 0.5f, -0.5f,
-        0.5f, 0.5f, 0.5f,
+        0.5f, -0.5f, -0.5f,     1.0f, 0.0f, 0.0f,
+        0.5f, 0.5f, -0.5f,      1.0f, 0.0f, 0.0f,
+        0.5f, -0.5f, 0.5f,      1.0f, 0.0f, 0.0f,
+        0.5f, -0.5f, 0.5f,      1.0f, 0.0f, 0.0f,
+        0.5f, 0.5f, -0.5f,      1.0f, 0.0f, 0.0f,
+        0.5f, 0.5f, 0.5f,       1.0f, 0.0f, 0.0f,
         
-        0.5f, 0.5f, -0.5f,
-        -0.5f, 0.5f, -0.5f,
-        0.5f, 0.5f, 0.5f,
-        0.5f, 0.5f, 0.5f,
-        -0.5f, 0.5f, -0.5f,
-        -0.5f, 0.5f, 0.5f,
+        0.5f, 0.5f, -0.5f,      0.0f, 1.0f, 0.0f,
+        -0.5f, 0.5f, -0.5f,     0.0f, 1.0f, 0.0f,
+        0.5f, 0.5f, 0.5f,       0.0f, 1.0f, 0.0f,
+        0.5f, 0.5f, 0.5f,       0.0f, 1.0f, 0.0f,
+        -0.5f, 0.5f, -0.5f,     0.0f, 1.0f, 0.0f,
+        -0.5f, 0.5f, 0.5f,      0.0f, 1.0f, 0.0f,
         
-        -0.5f, 0.5f, -0.5f,
-        -0.5f, -0.5f, -0.5f,
-        -0.5f, 0.5f, 0.5f,
-        -0.5f, 0.5f, 0.5f,
-        -0.5f, -0.5f, -0.5f,
-        -0.5f, -0.5f, 0.5f,
+        -0.5f, 0.5f, -0.5f,     -1.0f, 0.0f, 0.0f,
+        -0.5f, -0.5f, -0.5f,    -1.0f, 0.0f, 0.0f,
+        -0.5f, 0.5f, 0.5f,      -1.0f, 0.0f, 0.0f,
+        -0.5f, 0.5f, 0.5f,      -1.0f, 0.0f, 0.0f,
+        -0.5f, -0.5f, -0.5f,    -1.0f, 0.0f, 0.0f,
+        -0.5f, -0.5f, 0.5f,     -1.0f, 0.0f, 0.0f,
         
-        -0.5f, -0.5f, -0.5f,
-        0.5f, -0.5f, -0.5f,
-        -0.5f, -0.5f, 0.5f,
-        -0.5f, -0.5f, 0.5f,
-        0.5f, -0.5f, -0.5f,
-        0.5f, -0.5f, 0.5f,
+        -0.5f, -0.5f, -0.5f,    0.0f, -1.0f, 0.0f,
+        0.5f, -0.5f, -0.5f,     0.0f, -1.0f, 0.0f,
+        -0.5f, -0.5f, 0.5f,     0.0f, -1.0f, 0.0f,
+        -0.5f, -0.5f, 0.5f,     0.0f, -1.0f, 0.0f,
+        0.5f, -0.5f, -0.5f,     0.0f, -1.0f, 0.0f,
+        0.5f, -0.5f, 0.5f,      0.0f, -1.0f, 0.0f,
         
-        0.5f, 0.5f, 0.5f,
-        -0.5f, 0.5f, 0.5f,
-        0.5f, -0.5f, 0.5f,
-        0.5f, -0.5f, 0.5f,
-        -0.5f, 0.5f, 0.5f,
-        -0.5f, -0.5f, 0.5f,
-        
-        0.5f, -0.5f, -0.5f,
-        -0.5f, -0.5f, -0.5f,
-        0.5f, 0.5f, -0.5f,
-        0.5f, 0.5f, -0.5f,
-        -0.5f, -0.5f, -0.5f,
-        -0.5f, 0.5f, -0.5f
+        0.5f, 0.5f, 0.5f,       0.0f, 0.0f, 1.0f,
+        -0.5f, 0.5f, 0.5f,      0.0f, 0.0f, 1.0f,
+        0.5f, -0.5f, 0.5f,      0.0f, 0.0f, 1.0f,
+        0.5f, -0.5f, 0.5f,      0.0f, 0.0f, 1.0f,
+        -0.5f, 0.5f, 0.5f,      0.0f, 0.0f, 1.0f,
+        -0.5f, -0.5f, 0.5f,     0.0f, 0.0f, 1.0f,
+            
+        0.5f, -0.5f, -0.5f,     0.0f, 0.0f, -1.0f,
+        -0.5f, -0.5f, -0.5f,    0.0f, 0.0f, -1.0f,
+        0.5f, 0.5f, -0.5f,      0.0f, 0.0f, -1.0f,
+        0.5f, 0.5f, -0.5f,      0.0f, 0.0f, -1.0f,
+        -0.5f, -0.5f, -0.5f,    0.0f, 0.0f, -1.0f,
+        -0.5f, 0.5f, -0.5f,     0.0f, 0.0f, -1.0f
     };
     
-    static float CubeNormalData[108] =
-    {
-        //normalX, normalY, normalZ,
-        1.0f, 0.0f, 0.0f,
-        1.0f, 0.0f, 0.0f,
-        1.0f, 0.0f, 0.0f,
-        1.0f, 0.0f, 0.0f,
-        1.0f, 0.0f, 0.0f,
-        1.0f, 0.0f, 0.0f,
-        
-        0.0f, 1.0f, 0.0f,
-        0.0f, 1.0f, 0.0f,
-        0.0f, 1.0f, 0.0f,
-        0.0f, 1.0f, 0.0f,
-        0.0f, 1.0f, 0.0f,
-        0.0f, 1.0f, 0.0f,
-        
-        -1.0f, 0.0f, 0.0f,
-        -1.0f, 0.0f, 0.0f,
-        -1.0f, 0.0f, 0.0f,
-        -1.0f, 0.0f, 0.0f,
-        -1.0f, 0.0f, 0.0f,
-        -1.0f, 0.0f, 0.0f,
-        
-        0.0f, -1.0f, 0.0f,
-        0.0f, -1.0f, 0.0f,
-        0.0f, -1.0f, 0.0f,
-        0.0f, -1.0f, 0.0f,
-        0.0f, -1.0f, 0.0f,
-        0.0f, -1.0f, 0.0f,
-        
-        0.0f, 0.0f, 1.0f,
-        0.0f, 0.0f, 1.0f,
-        0.0f, 0.0f, 1.0f,
-        0.0f, 0.0f, 1.0f,
-        0.0f, 0.0f, 1.0f,
-        0.0f, 0.0f, 1.0f,
-        
-        0.0f, 0.0f, -1.0f,
-        0.0f, 0.0f, -1.0f,
-        0.0f, 0.0f, -1.0f,
-        0.0f, 0.0f, -1.0f,
-        0.0f, 0.0f, -1.0f,
-        0.0f, 0.0f, -1.0f
-    };
+    std::unordered_map<String, shared_ptr<TexturedMesh>> GeometryFactory::primitive_map;
     
-    
-    shared_ptr<Geometry> GeometryFactory::createPlane()
+    shared_ptr<TexturedMesh> GeometryFactory::getPrimitive(String name)
     {
-        float width = 2;
-        float height = 2;
+        auto it = primitive_map.find(name);
+        
+        if(it != primitive_map.end())
+            return it->second;
+        
+        // else create
+        if (name == "plane")
+            primitive_map[name] = createPlane();
+        else if (name == "boundingBox")
+            primitive_map[name] = createBoundingBox();
+        else if (name == "box")
+            primitive_map[name] = createBox();
+        
+        it = primitive_map.find(name);
+        assert(it != primitive_map.end());
+        return it->second;
+    }
+    
+    shared_ptr<TexturedMesh> GeometryFactory::createPlane()
+    {
+        float width = 1;
+        float height = 1;
         
         int subdivs = 30;
         float offsetX = 1.0 / subdivs;
         float offsetZ = 1.0 / subdivs;
         
-        Vec3 * vertex_array = new Vec3[subdivs * (4 + subdivs * 2)];
-        Vec3 * normal_array = new Vec3[subdivs * (4 + subdivs * 2)];
-        Vec3 * texcoord_array = new Vec3[subdivs * (4 + subdivs * 2)];
+        unsigned size = subdivs * (4 + subdivs * 2) * sizeof(Vec3) * 3;
+        
+        shared_ptr<BufferedVertexData> vbo(new BufferedVertexData(size, sizeof(Vec3) * 3, GL_STATIC_DRAW, GL_ARRAY_BUFFER, nullptr));
+        
+        vbo->setAttribute("in_position", VertexData::AttribProps(0, 3, GL_FLOAT));
+        vbo->setAttribute("in_normal",   VertexData::AttribProps(sizeof(Vec3), 3, GL_FLOAT));
+        vbo->setAttribute("in_texcoord", VertexData::AttribProps(sizeof(Vec3) * 2, 2, GL_FLOAT));
+        
+        Vec3 * vbo_array = (Vec3 *)vbo->mapData();
         
         int idx = 0;
         for (int j = 1; j <= subdivs; j++) {
-            vertex_array[idx] = Vec3((offsetX * (j - 1) - 0.5) * width, 0, - 0.5 * height);  // vertex
-            normal_array[idx] = Vec3(0, 1, 0);                                               // normal
-            texcoord_array[idx++] = Vec3(offsetX * (j - 1), 0.0, 0);                             // texture coordinate
+            vbo_array[idx++] = Vec3((offsetX * (j - 1) - 0.5) * width, 0, - 0.5 * height);  // vertex
+            vbo_array[idx++] = Vec3(0, 1, 0);                                               // normal
+            vbo_array[idx++] = Vec3(offsetX * (j - 1), 0.0, 0);                             // texture coordinate
             
-            vertex_array[idx] = Vec3((offsetX * j - 0.5) * width, 0, - 0.5 * height);
-            normal_array[idx] = Vec3(0, 1, 0);
-            texcoord_array[idx++] = Vec3(offsetX * j, 0.0, 0);
+            vbo_array[idx++] = Vec3((offsetX * j - 0.5) * width, 0, - 0.5 * height);
+            vbo_array[idx++] = Vec3(0, 1, 0);
+            vbo_array[idx++] = Vec3(offsetX * j, 0.0, 0);
             
             for (int i = 1; i <= subdivs; i++) {
-                vertex_array[idx] = Vec3((offsetX * (j - 1) - 0.5) * width, 0, (offsetZ * i - 0.5) * height);
-                normal_array[idx] = Vec3(0, 1, 0);
-                texcoord_array[idx++] = Vec3(offsetX * (j - 1), offsetZ * i, 0);
+                vbo_array[idx++] = Vec3((offsetX * (j - 1) - 0.5) * width, 0, (offsetZ * i - 0.5) * height);
+                vbo_array[idx++] = Vec3(0, 1, 0);
+                vbo_array[idx++] = Vec3(offsetX * (j - 1), offsetZ * i, 0);
                 
-                vertex_array[idx] = Vec3((offsetX * j - 0.5) * width, 0, (offsetZ * i - 0.5) * height);
-                normal_array[idx] = Vec3(0, 1, 0);
-                texcoord_array[idx++] = Vec3(offsetX * j, offsetZ * i, 0);
+                vbo_array[idx++] = Vec3((offsetX * j - 0.5) * width, 0, (offsetZ * i - 0.5) * height);
+                vbo_array[idx++] = Vec3(0, 1, 0);
+                vbo_array[idx++] = Vec3(offsetX * j, offsetZ * i, 0);
             }
             
-            vertex_array[idx] = Vec3((offsetX * j - 0.5) * width, 0, (offsetZ * subdivs - 0.5) * height);
-            normal_array[idx] = Vec3(0, 1, 0);
-            texcoord_array[idx++] = Vec3(offsetX * j - 1.0, offsetX * subdivs, 0);
+            vbo_array[idx++] = Vec3((offsetX * j - 0.5) * width, 0, (offsetZ * subdivs - 0.5) * height);
+            vbo_array[idx++] = Vec3(0, 1, 0);
+            vbo_array[idx++] = Vec3(offsetX * j - 1.0, offsetX * subdivs, 0);
             
-            vertex_array[idx] = Vec3((offsetX * j - 0.5) * width, 0, - 0.5 * height);
-            normal_array[idx] = Vec3(0, 1, 0);
-            texcoord_array[idx++] = Vec3(offsetX * j, 0.0, 0);
+            vbo_array[idx++] = Vec3((offsetX * j - 0.5) * width, 0, - 0.5 * height);
+            vbo_array[idx++] = Vec3(0, 1, 0);
+            vbo_array[idx++] = Vec3(offsetX * j, 0.0, 0);
         }
         
-        Geometry * g = new Geometry(shared_ptr<float>((float*)vertex_array), idx);
-
-        g->setNormalArray(shared_ptr<float>((float*)normal_array));
-        g->setTexCoordArray(shared_ptr<float>((float*)texcoord_array));
+        vbo->unmapData();
         
-        g->setGeometryType(GL_TRIANGLE_STRIP);
-        g->setVertexPointerStride(sizeof(Vec3));
-        g->setNormalPointerStride(sizeof(Vec3));
-        g->setTexCoordPointerStride(sizeof(Vec3));
-        
-        return shared_ptr<Geometry>(g);
+        return shared_ptr<TexturedMesh>(new TexturedMesh(nullptr, vbo, GL_TRIANGLE_STRIP, idx/3));
     }
     
-    shared_ptr<Geometry> GeometryFactory::createBoundingBox(Vec3 volume)
+    shared_ptr<TexturedMesh> GeometryFactory::createBoundingBox()
     {
         // vertex array
-        Vec3 * vertex_array = new Vec3[8];
+        shared_ptr<BufferedVertexData> vbo(new BufferedVertexData(sizeof(Vec3) * 8,
+                                                                  sizeof(Vec3), GL_STATIC_DRAW, GL_ARRAY_BUFFER, nullptr));
         
-        float half_x = volume.x / 2.0;
-        float half_y = volume.y / 2.0;
-        float half_z = volume.z / 2.0;
+        vbo->setAttribute("in_position", VertexData::AttribProps(0, 3, GL_FLOAT));
+        
+        Vec3 * vertex_array = (Vec3 *)vbo->mapData();
+        
+        float half_x = 1 / 2.0;
+        float half_y = 1 / 2.0;
+        float half_z = 1 / 2.0;
         
         vertex_array[0] = Vec3(-half_x, -half_y,  half_z);
         vertex_array[1] = Vec3( half_x, -half_y,  half_z);
@@ -178,8 +157,14 @@ namespace d3 {
         vertex_array[6] = Vec3( half_x, half_y, -half_z);
         vertex_array[7] = Vec3(-half_x, half_y, -half_z);
         
+        vbo->unmapData();
+        
         // indices
-        unsigned int * indices = new unsigned int[16];
+        shared_ptr<BufferedVertexData> ibo(new BufferedVertexData(sizeof(unsigned short) * 16,
+                                                                  sizeof(unsigned short), GL_STATIC_DRAW, GL_ELEMENT_ARRAY_BUFFER, nullptr));
+        
+        unsigned short * indices = (unsigned short*)ibo->mapData();
+        
         indices[0] = 4;
         indices[1] = 0;
         indices[2] = 1;
@@ -197,108 +182,22 @@ namespace d3 {
         indices[14] = 3;
         indices[15] = 0;
         
-        Geometry * g = new Geometry(shared_ptr<float>((float*)vertex_array),
-                                    shared_ptr<unsigned int>(indices),
-                                    16);
-        g->setVertexPointerStride(sizeof(Vec3));
-        g->setGeometryType(GL_LINE_STRIP);
+        ibo->unmapData();
         
-        return shared_ptr<Geometry>(g);
+        return shared_ptr<TexturedMesh>(new TexturedMesh(ibo, vbo, GL_LINE_STRIP, 16));
     }
-    
-    shared_ptr<Geometry> GeometryFactory::createBox()
-    {
-        float * vertices = new float[108]; memcpy(vertices, CubeVertexData, sizeof(float)*108);
-        float * normals = new float[108]; memcpy(normals, CubeNormalData, sizeof(float)*108);
-        
-        Geometry * g = new Geometry(shared_ptr<float>(vertices), 36);
-        
-        g->setNormalArray(shared_ptr<float>(normals));
-        g->setVertexPointerStride(0);
-        g->setNormalPointerStride(0);
-        g->setGeometryType(GL_TRIANGLES);
-        
-        return shared_ptr<Geometry>(g);
-    }
-    
-    shared_ptr<Geometry> GeometryFactory::createCylinder()
-    {
-        int segments = 15;
-        float offset = 1.0 / segments;
 
-        Vec3 * vertex_array = new Vec3[segments*2+2];
-        Vec3 * texcoord_array = new Vec3[segments*2+2];
-        
-        int idx = 0;
-        for (int i = 0; i < segments; i++) {
-            vertex_array[idx] = Vec3(cosf(offset * i * k2Pi), sinf(offset * i * k2Pi), -0.5f);
-            texcoord_array[idx++] = Vec3(offset * i, 0, 0);
-            vertex_array[idx] = Vec3(cosf(offset * i * k2Pi), sinf(offset * i * k2Pi), 0.5f);
-            texcoord_array[idx++] = Vec3(offset * i, 1, 0);
-        }
-        
-        vertex_array[idx] = Vec3(cosf(0), sinf(0), -0.5f);
-        texcoord_array[idx++] = Vec3(1, 0, 0);
-        
-        vertex_array[idx] = Vec3(cosf(0), sinf(0), 0.5f);
-        texcoord_array[idx++] = Vec3(1, 1, 0);
-        
-        Geometry * g = new Geometry(shared_ptr<float>((float*)vertex_array), idx/2);
-        g->setTexCoordArray(shared_ptr<float>((float*)texcoord_array));
-        g->setGeometryType(GL_TRIANGLE_STRIP);
-        g->setVertexPointerStride(sizeof(Vec3));
-        g->setTexCoordPointerStride(sizeof(Vec3));
-        
-        return shared_ptr<Geometry>(g);
-    }
-    
-    shared_ptr<Geometry> GeometryFactory::createAxes()
+    shared_ptr<TexturedMesh> GeometryFactory::createBox()
     {
-        Vec3 * vertex = new Vec3[6];
-        Vec4 * color = new Vec4[6];
+        shared_ptr<BufferedVertexData> vbo(new BufferedVertexData(216 * sizeof(float), sizeof(float) * 6, GL_STATIC_DRAW, GL_ARRAY_BUFFER, nullptr));
         
-        // X-axis
-        color[0] = color[1] = Vec4(1.f, 0.f, 0.f, 1.0f);      // color
-        vertex[0] = Vec3(-1000.f, 0.f, 0.f);                     // star point
-        vertex[1] = Vec3( 1000.f, 0.f, 0.f);                     // end point
+        vbo->setAttribute("in_position", VertexData::AttribProps(0, 3, GL_FLOAT));
+        vbo->setAttribute("in_normal", VertexData::AttribProps(sizeof(float) * 3, 3, GL_FLOAT));
         
-        // Y-axis
-        color[2] = color[3] = Vec4(0.f, 1.f, 0.f, 1.0f);      // color
-        vertex[2] = Vec3(0.f, -1000.f, 0.f);                     // star point
-        vertex[3] = Vec3(0.f,  1000.f, 0.f);                     // end point
+        float * vertex_array = (float *)vbo->mapData();
+        memcpy(vertex_array, CubeVertexData, sizeof(float)*216);
+        vbo->unmapData();
         
-        // Z-axis
-        color[4] = color[5] = Vec4(0.f, 0.f, 1.f, 1.0f);      // color
-        vertex[4] = Vec3(0.f, 0.f, -1000.f);                     // star point
-        vertex[5] = Vec3(0.f, 0.f,  1000.f);                    // end point
-        
-        Geometry * g = new Geometry(shared_ptr<float>((float*)vertex), 6);
-        g->setColorArray(shared_ptr<float>((float*)color));
-
-        g->setGeometryType(GL_LINES);
-        g->setVertexPointerStride(sizeof(Vec3));
-        g->setColorPointerStride(sizeof(Vec3));
-        
-        return shared_ptr<Geometry>(g);
-    }
-    
-    shared_ptr<Geometry> GeometryFactory::createArrow(Vec3 v)
-    {
-        Vec3 * vertex = new Vec3[2];
-        Vec4 * color = new Vec4[3];
-        
-        // X-axis
-        color[0] = color[1] = Vec4(1.0f, 1.0f, 1.0f, 1.0f);      // color
-        vertex[0] = Vec3(0.f, 0.f, 0.f);                     // star point
-        vertex[1] = v.unit() * 10.0;                     // end point
-        
-        Geometry * g = new Geometry(shared_ptr<float>((float*)vertex), 2);
-        g->setColorArray(shared_ptr<float>((float*)color));
-        
-        g->setGeometryType(GL_LINES);
-        g->setVertexPointerStride(sizeof(Vec3));
-        g->setColorPointerStride(sizeof(Vec3));
-        
-        return shared_ptr<Geometry>(g);
+        return shared_ptr<TexturedMesh>(new TexturedMesh(nullptr, vbo, GL_TRIANGLES, 36));
     }
 }

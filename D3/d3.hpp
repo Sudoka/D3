@@ -31,85 +31,60 @@
 
 // Scene graph
 #include "Scene.hpp"
-#include "TransformNode.hpp"
+#include "Node.hpp"
 #include "SceneNode.hpp"
+#include "Movable.hpp"
+#include "Occurable.hpp"
 #include "Program.hpp"
 #include "VertexData.hpp"
 #include "BufferedVertexData.hpp"
-#include "Geometry.hpp"
-#include "Material.hpp"
 #include "Texture.hpp"
-#include "PointLight.hpp"
-#include "SpotLight.hpp"
-#include "DirectionalLight.hpp"
-#include "Technique.hpp"
-#include "PlainTechnique.hpp"
-#include "Renderable.hpp"
-#include "TexturedGeometry.hpp"
+#include "Material.hpp"
+#include "Light.hpp"
 #include "Camera.hpp"
 #include "Image.hpp"
-//#include "ParticleEmitter.hpp"
 
 // Primitives
 #include "GeometryFactory.hpp"
-#include "Modeler.hpp"
-
 
 // Rendering system
-#include "Device.hpp"
-#include "GLShader.hpp"
-#include "GLProgram.hpp"
+#include "Program.hpp"
+#include "GLSLProgram.hpp"
 #include "SceneRenderer.hpp"
-#include "GL13Renderer.hpp"
-#include "GLSLRenderer.hpp"
-#include "SimpleRenderer.hpp"
+#include "GLSLSceneRenderer.hpp"
 
+#include "Drawable.hpp"
+#include "TexturedMesh.hpp"
 
 // Physics
-#include "ParticleEmitterProperties.hpp"
 #include "SceneSimulator.hpp"
-//#include "ParticleSystem.hpp"
-#include "BillboardParticleEmitter.hpp"
+#include "ParticleSystem.hpp"
+#include "BillboardParticles.hpp"
 
 // Resources
 #include "ResourceManager.hpp"
-
-//#include "Engine.hpp"
-
 #include "Application.hpp"
 
 // Implementation
 // Simple method to avoid compiling lib
 #ifdef D3_COMPILE
 #include "Math.cpp"
-#include "TransformNode.cpp"
+#include "Node.cpp"
 #include "SceneNode.cpp"
 #include "Scene.cpp"
 #include "Camera.cpp"
-#include "PointLight.cpp"
-#include "DirectionalLight.cpp"
-#include "SpotLight.cpp"
+#include "Light.cpp"
 #include "Image.cpp"
-#include "Material.cpp"
-#include "Geometry.cpp"
 #include "Texture.cpp"
-#include "GL13Renderer.cpp"
 #include "GeometryFactory.cpp"
 #include "FileIO.cpp"
-#include "GLShader.cpp"
-#include "GLProgram.cpp"
-#include "GLSLRenderer.cpp"
-#include "SimpleRenderer.cpp"
-
-#include "PlainTechnique.cpp"
-
-#include "Modeler.cpp"
+#include "SceneRenderer.cpp"
+#include "GLSLProgram.cpp"
+#include "GLSLSceneRenderer.cpp"
 #include "SceneSimulator.cpp"
-#include "ParticleEmitterProperties.cpp"
-//#include "ParticleSystem.cpp"
-//#include "ParticleEmitter.cpp"
-#include "BillboardParticleEmitter.cpp"
+#include "ParticleSystem.cpp"
 #include "ResourceManager.cpp"
+#include "BillboardParticles.cpp"
 
 #ifdef GLUT
 #include "GLUTWindow.cpp"
@@ -117,7 +92,13 @@
 #include "EAGLWindow.mm"
 #endif
 
-//#include "Engine.cpp"
+#include "VertexData.cpp"
+#include "BufferedVertexData.cpp"
+#include "Program.cpp"
+#include "Movable.cpp"
+#include "Occurable.cpp"
+#include "Drawable.cpp"
+#include "TexturedMesh.cpp"
 
 #include "Application.cpp"
 #include "Example.hpp"

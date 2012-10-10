@@ -9,12 +9,14 @@
 #ifndef _core_hpp
 #define _core_hpp
 
+#include <iostream>
 #include <sstream>
 #include <string>
 #include <list>
 #include <vector>
 #include <memory>
 #include <map>
+#include <set>
 #include <queue>
 #include <stack>
 #include <unordered_map>
@@ -28,11 +30,7 @@ namespace d3 {
     typedef unsigned int Size;
     
     enum PixelFormat { D3_RGB = GL_RGB, D3_RGBA = GL_RGBA, D3_GREY = GL_ALPHA };
-    
-    enum Type { D3_FLOAT, D3_INT, D3_PTR };
-    
-    enum ShaderType { D3_VERTEX_PROGRAM, D3_FRAGMENT_PROGRAM };
-    
+            
     inline String toString(int num) {
         std::stringstream ss;
         ss << num;
@@ -46,9 +44,7 @@ namespace d3 {
 #ifndef _IOS_
 #define YES true
 #define NO false
-#define D3_TRANSPOSE 1
 #else
-#define D3_TRANSPOSE 0
 #endif
     
 #ifdef DEBUG
@@ -57,15 +53,9 @@ namespace d3 {
 #define DEBUG_PRINT(what) ;
 #endif
     
-#ifdef DEBUG_LEVEL_2
-#define DEBUG_PRINT_2(what) DEBUG_PRINT(what)
-#else
-#define DEBUG_PRINT_2(what) ;
-#endif
-    
-#define SETGET(type, member, name) \
-inline void set##name(type value) { member = value; } \
-inline type get##name() const { return member; }
+//#define SETGET(type, member, name) \
+//inline void set##name(type value) { member = value; } \
+//inline type get##name() const { return member; }
 }
 
 #endif

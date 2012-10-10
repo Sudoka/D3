@@ -10,26 +10,68 @@
 #define _SceneRenderer_hpp
 
 namespace d3 {
+    class Drawable;
+    
+    //! Abstract scene renderer
     class SceneRenderer {
-    protected:
-        int screen_width_;
-        int screen_height_;
-        
     public:
-        SceneRenderer(int screen_width, int screen_height) { setScreenSize(screen_width, screen_height); }
-        virtual ~SceneRenderer() {}
+        //! Creates scene renderer
+        SceneRenderer(Scene * scene);
+        
+        //! Virtual destructor
+        virtual ~SceneRenderer();
+        
+        //! Binds texture to device
+        virtual void useTexture(shared_ptr<Texture> & texture) =0;
+        
+        //! Binds program to device
+        virtual Program * useProgram(String name) =0;
+        
+        //! @return Currently bound program
+        virtual Program & getProgram() =0;
+        
+        //! Sets depth mask (true to enable writing to depth buffer, false otherwise)
+        virtual void setDepthMask(bool value) =0;
+        
+        //! True to enable blending, false otherwise
+        virtual void setBlend(bool value) =0;
+        
+        //! Sets blending function coefficients
+        virtual void setBlendFunc(unsigned c_src, unsigned c_dst) =0;
+        
+        //! Binds array to device
+        virtual void bindArray(shared_ptr<VertexData> & array) =0;
+        
+        //! Draws currently bound array
+        virtual void drawArrays(unsigned primitive_type, unsigned count) =0;
+        
+        //! Draws elements indicated by index buffer
+        virtual void drawElements(unsigned primitive_type, unsigned count, const shared_ptr<VertexData> & ibo) =0;
+        
+        //! Adds drawable to drawable queue
+        virtual void registerDrawable(Drawable * drawable);
+        
+        //! Removes drawable from drawable queue
+        virtual void unregisterDrawable(Drawable * drawable);
+        
+        //! Inserts light in light map
+        virtual void registerLight(Light * light);
+        
+        //! Removes light from map
+        virtual void unregisterLight(Light * light);
         
         //! Renders scene
-        virtual void render(Scene * scene) =0;
+        virtual void render() =0;
         
-        //! Sets screen (window) size
-        virtual void setScreenSize(int width, int height) { screen_width_ = width; screen_height_ = height; }
+    protected:
+        /* Scene */
+        Scene * scene;
         
-        //! @return Screen width
-        int getScreenWidth() const { return screen_width_; }
+        /* Renderables */
+        std::list<Drawable *> drawable_list;
         
-        //! @return Screen height
-        int getScreenHeight() const { return screen_height_; }
+        /* Lights */
+        std::unordered_map<Light *, int> light_map;
     };
 }
 

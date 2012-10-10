@@ -25,91 +25,81 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		EC06057915F28DB5009CB3E0 /* TexturedGeometry.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TexturedGeometry.hpp; sourceTree = "<group>"; };
-		EC06057A15F28E73009CB3E0 /* Geometry.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Geometry.hpp; sourceTree = "<group>"; };
 		EC06057D15F29589009CB3E0 /* GeometryFactory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GeometryFactory.cpp; sourceTree = "<group>"; };
 		EC06057E15F29589009CB3E0 /* GeometryFactory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GeometryFactory.hpp; sourceTree = "<group>"; };
 		EC06057F15F2AA44009CB3E0 /* Math.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Math.cpp; sourceTree = "<group>"; };
 		EC06058115F2ACE1009CB3E0 /* SceneRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SceneRenderer.hpp; sourceTree = "<group>"; };
 		EC06058315F2DAF2009CB3E0 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; lineEnding = 0; path = Makefile; sourceTree = "<group>"; };
+		EC093D7B1625D1E50084EC0D /* VertexData.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = VertexData.cpp; sourceTree = "<group>"; };
+		EC093D7E1625D5B70084EC0D /* BufferedVertexData.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BufferedVertexData.cpp; sourceTree = "<group>"; };
+		EC093D801625DFA80084EC0D /* Program.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Program.cpp; sourceTree = "<group>"; };
+		EC093D82162606430084EC0D /* SceneRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SceneRenderer.cpp; sourceTree = "<group>"; };
 		EC123C4A15F13E09004447ED /* README.md */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; lineEnding = 0; path = README.md; sourceTree = "<group>"; };
-		EC1293C516163E16006B69F1 /* Geometry.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Geometry.cpp; sourceTree = "<group>"; };
 		EC1293C716165238006B69F1 /* SceneNode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SceneNode.cpp; sourceTree = "<group>"; };
 		EC1293C816165238006B69F1 /* SceneNode.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SceneNode.hpp; sourceTree = "<group>"; };
-		EC1496B416172A610074E0B1 /* BillboardParticleEmitter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BillboardParticleEmitter.cpp; sourceTree = "<group>"; };
-		EC1496B516172A610074E0B1 /* BillboardParticleEmitter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BillboardParticleEmitter.hpp; sourceTree = "<group>"; };
-		EC1496B616172B230074E0B1 /* ParticleEmitterProperties.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ParticleEmitterProperties.hpp; sourceTree = "<group>"; };
-		EC1496B716172E720074E0B1 /* ParticleEmitterProperties.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ParticleEmitterProperties.cpp; sourceTree = "<group>"; };
-		EC19985115FA7CAF00717FE3 /* Modeler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Modeler.cpp; sourceTree = "<group>"; };
-		EC19985215FA7CAF00717FE3 /* Modeler.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Modeler.hpp; sourceTree = "<group>"; };
+		EC1496B416172A610074E0B1 /* ParticleSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ParticleSystem.cpp; sourceTree = "<group>"; };
+		EC1496B516172A610074E0B1 /* ParticleSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ParticleSystem.hpp; sourceTree = "<group>"; };
+		EC1C5B9A1621E6F50036CED9 /* fire.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = fire.xml; path = emitters/fire.xml; sourceTree = "<group>"; };
+		EC1C5BA01621F0F10036CED9 /* particle01_low.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = particle01_low.png; sourceTree = "<group>"; };
 		EC33295215F8EDEF007A85D5 /* FileIO.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FileIO.hpp; sourceTree = "<group>"; };
 		EC33295315F8EE35007A85D5 /* FileIO.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileIO.cpp; sourceTree = "<group>"; };
-		EC33295515F8F106007A85D5 /* GLShader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GLShader.cpp; sourceTree = "<group>"; };
-		EC33295615F8F106007A85D5 /* GLShader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GLShader.hpp; sourceTree = "<group>"; };
-		EC33295A15F90D2B007A85D5 /* GLProgram.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GLProgram.cpp; sourceTree = "<group>"; };
-		EC33295B15F90D2B007A85D5 /* GLProgram.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GLProgram.hpp; sourceTree = "<group>"; };
-		EC33295E15F91431007A85D5 /* GLSLRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GLSLRenderer.cpp; sourceTree = "<group>"; };
-		EC33295F15F91431007A85D5 /* GLSLRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GLSLRenderer.hpp; sourceTree = "<group>"; };
-		EC369C01160F16A50092F9E3 /* ParticleSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ParticleSystem.cpp; sourceTree = "<group>"; };
-		EC369C02160F16A50092F9E3 /* ParticleSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ParticleSystem.hpp; sourceTree = "<group>"; };
-		EC369C04160F4AA40092F9E3 /* ParticleEmitter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ParticleEmitter.cpp; sourceTree = "<group>"; };
-		EC369C05160F4AA40092F9E3 /* ParticleEmitter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ParticleEmitter.hpp; sourceTree = "<group>"; };
-		EC3AC5D6162094A800199585 /* screenshot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot.png; sourceTree = "<group>"; };
-		EC4142871615C1A700E77795 /* BlinnPhongShader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = BlinnPhongShader.vsh; sourceTree = "<group>"; };
-		EC4142891615D34900E77795 /* BlinnPhongShader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = BlinnPhongShader.fsh; sourceTree = "<group>"; };
+		EC33295A15F90D2B007A85D5 /* GLSLProgram.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GLSLProgram.cpp; sourceTree = "<group>"; };
+		EC33295B15F90D2B007A85D5 /* GLSLProgram.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GLSLProgram.hpp; sourceTree = "<group>"; };
+		EC33295E15F91431007A85D5 /* GLSLSceneRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GLSLSceneRenderer.cpp; sourceTree = "<group>"; };
+		EC33295F15F91431007A85D5 /* GLSLSceneRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GLSLSceneRenderer.hpp; sourceTree = "<group>"; };
+		EC364AEB1621BB4A00CAAD55 /* BillboardParticleShader.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = BillboardParticleShader.shader; sourceTree = "<group>"; };
+		EC364AED1621C7F100CAAD55 /* PlainShader.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = PlainShader.shader; sourceTree = "<group>"; };
+		EC364B031621D62000CAAD55 /* BillboardParticles.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BillboardParticles.cpp; sourceTree = "<group>"; };
+		EC364B041621D62000CAAD55 /* BillboardParticles.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BillboardParticles.hpp; sourceTree = "<group>"; };
+		EC4142871615C1A700E77795 /* BlinnPhongShader.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = BlinnPhongShader.shader; sourceTree = "<group>"; };
 		EC4A0A5B161F18550044A834 /* VertexData.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = VertexData.hpp; sourceTree = "<group>"; };
 		EC4A0A5D161F1FAD0044A834 /* BufferedVertexData.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BufferedVertexData.hpp; sourceTree = "<group>"; };
-		EC4A0A5F161F25960044A834 /* Device.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Device.hpp; sourceTree = "<group>"; };
 		EC4A0A60161F25A70044A834 /* Program.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Program.hpp; sourceTree = "<group>"; };
 		EC51B0E516065CB400E11226 /* SceneSimulator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneSimulator.cpp; sourceTree = "<group>"; };
 		EC51B0E616065CB400E11226 /* SceneSimulator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SceneSimulator.hpp; sourceTree = "<group>"; };
 		EC61158F161486CA00D02A01 /* EAGLWindow.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = EAGLWindow.mm; sourceTree = "<group>"; };
 		EC611590161486CA00D02A01 /* EAGLWindow.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EAGLWindow.hpp; sourceTree = "<group>"; };
 		EC6115921614941500D02A01 /* Example.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Example.hpp; sourceTree = "<group>"; };
-		EC61159B1614A78A00D02A01 /* SimpleRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleRenderer.cpp; sourceTree = "<group>"; };
-		EC61159C1614A78A00D02A01 /* SimpleRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SimpleRenderer.hpp; sourceTree = "<group>"; };
-		EC7B8992161DF674000C0F9F /* Renderable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Renderable.hpp; sourceTree = "<group>"; };
-		EC7B8993161DF686000C0F9F /* Technique.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Technique.hpp; sourceTree = "<group>"; };
 		EC7B8994161DFDF0000C0F9F /* concrete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = concrete.png; sourceTree = "<group>"; };
 		ECB09A3F161356D100677A13 /* ResourceManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ResourceManager.cpp; sourceTree = "<group>"; };
 		ECB09A40161356D100677A13 /* ResourceManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ResourceManager.hpp; sourceTree = "<group>"; };
 		ECB09A4A16136D6900677A13 /* Window.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Window.hpp; sourceTree = "<group>"; };
 		ECB09A4B16136E4B00677A13 /* GLUTWindow.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GLUTWindow.cpp; sourceTree = "<group>"; };
 		ECB09A4C16136E4B00677A13 /* GLUTWindow.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GLUTWindow.hpp; sourceTree = "<group>"; };
-		ECB09A551613774E00677A13 /* ParticleShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ParticleShader.fsh; sourceTree = "<group>"; };
-		ECB09A561613774E00677A13 /* ParticleShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ParticleShader.vsh; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
+		ECB09A561613774E00677A13 /* PointParticleShader.shader */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PointParticleShader.shader; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
 		ECB09A581613774E00677A13 /* earth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = earth.png; sourceTree = "<group>"; };
 		ECB09A591613774E00677A13 /* fbo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fbo.png; sourceTree = "<group>"; };
 		ECB09A5A1613774E00677A13 /* particle01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = particle01.png; sourceTree = "<group>"; };
 		ECB09A5B1613774E00677A13 /* road.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = road.png; sourceTree = "<group>"; };
 		ECB09A5C1613774E00677A13 /* smoke.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smoke.png; sourceTree = "<group>"; };
+		ECBC3E0216234B4C008C4BE2 /* Occurable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Occurable.hpp; sourceTree = "<group>"; };
+		ECBC3E03162354FF008C4BE2 /* Drawable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Drawable.hpp; sourceTree = "<group>"; };
+		ECBC3E0416235760008C4BE2 /* Occurable.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Occurable.cpp; sourceTree = "<group>"; };
+		ECBC3E061623578C008C4BE2 /* Drawable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Drawable.cpp; sourceTree = "<group>"; };
+		ECBC3E0A16235DAB008C4BE2 /* TexturedMesh.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TexturedMesh.hpp; sourceTree = "<group>"; };
+		ECBC3E0B16235DBA008C4BE2 /* TexturedMesh.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TexturedMesh.cpp; sourceTree = "<group>"; };
+		ECBC3E0E1623A71E008C4BE2 /* Movable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Movable.hpp; sourceTree = "<group>"; };
+		ECBC3E0F1623A73A008C4BE2 /* Movable.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Movable.cpp; sourceTree = "<group>"; };
 		ECCB7D7F15F139FC00495973 /* D3 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = D3; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECCB7DC915F13B3A00495973 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		ECCB7DCA15F13B3A00495973 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		ECCB7DCE15F13BD100495973 /* d3.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; lineEnding = 0; path = d3.hpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		ECCB7DD315F13BD100495973 /* Camera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
 		ECCB7DD415F13BD100495973 /* Camera.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Camera.hpp; sourceTree = "<group>"; };
-		ECCB7DD515F13BD100495973 /* DirectionalLight.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DirectionalLight.cpp; sourceTree = "<group>"; };
-		ECCB7DD615F13BD100495973 /* DirectionalLight.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DirectionalLight.hpp; sourceTree = "<group>"; };
 		ECCB7DD715F13BD100495973 /* OpenGLHeaders.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = OpenGLHeaders.hpp; sourceTree = "<group>"; };
-		ECCB7DD815F13BD100495973 /* GL13Renderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GL13Renderer.cpp; sourceTree = "<group>"; };
-		ECCB7DD915F13BD100495973 /* GL13Renderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GL13Renderer.hpp; sourceTree = "<group>"; };
 		ECCB7DDA15F13BD100495973 /* Image.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Image.cpp; sourceTree = "<group>"; };
 		ECCB7DDB15F13BD100495973 /* Image.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Image.hpp; sourceTree = "<group>"; };
 		ECCB7DDC15F13BD100495973 /* Mat3.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Mat3.hpp; sourceTree = "<group>"; };
 		ECCB7DDD15F13BD100495973 /* Mat4.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Mat4.hpp; sourceTree = "<group>"; };
-		ECCB7DDE15F13BD100495973 /* Material.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Material.cpp; sourceTree = "<group>"; };
 		ECCB7DDF15F13BD100495973 /* Material.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Material.hpp; sourceTree = "<group>"; };
 		ECCB7DE015F13BD100495973 /* Math.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Math.hpp; sourceTree = "<group>"; };
-		ECCB7DE115F13BD100495973 /* TransformNode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TransformNode.cpp; sourceTree = "<group>"; };
-		ECCB7DE215F13BD100495973 /* TransformNode.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TransformNode.hpp; sourceTree = "<group>"; };
-		ECCB7DE415F13BD100495973 /* PointLight.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PointLight.cpp; sourceTree = "<group>"; };
-		ECCB7DE515F13BD100495973 /* PointLight.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PointLight.hpp; sourceTree = "<group>"; };
+		ECCB7DE115F13BD100495973 /* Node.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Node.cpp; sourceTree = "<group>"; };
+		ECCB7DE215F13BD100495973 /* Node.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Node.hpp; sourceTree = "<group>"; };
+		ECCB7DE415F13BD100495973 /* Light.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Light.cpp; sourceTree = "<group>"; };
+		ECCB7DE515F13BD100495973 /* Light.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Light.hpp; sourceTree = "<group>"; };
 		ECCB7DE615F13BD100495973 /* Quat.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Quat.hpp; sourceTree = "<group>"; };
 		ECCB7DE915F13BD100495973 /* Scene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Scene.cpp; sourceTree = "<group>"; };
 		ECCB7DEA15F13BD100495973 /* Scene.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Scene.hpp; sourceTree = "<group>"; };
-		ECCB7DEB15F13BD100495973 /* SpotLight.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SpotLight.cpp; sourceTree = "<group>"; };
-		ECCB7DEC15F13BD100495973 /* SpotLight.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SpotLight.hpp; sourceTree = "<group>"; };
 		ECCB7DEE15F13BD100495973 /* Texture.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Texture.cpp; sourceTree = "<group>"; };
 		ECCB7DEF15F13BD100495973 /* Texture.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Texture.hpp; sourceTree = "<group>"; };
 		ECCB7DF015F13BD100495973 /* Types.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Types.hpp; sourceTree = "<group>"; };
@@ -136,47 +126,36 @@
 		EC06058215F2AF61009CB3E0 /* OpenGL */ = {
 			isa = PBXGroup;
 			children = (
-				EC33295615F8F106007A85D5 /* GLShader.hpp */,
-				EC33295515F8F106007A85D5 /* GLShader.cpp */,
-				EC33295B15F90D2B007A85D5 /* GLProgram.hpp */,
-				EC33295A15F90D2B007A85D5 /* GLProgram.cpp */,
-				EC61159C1614A78A00D02A01 /* SimpleRenderer.hpp */,
-				EC61159B1614A78A00D02A01 /* SimpleRenderer.cpp */,
-				EC33295F15F91431007A85D5 /* GLSLRenderer.hpp */,
-				EC33295E15F91431007A85D5 /* GLSLRenderer.cpp */,
-				ECCB7DD915F13BD100495973 /* GL13Renderer.hpp */,
-				ECCB7DD815F13BD100495973 /* GL13Renderer.cpp */,
+				EC33295B15F90D2B007A85D5 /* GLSLProgram.hpp */,
+				EC33295A15F90D2B007A85D5 /* GLSLProgram.cpp */,
+				EC33295F15F91431007A85D5 /* GLSLSceneRenderer.hpp */,
+				EC33295E15F91431007A85D5 /* GLSLSceneRenderer.cpp */,
 			);
 			name = OpenGL;
 			sourceTree = "<group>";
 		};
-		EC123C4515F13C5F004447ED /* Rendering system */ = {
+		EC123C4515F13C5F004447ED /* Rendering System */ = {
 			isa = PBXGroup;
 			children = (
-				EC4A0A5F161F25960044A834 /* Device.hpp */,
 				EC4A0A60161F25A70044A834 /* Program.hpp */,
+				EC093D801625DFA80084EC0D /* Program.cpp */,
 				EC4A0A5B161F18550044A834 /* VertexData.hpp */,
+				EC093D7B1625D1E50084EC0D /* VertexData.cpp */,
 				EC4A0A5D161F1FAD0044A834 /* BufferedVertexData.hpp */,
-				EC7B8993161DF686000C0F9F /* Technique.hpp */,
-				EC7B8992161DF674000C0F9F /* Renderable.hpp */,
-				EC06057915F28DB5009CB3E0 /* TexturedGeometry.hpp */,
+				EC093D7E1625D5B70084EC0D /* BufferedVertexData.cpp */,
 				EC06058115F2ACE1009CB3E0 /* SceneRenderer.hpp */,
-				EC06057A15F28E73009CB3E0 /* Geometry.hpp */,
-				EC1293C516163E16006B69F1 /* Geometry.cpp */,
-				ECCB7DDF15F13BD100495973 /* Material.hpp */,
-				ECCB7DDE15F13BD100495973 /* Material.cpp */,
+				EC093D82162606430084EC0D /* SceneRenderer.cpp */,
 				ECCB7DEF15F13BD100495973 /* Texture.hpp */,
 				ECCB7DEE15F13BD100495973 /* Texture.cpp */,
+				ECCB7DDF15F13BD100495973 /* Material.hpp */,
 				EC06058215F2AF61009CB3E0 /* OpenGL */,
 			);
-			name = "Rendering system";
+			name = "Rendering System";
 			sourceTree = "<group>";
 		};
 		EC123C4715F13C6D004447ED /* Primitives */ = {
 			isa = PBXGroup;
 			children = (
-				EC19985215FA7CAF00717FE3 /* Modeler.hpp */,
-				EC19985115FA7CAF00717FE3 /* Modeler.cpp */,
 				EC06057E15F29589009CB3E0 /* GeometryFactory.hpp */,
 				EC06057D15F29589009CB3E0 /* GeometryFactory.cpp */,
 			);
@@ -213,6 +192,7 @@
 		EC1496BA1617312E0074E0B1 /* emitters */ = {
 			isa = PBXGroup;
 			children = (
+				EC1C5B9A1621E6F50036CED9 /* fire.xml */,
 			);
 			name = emitters;
 			sourceTree = "<group>";
@@ -251,10 +231,10 @@
 		ECB09A501613774E00677A13 /* shaders */ = {
 			isa = PBXGroup;
 			children = (
-				ECB09A561613774E00677A13 /* ParticleShader.vsh */,
-				ECB09A551613774E00677A13 /* ParticleShader.fsh */,
-				EC4142871615C1A700E77795 /* BlinnPhongShader.vsh */,
-				EC4142891615D34900E77795 /* BlinnPhongShader.fsh */,
+				EC364AED1621C7F100CAAD55 /* PlainShader.shader */,
+				EC4142871615C1A700E77795 /* BlinnPhongShader.shader */,
+				EC364AEB1621BB4A00CAAD55 /* BillboardParticleShader.shader */,
+				ECB09A561613774E00677A13 /* PointParticleShader.shader */,
 			);
 			path = shaders;
 			sourceTree = "<group>";
@@ -262,6 +242,7 @@
 		ECB09A571613774E00677A13 /* textures */ = {
 			isa = PBXGroup;
 			children = (
+				EC1C5BA01621F0F10036CED9 /* particle01_low.png */,
 				ECB09A581613774E00677A13 /* earth.png */,
 				EC7B8994161DFDF0000C0F9F /* concrete.png */,
 				ECB09A591613774E00677A13 /* fbo.png */,
@@ -277,14 +258,29 @@
 			children = (
 				EC51B0E616065CB400E11226 /* SceneSimulator.hpp */,
 				EC51B0E516065CB400E11226 /* SceneSimulator.cpp */,
-				EC369C02160F16A50092F9E3 /* ParticleSystem.hpp */,
-				EC369C01160F16A50092F9E3 /* ParticleSystem.cpp */,
-				EC1496B616172B230074E0B1 /* ParticleEmitterProperties.hpp */,
-				EC1496B716172E720074E0B1 /* ParticleEmitterProperties.cpp */,
-				EC1496B516172A610074E0B1 /* BillboardParticleEmitter.hpp */,
-				EC1496B416172A610074E0B1 /* BillboardParticleEmitter.cpp */,
+				ECBC3E011623402B008C4BE2 /* Particle System */,
 			);
 			name = Physics;
+			sourceTree = "<group>";
+		};
+		ECBC3E011623402B008C4BE2 /* Particle System */ = {
+			isa = PBXGroup;
+			children = (
+				EC1496B516172A610074E0B1 /* ParticleSystem.hpp */,
+				EC1496B416172A610074E0B1 /* ParticleSystem.cpp */,
+			);
+			name = "Particle System";
+			sourceTree = "<group>";
+		};
+		ECBC3E0D1623607C008C4BE2 /* Drawables */ = {
+			isa = PBXGroup;
+			children = (
+				ECBC3E0A16235DAB008C4BE2 /* TexturedMesh.hpp */,
+				ECBC3E0B16235DBA008C4BE2 /* TexturedMesh.cpp */,
+				EC364B041621D62000CAAD55 /* BillboardParticles.hpp */,
+				EC364B031621D62000CAAD55 /* BillboardParticles.cpp */,
+			);
+			name = Drawables;
 			sourceTree = "<group>";
 		};
 		ECCB7D7415F139FC00495973 = {
@@ -292,7 +288,6 @@
 			children = (
 				EC123C4A15F13E09004447ED /* README.md */,
 				EC06058315F2DAF2009CB3E0 /* Makefile */,
-				EC3AC5D6162094A800199585 /* screenshot.png */,
 				ECB09A4F1613774E00677A13 /* Resources */,
 				ECCB7D8215F139FC00495973 /* D3 */,
 				ECCB7DCD15F13B4000495973 /* Frameworks */,
@@ -318,8 +313,8 @@
 				ECCB7DF415F13BE300495973 /* Headers */,
 				EC123C4915F13C7D004447ED /* Math */,
 				ECB26550160076B6005D283C /* Physics */,
-				ECCB7DF915F13C2800495973 /* Scene graph */,
-				EC123C4515F13C5F004447ED /* Rendering system */,
+				ECCB7DF915F13C2800495973 /* Scene Graph */,
+				EC123C4515F13C5F004447ED /* Rendering System */,
 				EC123C4815F13C75004447ED /* Resources */,
 			);
 			path = D3;
@@ -344,28 +339,29 @@
 			name = Headers;
 			sourceTree = "<group>";
 		};
-		ECCB7DF915F13C2800495973 /* Scene graph */ = {
+		ECCB7DF915F13C2800495973 /* Scene Graph */ = {
 			isa = PBXGroup;
 			children = (
 				ECCB7DEA15F13BD100495973 /* Scene.hpp */,
 				ECCB7DE915F13BD100495973 /* Scene.cpp */,
-				ECCB7DE215F13BD100495973 /* TransformNode.hpp */,
-				ECCB7DE115F13BD100495973 /* TransformNode.cpp */,
+				ECCB7DE215F13BD100495973 /* Node.hpp */,
+				ECCB7DE115F13BD100495973 /* Node.cpp */,
 				EC1293C816165238006B69F1 /* SceneNode.hpp */,
 				EC1293C716165238006B69F1 /* SceneNode.cpp */,
 				ECCB7DD415F13BD100495973 /* Camera.hpp */,
 				ECCB7DD315F13BD100495973 /* Camera.cpp */,
-				ECCB7DE515F13BD100495973 /* PointLight.hpp */,
-				ECCB7DE415F13BD100495973 /* PointLight.cpp */,
-				ECCB7DEC15F13BD100495973 /* SpotLight.hpp */,
-				ECCB7DEB15F13BD100495973 /* SpotLight.cpp */,
-				ECCB7DD615F13BD100495973 /* DirectionalLight.hpp */,
-				ECCB7DD515F13BD100495973 /* DirectionalLight.cpp */,
-				EC369C05160F4AA40092F9E3 /* ParticleEmitter.hpp */,
-				EC369C04160F4AA40092F9E3 /* ParticleEmitter.cpp */,
+				ECCB7DE515F13BD100495973 /* Light.hpp */,
+				ECCB7DE415F13BD100495973 /* Light.cpp */,
+				ECBC3E0E1623A71E008C4BE2 /* Movable.hpp */,
+				ECBC3E0F1623A73A008C4BE2 /* Movable.cpp */,
+				ECBC3E0216234B4C008C4BE2 /* Occurable.hpp */,
+				ECBC3E0416235760008C4BE2 /* Occurable.cpp */,
+				ECBC3E03162354FF008C4BE2 /* Drawable.hpp */,
+				ECBC3E061623578C008C4BE2 /* Drawable.cpp */,
+				ECBC3E0D1623607C008C4BE2 /* Drawables */,
 				EC123C4715F13C6D004447ED /* Primitives */,
 			);
-			name = "Scene graph";
+			name = "Scene Graph";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -10,35 +10,34 @@
 #define D3_BufferedVertexData_hpp
 
 namespace d3 {
-    /*! VertexData implementation using Vertex Buffer Object
+    /*! VertexData implementation using Vertex Buffer Object.
+     *  Memory is managed by GPU.
      */
-    class BufferedVertexData : public VertexData {
+    class BufferedVertexData : public VertexData {        
+    public:
+        //! Creates new BufferedVertexData object
+        BufferedVertexData(unsigned size,       //!> Size of buffer in bytes
+                           unsigned stride,     //!> Stride for interleaved parts
+                           unsigned usage_mode, //!> Usage mode: GL_STATIC_DRAW, GL_STREAM_DRAW...
+                           unsigned target,     //!> Target: GL_ARRAY_BUFFER, GL_ELEMENT_ARRAY_BUFFER
+                           unsigned char * ptr);//!> Pointer to data to copy to buffer or nullptr
+        
+        //! Destructor
+        virtual ~BufferedVertexData();
+        
+        //! VertexData:: Binds array/buffer to device
+        virtual void _bind();
+        
+        //! VertexData:: Maps array to system memory (unmapData() must follow later!)
+        virtual void * mapData(int access_mode = GL_WRITE_ONLY);
+        
+        //! VertexData:: Unmaps data from system memory
+        virtual void unmapData();
+        
     protected:
         unsigned object_id;
-        
-    public:
-        BufferedVertexData(unsigned size, unsigned stride, int type, unsigned char * ptr) : VertexData(size, stride) {
-            glGenBuffers(1, &object_id);
-            glBindBuffer(GL_ARRAY_BUFFER, object_id);
-            glBufferData(GL_ARRAY_BUFFER, size, ptr, type);
-        }
-        
-        virtual ~BufferedVertexData() {
-            glDeleteBuffers(1, &object_id);
-        }
-        
-        virtual void bindToProgram(Program * program) {
-            glBindBuffer(GL_ARRAY_BUFFER, object_id);
-            program->setVertexData(this);
-        }
-        
-        virtual void * mapData(int access_mode = GL_WRITE_ONLY) {
-            // unmap 0?
-            glBindBuffer(GL_ARRAY_BUFFER, object_id);
-            if (access_mode == GL_WRITE_ONLY)
-                glBufferData(GL_ARRAY_BUFFER, size, NULL, GL_STREAM_DRAW); // if only write
-            return glMapBuffer(GL_ARRAY_BUFFER, access_mode);
-        }
+        unsigned usage_mode;
+        unsigned target;
     };
 }
 

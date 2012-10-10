@@ -89,9 +89,11 @@ namespace d3 {
      *  Valid component range [0.0, 1.0]
      */
     inline int to8BitVec4(Vec4 v) {
-        int f = 0;
-        f = (((int)(v.a * 255.0) << 24) & 0xFF000000) | (((int)(v.z * 255.0) << 16) & 0x00FF0000) | (((int)(v.y * 255.0) << 8) & 0x0000FF00) | (((int)(v.x * 255.0) << 0) & 0x000000FF);
-        return f;
+        return
+        (((int)(v.a * 255.0) << 24) & 0xFF000000) |
+        (((int)(v.z * 255.0) << 16) & 0x00FF0000) |
+        (((int)(v.y * 255.0) <<  8) & 0x0000FF00) |
+        (((int)(v.x * 255.0) <<  0) & 0x000000FF);
     }
     
     // ostream

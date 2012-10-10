@@ -15,49 +15,30 @@ namespace d3 {
      *  you application.
      */
     class Application {
-    protected:
-        /* Basic app info */
-        String name;
-        
-        /* Main subsystems */
-        ResourceManager * resource_manager;
-        SceneRenderer * renderer;
-        SceneSimulator * simulator;
-        Device * device;
-        
-        /* Main window */
-        Window * window;
-        
-        /* Scene */
-        Scene * scene;
-        
     public:
         //! Creates new app
         Application(String name, String main_resources_package_path);
         
+        //! Destructs all subsystems
+        virtual ~Application();
+        
         //! Gets instance to singleton
-        static Application * get();
+        static Application & get();
         
         //! @return Reference to main resource manager
-        ResourceManager * getResourceManager() const;
+        ResourceManager & getResourceManager() const;
         
         //! @return Reference to main renderer
-        SceneRenderer * getRenderer() const;
-        
-        //! @return Reference to default device
-        Device * getDevice() const;
+        SceneRenderer & getRenderer() const;
         
         //! @return Reference to main simlator
-        SceneSimulator * getSimulator() const;
+        SceneSimulator & getSimulator() const;
         
         //! @return Reference to main window
-        Window & getWindowRef() const;
-        
-        //! @return Reference to main window
-        Window * getWindow() const;
+        Window & getWindow() const;
         
         //! @return Current scene
-        Scene * getScene() const;
+        Scene & getScene() const;
         
         //! Runs main loop
         void run();
@@ -76,6 +57,21 @@ namespace d3 {
         
         //! Called upon key up
         virtual void onKeyUp(int key) {}
+        
+    protected:
+        /* Basic app info */
+        String name;
+        
+        /* Main subsystems */
+        ResourceManager * resource_manager;
+        SceneRenderer * renderer;
+        SceneSimulator * simulator;
+        
+        /* Main window */
+        Window * window;
+        
+        /* Scene */
+        Scene * scene;
     };
 }
 

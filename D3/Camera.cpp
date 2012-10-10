@@ -10,7 +10,7 @@
 #include <iostream>
 
 namespace d3 {
-    Camera::Camera()
+    Camera::Camera(SceneNode & mover) : Movable(mover)
     {
         // Setup default values
         setUpVector(Vec3(0.f, 1.f, 0.f));
@@ -18,64 +18,90 @@ namespace d3 {
         setTarget(nullptr);
         setFovy(60);
         setAspectRatio(4/3.f);
+        
+        // register as listener
+        getMover().setListener(this);
     }
     
-    void Camera::setTarget(SceneNode *node) { target_node_ = node; }
+    void Camera::onRecache(Node * node)
+    {
+        transform_dirty = true;
+    }
     
-    void Camera::setAspectRatio(float a) { aspect_ratio_ = a; }
+    void Camera::setTarget(SceneNode *node)
+    {
+        target_node_ = node;
+        transform_dirty = true;
+    }
     
-    void Camera::setDirection(Vec3 dir) { direction_ = dir; }
+    void Camera::setAspectRatio(float a)
+    {
+        aspect_ratio_ = a;
+        projection_dirty = true;
+    }
     
-    Vec3 Camera::getDirection() const { return direction_; }
+    void Camera::setDirection(Vec3 dir)
+    {
+        direction_ = dir;
+        transform_dirty = true;
+    }
+    
+    Vec3 Camera::getDirection() const
+    {
+        return direction_;
+    }
 
-    void Camera::setFovy(float fovy) { fovy_ = fovy; }
-    
-    float Camera::getFovy() const { return fovy_; }
-    
-    void Camera::setUpVector(Vec3 up) { up_vector_ = up; }
-    
-    Frustum Camera::getFrustum() const
+    void Camera::setFovy(float fovy)
     {
-        float near = 1, far = 100, zoom = 1;
-        float half_height = near * tan( fovy_ * 0.5 * k2Pi / 360.f );
-        float half_width = half_height * aspect_ratio_;
-        
-        Frustum frustum = {-half_width * zoom, half_width * zoom, -half_height * zoom, half_height * zoom, near, far};
-        
-        return frustum;
+        fovy_ = fovy;
+        projection_dirty = true;
     }
     
-    Mat4 Camera::getProjection() const
+    float Camera::getFovy() const
     {
-        return getPerspective(fovy_ * kPiOver180, aspect_ratio_, 0.1, 100);
-        
-        ///Frustum f = getFrustum();
-        
-        //return getFrustumMat4(f.left, f.right, f.down, f.up, f.near, f.far);
+        return fovy_;
     }
     
-    Mat4 Camera::getTransform() const
+    void Camera::setUpVector(Vec3 up)
+    { up_vector_ = up; }
+    
+    //! @return Projection matrix
+    Mat4 Camera::getProjection()
     {
-        // Look at
-        Vec3 eye = getParent()->getDerivedPosition();
-        
-        Vec3 center;
-        
-        if (target_node_ != nullptr) {
-            center = target_node_->getDerivedPosition();
-        } else {
-            center = getParent()->getDerivedPosition() + getParent()->getDerivedOrientation() * direction_;
+        // Recalcuate if not cached already
+        if (projection_dirty) {
+            projection_cache = getPerspective(fovy_ * kPiOver180, aspect_ratio_, 0.1, 100);
+            projection_dirty = false;
         }
         
-        Vec3 forward = eye - center; forward.normalize();
-        Vec3 side = up_vector_.cross(forward); side.normalize();
-        Vec3 up = forward.cross(side);
+        return projection_cache;
+    }
+    
+    //! @return Inverse camera transform
+    Mat4 Camera::getTransform()
+    {
+        // Recalcuate if not cached already
+        if (transform_dirty) {
+            Vec3 eye = getMover().getDerivedPosition();
+            
+            Vec3 center;
+            if (target_node_ != nullptr)
+                center = target_node_->getDerivedPosition();
+            else
+                center = getMover().getDerivedPosition() + getMover().getDerivedOrientation() * direction_;
+            
+            Vec3 forward = eye - center; forward.normalize();
+            Vec3 side = up_vector_.cross(forward); side.normalize();
+            Vec3 up = forward.cross(side);
+            
+            transform_cache = Mat4(side.x, up.x, forward.x, 0,
+                                   side.y, up.y, forward.y, 0,
+                                   side.z, up.z, forward.z, 0,
+                                   (side * -1) * eye, (up * -1) * eye, (forward * -1) * eye, 1.0);
+            
+            transform_dirty = false;
+        }
         
-        Mat4 lookat(side.x, up.x, forward.x, 0,
-                    side.y, up.y, forward.y, 0,
-                    side.z, up.z, forward.z, 0,
-                    (side * -1) * eye, (up * -1) * eye, (forward * -1) * eye, 1.0);
-        
-        return lookat;
+        return transform_cache;
     }
 }

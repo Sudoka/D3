@@ -17,22 +17,31 @@ namespace d3 {
         assert(application_instance__ == nullptr);
         application_instance__ = this;
         
-#ifdef GLUT
+        #ifdef GLUT
         this->window = new GLUTWindow(name, 640, 480, this);
-#elif defined _IOS_
+        #elif defined _IOS_
         this->window = new EAGLWindow(this);
-#endif
-        this->resource_manager = new ResourceManager(main_resources_package_path);
-        //this->renderer = new GLSLRenderer(resource_manager, window->getWidth(), window->getHeight());
-        this->renderer = new GL13Renderer(window->getWidth(), window->getHeight());
-        this->simulator = new SceneSimulator();
+        #endif
+        
         this->scene = new Scene();
+        this->resource_manager = new ResourceManager(main_resources_package_path);
+        this->renderer = new GLSLSceneRenderer(resource_manager, scene);
+        this->simulator = new SceneSimulator(scene);
     }
     
-    Application * Application::get()
+    Application::~Application()
+    {
+        delete scene;
+        delete resource_manager;
+        delete renderer;
+        delete simulator;
+        delete window;
+    }
+    
+    Application & Application::get()
     {
         assert(application_instance__);
-        return application_instance__;
+        return * application_instance__;
     }
     
     void Application::render()
@@ -55,7 +64,7 @@ namespace d3 {
         num_of_frames++;
         
 
-        renderer->render(scene);
+        renderer->render();
     }
     
     void Application::idle()
@@ -66,7 +75,7 @@ namespace d3 {
         previous_time = current_time;
         
         update(delta_time);
-        simulator->simulate(scene, delta_time);
+        simulator->simulate(delta_time);
     }
     
     void Application::run()
@@ -74,38 +83,28 @@ namespace d3 {
         window->runLoop();
     }
     
-    ResourceManager * Application::getResourceManager() const
+    ResourceManager & Application::getResourceManager() const
     {
-        return resource_manager;
+        return * resource_manager;
     }
     
-    SceneRenderer * Application::getRenderer() const
+    SceneRenderer & Application::getRenderer() const
     {
-        return renderer;
+        return * renderer;
     }
     
-    Device * Application::getDevice() const
+    SceneSimulator & Application::getSimulator() const
     {
-        return device;
+        return * simulator;
     }
     
-    SceneSimulator * Application::getSimulator() const
-    {
-        return simulator;
-    }
-    
-    Window & Application::getWindowRef() const
+    Window & Application::getWindow() const
     {
         return * window;
     }
     
-    Window * Application::getWindow() const
+    Scene & Application::getScene() const
     {
-        return window;
-    }
-    
-    Scene * Application::getScene() const
-    {
-        return scene;
+        return * scene;
     }
 }

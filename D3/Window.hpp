@@ -17,9 +17,6 @@ namespace d3 {
      *  specific window and context setup and their management.
      */
     class Window {
-    protected:
-        Application * application;
-        
     public:
         Window(Application * application) : application(application) {}
         
@@ -46,6 +43,10 @@ namespace d3 {
         
         //! @return Systems' window or view object (wrapped stuff)
         virtual void * getSystemObject() { return nullptr; }
+        
+    protected:
+        Application * application;
+        
     };
 }
 

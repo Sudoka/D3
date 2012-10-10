@@ -10,23 +10,50 @@
 #define __D3__Simulator__
 
 namespace d3 {
-    class SceneSimulator {
+    class SceneSimulator  {
+    public:
+        //! Inherit to subscribe for per-frame updates
+        struct Updatable {
+            Updatable();
+            virtual ~Updatable();
+            
+            virtual void update(float dt) {}
+        };
+        
+        typedef std::list<SceneNode *> NodeList;
+        
     protected:
         //! Rendering operation
-        class CollisionDetectOperation : public SceneNode::VisitOperation {
-            Scene * scene_;
+        class NodeGatherOperation : public SceneNode::VisitOperation {
+            NodeList & list;
             
         public:
-            CollisionDetectOperation(Scene * scene);
-            
-            Scene * getScene() const;
-            
+            NodeGatherOperation(NodeList & list);
             virtual void beginNode(SceneNode *node);
         };
         
-    public:        
-        void simulate(Scene * scene, float dt);
-        void simulate(std::vector<SceneNode *> nodes);
+    protected:
+        /* Scene */
+        Scene * scene;
+        
+        /* Updatables */
+        std::list<Updatable *> updatable_list;
+        
+    public:
+        //! Scene simulator
+        SceneSimulator(Scene * scene);
+        
+        //! Simulate scene animables nad updatables
+        void simulate(float dt);
+        
+        //! Check for collisions between node and part of scene graph
+        void checkForCollisions(SceneNode * root_node, SceneNode * node);
+        
+        //! Registers updatable
+        void registerUpdatable(Updatable * updatable);
+        
+        //! Unregisters updatable
+        void unregisterUpdatable(Updatable * updatable);
     };
 }
 

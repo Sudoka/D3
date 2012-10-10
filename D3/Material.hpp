@@ -10,22 +10,17 @@
 #define _Material_hpp
 
 namespace d3 {
-    class Vec4;
-    
-#pragma mark Interface
+    //! Basic material properties
     class Material {
-    public:       
-    protected:
-        Vec4 ambient_color;
-        Vec4 diffuse_color;
-        Vec4 specular_color;
-        float shininess;
-        
     public:
-        Material();
+        Vec4 ambient_color  = Vec4(0.2, 0.2, 0.2, 1.0);
+        Vec4 diffuse_color  = Vec4(0.8, 0.8, 0.8, 1.0);
+        Vec4 specular_color = Vec4(0.0, 0.0, 0.0, 1.0);
+        float shininess     = 0;
         
+    public:        
         //! Sets up ambient and diffuse color
-        void setAmbientAndDiffuseColor(Vec4 color);
+        void setAmbientAndDiffuseColor(Vec4 color) { setAmbientColor(color); setDiffuseColor(color); }
         
         //! @return reference to ambient color
         const Vec4 & getAmbientColor() const { return ambient_color; }

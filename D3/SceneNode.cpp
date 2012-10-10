@@ -8,94 +8,33 @@
 
 #include "SceneNode.hpp"
 
-
 namespace d3 {
-    
-    bool SceneNode::Attachment::isAttached() const {
-        return parent_node_ != nullptr;
-    }
-    
-    void SceneNode::Attachment::setParent(SceneNode *parent)
+    SceneNode::SceneNode(String node_name, Scene & scene)
+    : Node(node_name), scene(scene)
     {
-        parent_node_ = parent;
-    }
-    
-    SceneNode * SceneNode::Attachment::getParent() const
-    {
-        return parent_node_;
-    }
-    
-    SceneNode::SceneNode(String node_name, Scene * scene) : TransformNode(node_name), scene_(scene)
-    {       
-        attachedObject_ = nullptr;
+        show_bb = false;
+        bounding_box = Vec3(1, 1, 1);
+        user_data = nullptr;
         
-        show_bb_ = false;
-        bounding_box_ = Vec3(1, 1, 1);
-        
-        listener_ = nullptr;
-        user_data_ = nullptr;
-        DEBUG_PRINT("New node " << node_name)
+        scene._nodeCreated(this);
     }
     
     SceneNode::~SceneNode()
     {
-        getScene()->getRenderablesRef().erase(this);
-        getScene()->getEmittersRef().erase(this);
-
-        DEBUG_PRINT_2(name_)
-        TransformNode::~TransformNode();
+        getScene()._nodeWillBeDeleted(this);
+        Node::~Node();
     }
-    
-    SceneNode * SceneNode::createSubnode(String name)
+        
+    SceneNode & SceneNode::createSubnode(String name)
     {
         SceneNode * node = new SceneNode(name, getScene());
-        node->setAttachedObject(nullptr);
         addSubnode(node);
-        return node;
+        return * node;
     }
     
-    SceneNode * SceneNode::createSubnode(String name, shared_ptr<Attachment> attachment)
+    SceneNode & SceneNode::getSubnode(String name) const
     {
-        SceneNode * node = new SceneNode(name, getScene());
-        node->setAttachedObject(attachment);
-        addSubnode(node);
-        return node;
-    }
-    
-    SceneNode * SceneNode::createSubnode(String name, shared_ptr<Camera> camera)
-    {
-        DEBUG_PRINT_2("New camera node named " << name)
-        SceneNode * node = createSubnode(name, (shared_ptr<Attachment>)camera);
-        return node;
-    }
-    
-    SceneNode * SceneNode::createSubnode(String name, shared_ptr<TexturedGeometry> renderable)
-    {
-        DEBUG_PRINT_2("New renderable node named " << name)
-        SceneNode * node = createSubnode(name, (shared_ptr<Attachment>)renderable);
-        getScene()->getRenderablesRef().insert(node);
-        return node;
-    }
-    
-    SceneNode * SceneNode::createSubnode(String name, shared_ptr<PointLight> light_source)
-    {
-        DEBUG_PRINT_2("New light source node named " << name)
-        SceneNode * node = createSubnode(name, (shared_ptr<Attachment>)light_source);
-        getScene()->getLightSourcesRef().insert(node);
-        return node;
-    }
-    
-    SceneNode * SceneNode::createSubnode(String name, shared_ptr<BillboardParticleEmitter> emitter)
-    {
-        DEBUG_PRINT_2("New emitter node named " << name)
-        SceneNode * node = createSubnode(name, (shared_ptr<Attachment>)emitter);
-        getScene()->getEmittersRef().insert(node);
-        return node;
-    }
-    
-    SceneNode * SceneNode::getSubnode(String name) const
-    {
-        return (SceneNode *)TransformNode::getSubnode(name);
+        return (SceneNode &)Node::getSubnode(name);
     }
     
     void SceneNode::traverse(shared_ptr<SceneNode::VisitOperation> op)
@@ -104,7 +43,7 @@ namespace d3 {
         op->beginNode(this);
         
         // travers subnodes
-        for (TransformNode * node : sub_nodes_) {
+        for (Node * node : sub_nodes_) {
             ((SceneNode*)node)->traverse(op);
         }
         
@@ -114,45 +53,39 @@ namespace d3 {
     
     void SceneNode::setBoundingBox(Vec3 box)
     {
-        bounding_box_ = box;
+        bounding_box = box;
     }
     
     Box SceneNode::getBoundingBox(bool derived_position)
     {
         if (derived_position)
-            return { getDerivedPosition(), bounding_box_ };
+            return { getDerivedPosition(), bounding_box };
         else
-            return { getPosition(), bounding_box_ };
+            return { getPosition(), bounding_box };
     }
     
     void SceneNode::setBoundingBoxVisibility(bool visible)
     {
-        show_bb_ = visible;
+        show_bb = visible;
     }
     
     bool SceneNode::getBoundingBoxVisibility() const
     {
-        return show_bb_;
+        return show_bb;
     }
     
-    Scene * SceneNode::getScene() const
+    Scene & SceneNode::getScene() const
     {
-        return scene_;
-    }
-        
-    void SceneNode::setAttachedObject(shared_ptr<Attachment> obj) {
-        attachedObject_ = obj;
-        if (obj != nullptr)
-            obj->setParent(this);
+        return scene;
     }
     
-    shared_ptr<SceneNode::Attachment> SceneNode::getAttachedObject() const
+    void SceneNode::setUserData(UserData * user_data)
     {
-        return attachedObject_;
+        this->user_data = user_data;
     }
     
-    shared_ptr<BillboardParticleEmitter> SceneNode::getAttachedEmitter() const
+    SceneNode::UserData * SceneNode::getUserData() const
     {
-        return std::dynamic_pointer_cast<BillboardParticleEmitter>(attachedObject_);
+        return this->user_data;
     }
 }

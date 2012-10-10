@@ -10,14 +10,20 @@
 #define ____GeometryFactory__
 
 namespace d3 {
+    class TexturedMesh;
+    
+    //! Creates primitive meshes.
     class GeometryFactory {
+    private:
+        static std::unordered_map<String, shared_ptr<TexturedMesh>> primitive_map;
+        
+    private:
+        static shared_ptr<TexturedMesh> createBoundingBox();
+        static shared_ptr<TexturedMesh> createPlane();
+        static shared_ptr<TexturedMesh> createBox();
+        
     public:
-        static shared_ptr<Geometry> createBoundingBox(Vec3 volume);
-        static shared_ptr<Geometry> createPlane();
-        static shared_ptr<Geometry> createBox();
-        static shared_ptr<Geometry> createCylinder();
-        static shared_ptr<Geometry> createAxes();
-        static shared_ptr<Geometry> createArrow(Vec3);
+        static shared_ptr<TexturedMesh> getPrimitive(String name);
     };
 }
 #endif

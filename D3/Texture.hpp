@@ -12,17 +12,18 @@
 namespace d3 {
     class Image;
     
-#pragma mark Interface
+    //! Encapsulates GPU texture object
     class Texture {
+    public:
+        //! Creates new texture from image data
+        Texture(Image *image);
+        
+        //! Binds texture to device
+        virtual void _bind();
+        
     protected:
         unsigned int tex_id_;
         
-        float rotation = 60;
-        
-    public:
-        Texture(Image *image);
-        
-        virtual void bind();
     };
 }
 

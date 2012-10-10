@@ -17,21 +17,13 @@ namespace d3 {
     //! Scene.
     class Scene {
     public:
-        typedef std::unordered_set<SceneNode *> RenderableSet;
-        typedef std::unordered_set<SceneNode *> EmittersSet;
-        typedef std::unordered_set<SceneNode *> LightSourceSet;
+        typedef std::unordered_map<String, SceneNode *> NodeMap;
         
-    protected:
-        SceneNode * root_node;
-        shared_ptr<Camera> camera;
-        
-        /* Set of with all nodes in scene that cointains renderable attachment */
-        RenderableSet renderable_nodes;
-        
-        /* Set of with all nodes in scene that cointains light source attachment */
-        LightSourceSet light_sources;
-        
-        EmittersSet emitter_nodes;
+        //! Used to listen for Scene changes' notifications
+        struct Listener {
+            virtual void onNodeInsert(SceneNode * node) {}
+            virtual void onNodeRemove(SceneNode * node) {}
+        };        
 
     public:
         //! Default constructor
@@ -41,19 +33,34 @@ namespace d3 {
         ~Scene();
                 
         //! @return Scene camera
-        shared_ptr<Camera> getCamera() const { return camera; }
+        Camera & getCamera() const;
         
         //! @return Root node
-        SceneNode * getRoot() const { return root_node; };
+        SceneNode & getRoot() const;
         
-        //! @return Reference to light sources set
-        LightSourceSet & getLightSourcesRef() { return light_sources; }
+        //! @return Reference to map with all nodes in scene
+        const NodeMap & getNodeMap() const;
         
-        //! @return Reference to renderable nodes set
-        RenderableSet & getRenderablesRef() { return renderable_nodes; }
+        //! @return Node named name
+        SceneNode & getNode(String name);
         
-        //! @return Reference to emitter nodes set
-        RenderableSet & getEmittersRef() { return emitter_nodes; }
+        //! Registers new listener
+        void registerListener(Listener * listener);
+        
+        //! Removes listener from list
+        void unregisterListener(Listener * listener);
+        
+        //! Called internaly after new node is created
+        void _nodeCreated(SceneNode * node);
+        
+        //! Called internaly upon node deletion
+        void _nodeWillBeDeleted(SceneNode * node);
+        
+    protected:
+        SceneNode * root_node;
+        shared_ptr<Camera> camera;
+        std::list<Listener *> listeners;
+        NodeMap node_map;
     };
 }
 

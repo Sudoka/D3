@@ -20,24 +20,23 @@ namespace d3 {
     void GLUTWindow::glut_display_callback(void)
     {
         glut_window_instance->application->render();
-        glFinish();
         glutSwapBuffers();
     }
     
     void GLUTWindow::glut_idle_callback(void)
     {
-        glutPostRedisplay();
     }
     
     void GLUTWindow::glut_timer_callback(int value)
     {
         glut_window_instance->application->idle();
-        glutTimerFunc( 1000.0/60, GLUTWindow::glut_timer_callback, 0);
+        glutTimerFunc(1000.0/60, GLUTWindow::glut_timer_callback, 0);
+        glutPostRedisplay();
     }
     
     void GLUTWindow::glut_reshape_callback(int width, int height)
     {
-        glut_window_instance->application->getRenderer()->setScreenSize(width, height);
+        //glut_window_instance->application->getRenderer().setScreenSize(width, height);
     }
     
     void GLUTWindow::glut_keydown_callback(unsigned char key, int x, int y)

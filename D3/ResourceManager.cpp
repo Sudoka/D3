@@ -19,15 +19,6 @@ namespace d3 {
         }
     }
     
-    shared_ptr<GLShader> ResourceManager::loadShader(String resource_name, String filename, ShaderType type)
-    {
-        shared_ptr<GLShader> shader(new GLShader(type, package_path + shaders_group + delimiter + filename));
-        shader_map[resource_name] = shader;
-        
-        DEBUG_PRINT("File loaded: " << shaders_group << delimiter << filename);
-        return shader;
-    }
-    
     shared_ptr<Texture> ResourceManager::getTexture(String resource_name)
     {
         /* Get existing if exists */
@@ -45,29 +36,34 @@ namespace d3 {
         return texture;
     }
     
-    shared_ptr<ParticleEmitterProperties> ResourceManager::getParticleEmitterProperties(String resource_name)
+    shared_ptr<ParticleSystem> ResourceManager::getParticleSystem(String resource_name)
     {
         /* Get existing if exists */
-        auto it = particle_emitter_map.find(resource_name);
-        if (it != particle_emitter_map.end())
+        auto it = particle_system_map.find(resource_name);
+        if (it != particle_system_map.end())
             return it->second;
         
         /* Otherwise load new */
-        shared_ptr<ParticleEmitterProperties> properties(new ParticleEmitterProperties(package_path + emitters_group + delimiter + resource_name));
-        particle_emitter_map[resource_name] = properties;
+        shared_ptr<ParticleSystem::Properties> properties(new ParticleSystem::Properties(package_path + emitters_group + delimiter + resource_name));
+        shared_ptr<ParticleSystem> particle_system(new ParticleSystem(properties));
+        particle_system_map[resource_name] = particle_system;
         
         DEBUG_PRINT("File loaded: " << emitters_group << delimiter << resource_name);
-        return properties;
+        return particle_system;
     }
     
-    shared_ptr<GLShader> ResourceManager::getShader(String name)
+    shared_ptr<Program> ResourceManager::getProgram(String resource_name)
     {
-        auto iter = shader_map.find(name);
+        /* Get existing if exists */
+        auto it = program_map.find(resource_name);
+        if (it != program_map.end())
+            return it->second;
         
-        if (iter == shader_map.end()) {
-            return nullptr;
-        } else {
-            return iter->second;
-        }
+        /* Otherwise load new */
+        shared_ptr<Program> program(new GLSLProgram(resource_name, package_path + programs_group + delimiter + resource_name, true));
+        program_map[resource_name] = program;
+        
+        DEBUG_PRINT("File loaded: " << programs_group << delimiter << resource_name);
+        return program;
     }
 }

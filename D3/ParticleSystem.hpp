@@ -1,8 +1,8 @@
 //
-//  ParticleSystem.h
+//  ParticleSystem.hpp
 //  D3
 //
-//  Created by Srđan Rašić on 9/23/12.
+//  Created by Srđan Rašić on 9/29/12.
 //  Copyright (c) 2012 Srđan Rašić. All rights reserved.
 //
 
@@ -10,21 +10,10 @@
 #define __D3__ParticleSystem__
 
 namespace d3 {
-    class ParticleSystem {
+    class ParticleSystem : public SceneSimulator::Updatable {
     public:
-        //! Particle template
-        struct Particle {
-            float size;
-            float size_delta;
-            float time_to_live;
-            Vec3 position;
-            Vec3 direction;
-            Vec4 color;
-            Vec4 color_delta;
-        };
-                
-        //! Emiter properties
-        struct Emitter {
+        //! Emitter properties
+        struct Properties {
             Vec3 position_variance;
             Vec3 direction;
             Vec3 direction_variance;
@@ -45,21 +34,35 @@ namespace d3 {
             float particles_par_second_variance;
             float emitting_duration;
             
-            Particle * particle_array;
-            unsigned int particle_count;
+            Properties(String path);
         };
         
-    protected:
-        ParticleSystem() {}
-        
-        std::map<shared_ptr<Emitter>, Particle *> emitters_map_;
+        //! Particle template
+        struct ParticleProperties {
+            float size;
+            float size_delta;
+            float time_to_live;
+            Vec3 position;
+            Vec3 direction;
+            Vec4 color;
+            Vec4 color_delta;
+        };
         
     public:
-        static ParticleSystem * getInstance();
+        ParticleSystem(shared_ptr<Properties> props);
         
-        void insertEmitter(shared_ptr<Emitter> emitter);
+        virtual void update(float dt);
         
-        void simulate(float dt);
+        
+    public:
+        shared_ptr<Properties> properties;
+        
+        unsigned int max_particle_count;
+        unsigned int particle_count;
+        
+        ParticleProperties * properties_array;
+        
+        float emitting_duration;
     };
 }
 

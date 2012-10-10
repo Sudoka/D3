@@ -33,23 +33,27 @@ GLint height;
         [self setupLayer];
         [self setupContext];
 
+        /* Generate default framebuffer */
         glGenFramebuffers(1, &framebuffer);
         glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
         
+        /* Create color render buffer */
         glGenRenderbuffers(1, &color_render_buffer);
         glBindRenderbuffer(GL_RENDERBUFFER, color_render_buffer);
         [eagl_context renderbufferStorage:GL_RENDERBUFFER fromDrawable:eagl_layer];
         glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, color_render_buffer);
-        
 
+        /* Get windows size */
         glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &width);
         glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &height);
         
+        /* Create depth render buffer */
         glGenRenderbuffers(1, &depth_render_buffer);
         glBindRenderbuffer(GL_RENDERBUFFER, depth_render_buffer);
         glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, width, height);
         glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depth_render_buffer);
         
+        /* Validate */
         GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER) ;
         if(status != GL_FRAMEBUFFER_COMPLETE) {
             NSLog(@"failed to make complete framebuffer object %x", status);
@@ -68,10 +72,28 @@ GLint height;
 - (void)setupLayer {
     eagl_layer = (CAEAGLLayer *)self.layer;
     eagl_layer.opaque = YES;
+    
+    int w = 320;
+    int h = 480;
+    
+    float ver = [[[UIDevice currentDevice] systemVersion] floatValue];
+    // Can't detect screen res in pre 3.2 devices, but they are all 320x480 anyway.
+    if (ver >= 3.2f)
+    {
+        UIScreen* mainscr = [UIScreen mainScreen];
+        w = mainscr.currentMode.size.width;
+        h = mainscr.currentMode.size.height;
+    }
+    
+    NSLog(@"Screen size = %dx%d\n", w, h);
+           
+    if (w == 640)
+        self.contentScaleFactor = w / 320.0;
+           
 }
 
 - (void)setupContext {
-    eagl_context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
+    eagl_context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     
     if (!eagl_context) {
         NSLog(@"Failed to initialize OpenGLES 2.0 context");
@@ -95,7 +117,7 @@ GLint height;
     uiviewwindow_instance->getApplication()->render();
     uiviewwindow_instance->getApplication()->idle();
     
-    glFinish();
+    //glFinish();
 
     glBindRenderbuffer(GL_RENDERBUFFER, color_render_buffer);
     [eagl_context presentRenderbuffer:GL_RENDERBUFFER];
@@ -123,7 +145,7 @@ namespace d3 {
     
     void EAGLWindow::setupContext()
     {
-        
+        // Done in constructor
     }
     
     unsigned EAGLWindow::getWidth()
