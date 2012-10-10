@@ -25,7 +25,7 @@ Collision detection and particle simulations.
 # Requirements
 * libpng 
 * GLUT
-* TinyXML
+* TinyXML 
 
 # Basic usage
 1. Inherit Application class.
