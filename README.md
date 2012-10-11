@@ -33,6 +33,8 @@ Collision detection and particle simulations.
 3. Instanciate your class and call base mathod run() on it.
 
 ## Example
+See Example.hpp/cpp
+
     (new d3::Example("/path/to/resources"))->run();
 
 # Licence
