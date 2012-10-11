@@ -1,7 +1,7 @@
 # D3
-A user-friendly cross-platfrom inverted scene graph based OpenGL graphics & physics engine.
+A simplistic cross-platform scene graph based OpenGL 3D graphics and physics engine
 
-![Screenshot](http://www.deviantpics.com/images/rAesp.png)
+<div style="float: right"><img src="http://www.deviantpics.com/images/rAesp.png" /></div>
 
 # Features
 ## Cross-platfrom
