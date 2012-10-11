@@ -1,7 +1,7 @@
 # D3
 A simplistic cross-platform scene graph based OpenGL 3D graphics and physics engine
 
-<div style="float: right"><img src="http://www.deviantpics.com/images/rAesp.png" /></div>
+<p align="center"><img src="http://www.deviantpics.com/images/rAesp.png" /></p>
 
 # Features
 ## Cross-platfrom
