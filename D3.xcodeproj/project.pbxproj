@@ -30,10 +30,23 @@
 		EC06057F15F2AA44009CB3E0 /* Math.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Math.cpp; sourceTree = "<group>"; };
 		EC06058115F2ACE1009CB3E0 /* SceneRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SceneRenderer.hpp; sourceTree = "<group>"; };
 		EC06058315F2DAF2009CB3E0 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; lineEnding = 0; path = Makefile; sourceTree = "<group>"; };
+		EC0613DA1627290500EBA11D /* 747_2.obj */ = {isa = PBXFileReference; lastKnownFileType = text; name = 747_2.obj; path = meshes/747_2.obj; sourceTree = "<group>"; };
+		EC0613DB1627290500EBA11D /* 747.obj */ = {isa = PBXFileReference; lastKnownFileType = text; name = 747.obj; path = meshes/747.obj; sourceTree = "<group>"; };
+		EC0613DC1627290500EBA11D /* corn.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; name = corn.mtl; path = meshes/corn.mtl; sourceTree = "<group>"; };
+		EC0613DD1627290500EBA11D /* corn.obj */ = {isa = PBXFileReference; lastKnownFileType = text; name = corn.obj; path = meshes/corn.obj; sourceTree = "<group>"; };
+		EC0613DE1627290500EBA11D /* f16.obj */ = {isa = PBXFileReference; lastKnownFileType = text; name = f16.obj; path = meshes/f16.obj; sourceTree = "<group>"; };
+		EC0613DF1627290500EBA11D /* novcic.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; name = novcic.mtl; path = meshes/novcic.mtl; sourceTree = "<group>"; };
+		EC0613E01627290500EBA11D /* novcic.obj */ = {isa = PBXFileReference; lastKnownFileType = text; name = novcic.obj; path = meshes/novcic.obj; sourceTree = "<group>"; };
+		EC0613E11627291300EBA11D /* concrete_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = concrete_2.png; sourceTree = "<group>"; };
+		EC0613E21627291300EBA11D /* concrete_1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = concrete_1024.png; sourceTree = "<group>"; };
+		EC0613E31627291300EBA11D /* corntext.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = corntext.png; sourceTree = "<group>"; };
+		EC0613E41627291300EBA11D /* novcictext.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = novcictext.png; sourceTree = "<group>"; };
 		EC093D7B1625D1E50084EC0D /* VertexData.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = VertexData.cpp; sourceTree = "<group>"; };
 		EC093D7E1625D5B70084EC0D /* BufferedVertexData.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BufferedVertexData.cpp; sourceTree = "<group>"; };
 		EC093D801625DFA80084EC0D /* Program.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Program.cpp; sourceTree = "<group>"; };
 		EC093D82162606430084EC0D /* SceneRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SceneRenderer.cpp; sourceTree = "<group>"; };
+		EC093D88162653F70084EC0D /* MeshLoader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MeshLoader.hpp; sourceTree = "<group>"; };
+		EC093D8A162654190084EC0D /* MeshLoader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MeshLoader.cpp; sourceTree = "<group>"; };
 		EC123C4A15F13E09004447ED /* README.md */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; lineEnding = 0; path = README.md; sourceTree = "<group>"; };
 		EC1293C716165238006B69F1 /* SceneNode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SceneNode.cpp; sourceTree = "<group>"; };
 		EC1293C816165238006B69F1 /* SceneNode.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SceneNode.hpp; sourceTree = "<group>"; };
@@ -51,7 +64,7 @@
 		EC364AED1621C7F100CAAD55 /* PlainShader.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = PlainShader.shader; sourceTree = "<group>"; };
 		EC364B031621D62000CAAD55 /* BillboardParticles.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BillboardParticles.cpp; sourceTree = "<group>"; };
 		EC364B041621D62000CAAD55 /* BillboardParticles.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BillboardParticles.hpp; sourceTree = "<group>"; };
-		EC4142871615C1A700E77795 /* BlinnPhongShader.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = BlinnPhongShader.shader; sourceTree = "<group>"; };
+		EC4142871615C1A700E77795 /* BlinnPhongShader.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = BlinnPhongShader.shader; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
 		EC4A0A5B161F18550044A834 /* VertexData.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = VertexData.hpp; sourceTree = "<group>"; };
 		EC4A0A5D161F1FAD0044A834 /* BufferedVertexData.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BufferedVertexData.hpp; sourceTree = "<group>"; };
 		EC4A0A60161F25A70044A834 /* Program.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Program.hpp; sourceTree = "<group>"; };
@@ -134,6 +147,20 @@
 			name = OpenGL;
 			sourceTree = "<group>";
 		};
+		EC0613D8162728FB00EBA11D /* meshes */ = {
+			isa = PBXGroup;
+			children = (
+				EC0613DA1627290500EBA11D /* 747_2.obj */,
+				EC0613DB1627290500EBA11D /* 747.obj */,
+				EC0613DC1627290500EBA11D /* corn.mtl */,
+				EC0613DD1627290500EBA11D /* corn.obj */,
+				EC0613DE1627290500EBA11D /* f16.obj */,
+				EC0613DF1627290500EBA11D /* novcic.mtl */,
+				EC0613E01627290500EBA11D /* novcic.obj */,
+			);
+			name = meshes;
+			sourceTree = "<group>";
+		};
 		EC123C4515F13C5F004447ED /* Rendering System */ = {
 			isa = PBXGroup;
 			children = (
@@ -169,6 +196,8 @@
 				ECCB7DDA15F13BD100495973 /* Image.cpp */,
 				EC33295215F8EDEF007A85D5 /* FileIO.hpp */,
 				EC33295315F8EE35007A85D5 /* FileIO.cpp */,
+				EC093D88162653F70084EC0D /* MeshLoader.hpp */,
+				EC093D8A162654190084EC0D /* MeshLoader.cpp */,
 				ECB09A40161356D100677A13 /* ResourceManager.hpp */,
 				ECB09A3F161356D100677A13 /* ResourceManager.cpp */,
 			);
@@ -221,6 +250,7 @@
 		ECB09A4F1613774E00677A13 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				EC0613D8162728FB00EBA11D /* meshes */,
 				EC1496BA1617312E0074E0B1 /* emitters */,
 				ECB09A501613774E00677A13 /* shaders */,
 				ECB09A571613774E00677A13 /* textures */,
@@ -242,6 +272,10 @@
 		ECB09A571613774E00677A13 /* textures */ = {
 			isa = PBXGroup;
 			children = (
+				EC0613E11627291300EBA11D /* concrete_2.png */,
+				EC0613E21627291300EBA11D /* concrete_1024.png */,
+				EC0613E31627291300EBA11D /* corntext.png */,
+				EC0613E41627291300EBA11D /* novcictext.png */,
 				EC1C5BA01621F0F10036CED9 /* particle01_low.png */,
 				ECB09A581613774E00677A13 /* earth.png */,
 				EC7B8994161DFDF0000C0F9F /* concrete.png */,

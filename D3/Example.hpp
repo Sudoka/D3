@@ -17,9 +17,9 @@ namespace d3 {
             /* Create scene graph tree */
             getScene().getRoot().createSubnode("Box");
             getScene().getRoot().createSubnode("Plane").setScale(Vec3(10, 10, 10));
-            getScene().getRoot().createSubnode("Light").setPosition(d3::Vec3(0,2,0));
-            getScene().getRoot().createSubnode("Emitter").setPosition(Vec3(0,3,0)).setOrientation(Quat(Vec3(1,0,0), kPi/4));
-            getScene().getRoot().createSubnode("CameraTarget").setPosition(Vec3(0,1,0));
+            getScene().getRoot().createSubnode("Light").setPosition(d3::Vec3(4,2,4));
+            getScene().getRoot().createSubnode("Emitter").setPosition(Vec3(4,2,4)).setOrientation(Quat(Vec3(1,0,0), kPi/4));
+            getScene().getRoot().createSubnode("CameraTarget").setPosition(Vec3(0,1,0)).setScale(Vec3(5,5,5));
             
             /* Create drawable objects */
             shared_ptr<TexturedMesh> box_object = GeometryFactory::getPrimitive("box");
@@ -32,7 +32,7 @@ namespace d3 {
             
             /* Setup Camera (always to look at the some target node) */
             getScene().getCamera().getMover().setPosition(d3::Vec3(0,0,2));
-            getScene().getCamera().setTarget(&getScene().getNode("CameraTarget"));
+            getScene().getCamera().setTarget(&getScene().getRoot());
             
             /* Setup light */
             Light * dl = new Light(getScene().getNode("Light"));
@@ -43,6 +43,9 @@ namespace d3 {
             shared_ptr<ParticleSystem> particle_system = getResourceManager().getParticleSystem("fire.xml");
             BillboardParticles * billboard_particles = new BillboardParticles(particle_system);
             billboard_particles->addPointOfOrigin(getScene().getNode("Emitter"));
+            
+            static shared_ptr<TexturedMesh> mesh = MeshLoader::loadOBJ(resources_path + "/meshes/747.obj");
+            mesh->addPointOfOrigin(getScene().getNode("CameraTarget"));
         }
         
         virtual void update(float dt)

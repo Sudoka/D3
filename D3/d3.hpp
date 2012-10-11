@@ -62,6 +62,7 @@
 #include "BillboardParticles.hpp"
 
 // Resources
+#include "MeshLoader.hpp"
 #include "ResourceManager.hpp"
 #include "Application.hpp"
 
@@ -100,6 +101,7 @@
 #include "Drawable.cpp"
 #include "TexturedMesh.cpp"
 
+#include "MeshLoader.cpp"
 #include "Application.cpp"
 #include "Example.hpp"
 
