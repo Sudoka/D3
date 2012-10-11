@@ -1,7 +1,7 @@
 # D3
-A user-friendly cross-platfrom inverted scene graph based OpenGL graphics & physics engine.
+A simplistic cross-platform scene graph based OpenGL 3D graphics and physics engine
 
-![Screenshot](http://www.deviantpics.com/images/rAesp.png)
+<p align="center"><img src="http://www.deviantpics.com/images/rAesp.png" /></p>
 
 # Features
 ## Cross-platfrom
@@ -10,7 +10,7 @@ Written in C++ to maximize portability and performance. Currently implemented su
 ## _Inverted_ Scene Graph
 Rather then referencing Drawable object from each node, this engine utilises somewhat inverted approach. Each object (Drawable or some other) that can occur multiple times in scene is called Occurable. Those kind of objects contain list of all scene nodes at which instance of object should appear. This makes rendering of simple scenes that contain many instances of the same object very efficient. 
 
-## Programable pipeline
+## Programmable pipeline
 All rendering is done by shaders and system is designed to make use of shaders user-friendly.
 
 ## Resource manager
@@ -33,6 +33,8 @@ Collision detection and particle simulations.
 3. Instanciate your class and call base mathod run() on it.
 
 ## Example
+See Example.hpp/cpp
+
     (new d3::Example("/path/to/resources"))->run();
 
 # Licence
