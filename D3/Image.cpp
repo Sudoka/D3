@@ -7,7 +7,7 @@
 //
 
 #include "Image.hpp"
-#include <libpng/png.h>
+#include <png.h>
 #include <stdio.h>
 #include <assert.h>
 
